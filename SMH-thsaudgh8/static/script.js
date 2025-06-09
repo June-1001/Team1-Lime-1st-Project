@@ -103,5 +103,30 @@ function component(radius, color, x, y) {
     this.color = color;
 }
 
+function startGameWithDelay() {
+    let ctx = myGameArea.context; // 캔버스 컨텍스트 가져오기
+    let count = 3; // 시작 숫자
+
+    function updateCountdown() {
+        myGameArea.clear(); // 캔버스 초기화
+
+        // 카운트다운 텍스트 스타일 설정
+        ctx.fillStyle = "#000"; // 글자 색상
+        ctx.font = "48px Arial"; // 글자 스타일
+        ctx.textAlign = "center"; // 중앙 정렬
+        ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2); // 캔버스 중앙에 출력
+
+        if (count > 0) {
+            count--; // 숫자 감소
+            setTimeout(updateCountdown, 1000); // 1초 후 다시 실행
+        } else {
+            myGameArea.clear(); // 카운트다운 종료 후 캔버스 정리
+            startGame(); // 게임 시작
+        }
+    }
+
+    updateCountdown(); // 카운트다운 시작
+}
+
 // 캔버스를 초기화 상태에서 생성
 myGameArea.start();
