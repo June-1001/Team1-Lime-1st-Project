@@ -14,6 +14,10 @@ const keys = {
   ArrowDown: false,
   ArrowLeft: false,
   ArrowRight: false,
+  w: false,
+  a: false,
+  s: false,
+  d: false,
 };
 
 function handle_key_down(event) {
@@ -29,6 +33,13 @@ function handle_key_up(event) {
 
 document.addEventListener("keydown", handle_key_down);
 document.addEventListener("keyup", handle_key_up);
+
+document.addEventListener("keydown", function (e) {
+  keys[e.key.toLowerCase()] = true;
+});
+document.addEventListener("keyup", function (e) {
+  keys[e.key.toLowerCase()] = false;
+});
 
 // 게임 캔버스 세팅
 const my_game_area = {
@@ -63,16 +74,16 @@ let player = {
   max_trail_length: 15,
 
   move: function () {
-    if (keys.ArrowUp && this.y - this.radius > 0) {
+    if ((keys.ArrowUp || keys.w) && this.y - this.radius > 0) {
       this.y -= this.speed;
     }
-    if (keys.ArrowDown && this.y + this.radius < game_area_height) {
+    if ((keys.ArrowDown || keys.s) && this.y + this.radius < game_area_height) {
       this.y += this.speed;
     }
-    if (keys.ArrowLeft && this.x - this.radius > 0) {
+    if ((keys.ArrowLeft || keys.a) && this.x - this.radius > 0) {
       this.x -= this.speed;
     }
-    if (keys.ArrowRight && this.x + this.radius < game_area_width) {
+    if ((keys.ArrowRight || keys.d) && this.x + this.radius < game_area_width) {
       this.x += this.speed;
     }
   },

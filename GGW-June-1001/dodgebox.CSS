@@ -120,6 +120,11 @@ canvas {
   text-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
 }
 
+#comment_start .controls {
+  font-size: 16px;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.8);
+}
+
 #comment_restart {
   position: absolute;
   top: 65%;
