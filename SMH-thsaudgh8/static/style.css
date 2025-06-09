@@ -23,9 +23,12 @@ canvas {
 }
 
 #score{
+    width : 150px;
     margin:10px;
     padding:10px 20px;
     font-size: 36px;
+    text-align: center;
+    white-space: nowrap; 
 }
 
 button{

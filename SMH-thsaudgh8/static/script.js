@@ -55,9 +55,12 @@ function handleClick(event) {
     }
 }
 
-function addScore(){
-    let add = 1;
-    score.innerText = parseInt("Score : " + add);
+function addScore() {
+    // 현재 점수 가져오기
+    let currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;
+
+    // 점수 증가 후 업데이트
+    score.innerText = "Score: " + (currentScore + 1);
 }
 
 // 원을 화면에 그리는 함수
