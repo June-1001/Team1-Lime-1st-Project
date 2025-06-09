@@ -359,6 +359,18 @@ function check_collisions() {
   }
 }
 
+function is_block(element) {
+  return getComputedStyle(element).display === "block";
+}
+
+function show_div(div, menu) {
+  if (is_block(menu)) {
+    div.style.display = "block";
+  } else {
+    div.style.display = "none";
+  }
+}
+
 const final_score_display = document.getElementById("final_score");
 
 function game_over() {
@@ -395,17 +407,6 @@ const restart_btn = document.getElementById("restart_button");
 const comment_start = document.getElementById("comment_start");
 const comment_restart = document.getElementById("comment_restart");
 
-function is_block(element) {
-  return getComputedStyle(element).display === "block";
-}
-
-function show_div(div, menu) {
-  if (is_block(menu)) {
-    div.style.display = "block";
-  } else {
-    div.style.display = "none";
-  }
-}
 show_div(comment_start, start_btn);
 show_div(comment_restart, center_overlay);
 
