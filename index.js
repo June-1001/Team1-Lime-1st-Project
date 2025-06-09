@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
   //여기에 game.html 대신 본인 게임 html 이름 입력
   const URL_map = {
-    GGW: "GGW-June-1001/dodgebox_game.html",
-    SMH: "SMH-thsaudgh8/game.html",
-    KHS: "KHS-KHS25/game.html",
-    CJH: "CJH-DODOVX/game.html",
+    "June-1001": "GGW-June-1001/dodgebox_game.html",
+    thsaudgh8: "SMH-thsaudgh8/game.html",
+    KHS25: "KHS-KHS25/game.html",
+    DODOVX: "CJH-DODOVX/game.html",
   };
 
   // title 부분에 각자 게임 타이틀 입력
