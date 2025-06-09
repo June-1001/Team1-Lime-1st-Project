@@ -2,6 +2,7 @@
   gap: 0;
   margin: 0;
   box-sizing: border-box;
+  user-select: none;
 }
 
 body {
@@ -18,7 +19,7 @@ body {
 
 #title {
   align-content: center;
-  width: 800px;
+  width: 900px;
   height: 80px;
   box-shadow: 0 0 4px white;
   font-size: 60px;
@@ -29,8 +30,8 @@ body {
 #game_container {
   position: relative;
   box-shadow: 0 0 4px white;
-  width: 800px;
-  height: 600px;
+  width: 900px;
+  height: 750px;
   overflow: hidden;
 }
 
@@ -133,4 +134,111 @@ canvas {
   font-size: 24px;
   font-weight: bold;
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+#shop_button {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  padding: 5px 15px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: gold;
+  border: 1px solid gold;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s;
+  display: none;
+}
+
+#shop_button:hover {
+  background-color: rgba(100, 100, 0, 0.5);
+  box-shadow: 0 0 5px gold;
+}
+
+#shop_modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+  z-index: 20;
+  color: white;
+  font-family: "Orbitron";
+  border: 1px solid gold;
+  overflow: hidden;
+}
+
+#shop_modal h2 {
+  text-shadow: 0 0 5px gold;
+}
+
+#shop_modal button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  background-color: rgba(255, 215, 0, 0.2);
+  color: white;
+  border: 1px solid gold;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Orbitron";
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+#shop_modal button:hover {
+  background-color: rgba(255, 215, 0, 0.4);
+}
+
+#shop_items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  justify-items: center;
+}
+
+.shop-item {
+  background-color: rgba(50, 50, 50, 0.7);
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.shop-item h3 {
+  margin: 0 0 5px 0;
+  color: gold;
+}
+
+.shop-item p {
+  margin: 5px 0;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.shop-item button {
+  padding: 5px 10px;
+  background-color: rgba(0, 150, 0, 0.7);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: "Orbitron";
+  font-size: 14px;
+}
+
+.shop-item button:disabled {
+  background-color: rgba(100, 100, 100, 0.7);
+  cursor: not-allowed;
+}
+
+.shop-item button:hover:not(:disabled) {
+  background-color: rgba(0, 200, 0, 0.7);
+  transform: scale(1.05);
 }

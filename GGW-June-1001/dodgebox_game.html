@@ -11,6 +11,7 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap"
       rel="stylesheet"
     />
+    <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="dodgebox.CSS" />
   </head>
   <body>
@@ -20,10 +21,16 @@
         <source src="galaxy_loop_pixabay.mp4" type="video/mp4" />
       </video>
       <button id="start_button">시작</button>
-      <div id="comment_start">
-        Press Space Bar to Start<br /><br /><br /><br />
-        <span class="controls">Controls : WASD / Arrow</span>
+      <button id="shop_button">Shop</button>
+      <div id="shop_modal">
+        <h2 style="color: gold; text-align: center; margin-bottom: 20px">Shop</h2>
+        <div style="color: white; margin-bottom: 10px">
+          Coins: <span id="coin_display" style="color: gold">0</span>
+        </div>
+        <div id="shop_items"></div>
+        <button id="close_shop_button">Close</button>
       </div>
+      <div id="comment_start">Press Space Bar to Start</div>
       <div id="center_overlay">
         <div id="final_score"></div>
         <button id="restart_button">시작 화면으로</button>
