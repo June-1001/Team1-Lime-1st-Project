@@ -27,11 +27,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const temp_thumbnail = "thumbnail/temp.png";
 
     card.innerHTML = `
-            <img src="${thumbnail_img}" alt="${member.name}" class="card-img-top" onerror="this.src='${temp_thumbnail}'">
-            <div class="card-body text-center d-flex flex-column justify-content-center">
+            <img src="${thumbnail_img}" alt="${member.name}" class="card-img" onerror="this.src='${temp_thumbnail}'">
+            <div class="card-body">
                 <div class="game-title">${member.title}</div>
                 <div class="member-name"><span lang="ko">${member.name}</span> / ${member.id}</div>
-                <button class="btn btn-primary play-game" data-name="${member.id}">Play Game</button>
+                <button class="play-game" data-name="${member.id}">Play Game</button>
             </div>
         `;
 
