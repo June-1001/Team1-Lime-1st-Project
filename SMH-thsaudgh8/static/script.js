@@ -132,7 +132,6 @@ function startGameWithDelay() {
 function gameTimer() {
   const timerE1 = document.getElementById("timer");
   let timeLeft  = 10;
-
   // 최초 표시
   timerE1.innerText = "Timer: " + timeLeft;
 
@@ -143,8 +142,9 @@ function gameTimer() {
       timerE1.innerText = "Timer: " + timeLeft;
     } else {
       clearInterval(intervalId);
+      myGamePieces = [];
       timerE1.innerText = "Game Over";
-      myGameArea.clear(); 
+      drawGamePieces();
     }
   }, 1000);
 }
