@@ -73,7 +73,7 @@ function drawGamePieces() {
         ctx.beginPath();
         ctx.arc(piece.x, piece.y, piece.radius, 0, 2 * Math.PI);
         ctx.fill();
-    }
+    }    
 }
 
 // 원끼리 겹치지 않도록 랜덤 위치 생성
@@ -119,14 +119,34 @@ function startGameWithDelay() {
         if (count > 0) {
             count--; // 숫자 감소
             setTimeout(updateCountdown, 1000); // 1초 후 다시 실행
+            score.innerText = "Score: 0";
         } else {
             myGameArea.clear(); // 카운트다운 종료 후 캔버스 정리
             startGame(); // 게임 시작
+            gameTimer();
         }
     }
-
     updateCountdown(); // 카운트다운 시작
 }
 
-// 캔버스를 초기화 상태에서 생성
+function gameTimer() {
+  const timerE1 = document.getElementById("timer");
+  let timeLeft  = 10;
+
+  // 최초 표시
+  timerE1.innerText = "Timer: " + timeLeft;
+
+  // 1초마다 timeLeft--, 0이 되면 Game Over
+  const intervalId = setInterval(() => {
+    timeLeft--;
+    if (timeLeft > 0) {
+      timerE1.innerText = "Timer: " + timeLeft;
+    } else {
+      clearInterval(intervalId);
+      timerE1.innerText = "Game Over";
+      myGameArea.clear(); 
+    }
+  }, 1000);
+}
+// 시작할 때 초기값 넘기기
 myGameArea.start();
