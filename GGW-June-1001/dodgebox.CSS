@@ -46,14 +46,14 @@ body {
   width: 900px;
   height: 720px;
   overflow: hidden;
-  cursor: url("cross_aim.png") 16 16, crosshair;
+  cursor: url("cross_aim.png") 32 32, crosshair;
 }
 
 #game_container canvas {
   position: absolute;
   background: transparent;
   display: block;
-  cursor: url("cross_aim.png") 16 16, crosshair;
+  cursor: url("cross_aim.png") 32 32, crosshair;
 }
 
 #start_button {
@@ -153,7 +153,7 @@ body {
   align-content: center;
   box-shadow: 0 0 5px gold;
   font-family: "Orbitron";
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   text-shadow: 0 0 5px gold;
 }
@@ -228,7 +228,7 @@ body {
 
 .shop-item p {
   margin: 5px 0;
-  color: #ccc;
+  color: #ddd;
   font-size: 14px;
 }
 
@@ -240,7 +240,7 @@ body {
   border: none;
   border-radius: 4px;
   font-family: "Orbitron";
-  font-size: 14px;
+  font-size: 16px;
   align-content: center;
   height: 60px;
 }

@@ -206,7 +206,7 @@ function game_over() {
   game_running = false;
   center_overlay.style.display = "block";
   score_display.textContent = "";
-  final_score_display.innerHTML = `점수: ${score}<br><span style="text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
+  final_score_display.innerHTML = `점수: ${score}<br><span style="font-size: 26px; text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
   show_div(comment_start, start_btn);
   show_div(comment_restart, center_overlay);
   clearInterval(game_update);
@@ -571,7 +571,7 @@ function update_spawn_timers() {
     create_spawn_timer();
     last_spawn_time = now;
     // 스폰 간격이 점수에 비례해서 점점 빨라짐, 최대 0.2초에 한 번 생성
-    spawn_interval = Math.max(200, 1000 - score / 100);
+    spawn_interval = Math.max(200, 1000 - score / 50);
   }
 
   // 스폰 타이머가 true일 때 (스폰 완료 시) 스폰 타이머 제거
@@ -597,7 +597,7 @@ let bullet_power = 1;
 let bullet_speed = 10;
 
 // 총알 크기
-let bullet_size = 4;
+let bullet_size = 6;
 
 // 기본 발사 빈도
 let bullet_interval = 1000;
@@ -630,9 +630,9 @@ class Bullet {
 
     this.dx = dx / distance;
     this.dy = dy / distance;
-    this.angle = Math.atan2(dy, dx);
 
     // 각도 저장용 맵 (관통 부분 참고)
+    this.angle = Math.atan2(dy, dx);
     this.hit_angles = new Map();
   }
 
