@@ -27,14 +27,6 @@ body {
   text-shadow: 0 0 12px rgb(255, 0, 0);
 }
 
-#game_container {
-  position: relative;
-  box-shadow: 0 0 4px white;
-  width: 900px;
-  height: 750px;
-  overflow: hidden;
-}
-
 #background_video {
   display: none;
   position: absolute;
@@ -48,10 +40,20 @@ body {
   opacity: 0.3;
 }
 
-canvas {
+#game_container {
+  position: relative;
+  box-shadow: 0 0 4px white;
+  width: 900px;
+  height: 720px;
+  overflow: hidden;
+  cursor: url("cross_aim.png") 16 16, crosshair;
+}
+
+#game_container canvas {
   position: absolute;
   background: transparent;
   display: block;
+  cursor: url("cross_aim.png") 16 16, crosshair;
 }
 
 #start_button {
@@ -138,19 +140,25 @@ canvas {
 
 #shop_button {
   position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
   left: 20px;
   top: 20px;
   padding: 5px 15px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: auto;
+  height: 50px;
   color: gold;
   border: 1px solid gold;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   z-index: 10;
   transition: all 0.3s;
   display: none;
+  align-content: center;
+  box-shadow: 0 0 5px gold;
+  font-family: "Orbitron";
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 5px gold;
 }
 
 #shop_button:hover {
@@ -177,6 +185,10 @@ canvas {
 }
 
 #shop_modal h2 {
+  font-family: "Orbitron";
+  color: gold;
+  text-align: center;
+  margin-bottom: 20px;
   text-shadow: 0 0 5px gold;
 }
 
@@ -209,6 +221,7 @@ canvas {
   padding: 15px;
   border-radius: 8px;
   border: 1px solid #444;
+  width: 100%;
 }
 
 .shop-item h3 {
@@ -231,6 +244,8 @@ canvas {
   cursor: pointer;
   font-family: "Orbitron";
   font-size: 14px;
+  align-content: center;
+  height: 60px;
 }
 
 .shop-item button:disabled {
