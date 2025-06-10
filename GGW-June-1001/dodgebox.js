@@ -198,7 +198,7 @@ function show_div(div, menu) {
   }
 }
 
-//최종 점수
+//최종 점수 및 획득 코인 여기에 표시
 const final_score_display = document.getElementById("final_score");
 
 // 게임 오버 시 오버레이 표시하고 코인 획득 후 게임 초기화 진행 및 게임 데이터 저장
@@ -206,7 +206,7 @@ function game_over() {
   game_running = false;
   center_overlay.style.display = "block";
   score_display.textContent = "";
-  final_score_display.textContent = `점수: ${score}`;
+  final_score_display.innerHTML = `점수: ${score}<br><span style="text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
   show_div(comment_start, start_btn);
   show_div(comment_restart, center_overlay);
   clearInterval(game_update);
