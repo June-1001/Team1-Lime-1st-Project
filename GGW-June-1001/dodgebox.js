@@ -647,7 +647,7 @@ class Bullet {
     ctx.rotate(this.angle);
     ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
     ctx.shadowColor = "rgb(0, 140, 255)";
-    ctx.shadowBlur = 15;
+    ctx.shadowBlur = 20;
 
     ctx.beginPath();
     ctx.arc(0, 0, this.size, 0, Math.PI * 2);
