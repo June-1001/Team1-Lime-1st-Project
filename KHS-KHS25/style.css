@@ -1,0 +1,118 @@
+/* 화면 전체 스크롤 제거, 100% 높이 보장 */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 난이도 메뉴 */
+#menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+#menu p { font-size: 1.5rem; margin-bottom: 1rem; }
+#menu button {
+  margin: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* 숨김 처리 */
+.hidden { display: none !important; }
+
+/* 게임 컨테이너 전체 */
+#game-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* HUD */
+#hud {
+  background: #222;
+  color: #fff;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#hud span { margin: 0 1rem; }
+
+/* 게임 영역 */
+#game {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 48px);
+  background: #000;        
+  cursor: crosshair;    
+  overflow: hidden;
+}
+
+/* 파리 */
+#fly {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: url('assets/fly_real.png') no-repeat center/contain;
+  transition: left 0.6s linear, top 0.6s linear, transform 0.6s linear;
+}
+
+/* 파리채 */
+#swatter {
+  position: absolute;
+  width: 150px;    /* 컨테이너 너비 */
+  height: 130px;   /* 컨테이너 높이 */
+  background: url('assets/swatter.png') no-repeat top center;
+  background-size: 120px 100px;  
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Back, 끝내기 버튼 공통 스타일 */
+#backBtn,
+#finishBtn {
+  position: absolute;
+  bottom: 10px;        /* 공통 위치(필요시 하단 간격만 finishBtn은 수정) */
+  right: 10px;         /* 공통 우측 정렬 */
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  line-height: 1;
+  min-width: 100px;
+  text-align: center;
+  border: none;
+  background-color: #eee;
+  cursor: pointer;
+  z-index: 3;
+}
+
+/* finishBtn 만 backBtn 위로 */
+#finishBtn {
+  bottom: 60px;        /* backBtn(bottom:10px) 위쪽으로 50px 올림 */
+}
+
+/* Hover 시 시각적 피드백 */
+#backBtn:hover,
+#finishBtn:hover {
+  background-color: #ddd;
+}
+
+/* 종료 & 랭킹 박스 */
+#end {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  background: rgba(255,255,255,0.9);
+  padding: 1.5rem;
+  border: 2px solid #333;
+  border-radius: 8px;
+  text-align: center;
+  z-index: 10;
+}
+#ranking { text-align: left; margin-top: 0.5rem; }
