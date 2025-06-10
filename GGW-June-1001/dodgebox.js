@@ -888,6 +888,7 @@ function update_shop_display() {
   });
 }
 
+// 상점 설명
 function get_item_effect_description(key) {
   const item = shop_items[key];
   const level = item.current_level;
