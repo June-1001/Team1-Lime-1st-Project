@@ -31,6 +31,8 @@ function clearGame() {
     myGamePieces = [];  // 원 리스트 비우기
     myGameArea.clear(); // 캔버스 지우기
     score.innerText = "Score: 0"; // 점수를 0으로 설정
+    document.getElementById("timer").innerText = "Timer: 0";
+    return true;
 }
 
 // 원 클릭 시 삭제 후 재생성
@@ -140,7 +142,7 @@ function gameTimer() {
     timeLeft--;
     if (timeLeft > 0) {
       timerE1.innerText = "Timer: " + timeLeft;
-    } else {
+    } else{
       clearInterval(intervalId);
       myGamePieces = [];
       timerE1.innerText = "Game Over";
