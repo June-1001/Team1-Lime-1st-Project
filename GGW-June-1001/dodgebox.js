@@ -103,6 +103,7 @@ function start_game() {
   show_div(comment_start, start_btn);
   show_div(comment_restart, center_overlay);
   show_div(shop_button, start_btn);
+  show_div(shop_modal, start_btn);
 
   obstacles = [];
   spawn_timers = [];
