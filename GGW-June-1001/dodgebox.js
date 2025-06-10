@@ -287,7 +287,6 @@ function resume_game() {
 }
 
 // 게임 화면이 보이지 않거나 해당 화면에 포커스가 없을 때에 게임 멈추고, 돌아오면 다시 시작
-
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
     pause_game();
@@ -979,7 +978,7 @@ function save_game_data() {
     };
   }
 
-  localStorage.setItem("dodgeboxSave", JSON.stringify(save_data));
+  localStorage.setItem("dodgebox_save", JSON.stringify(save_data));
 }
 
 // 로컬 스토리지에서 상점 (스킬) 데이터 불러오기
