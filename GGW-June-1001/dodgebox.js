@@ -662,6 +662,16 @@ class Bullet {
   }
 }
 
+// 적과 총알의 충돌 감지
+function check_bullet_collision(bullet, obstacle) {
+  return (
+    bullet.x + bullet.size > obstacle.x &&
+    bullet.x - bullet.size < obstacle.x + obstacle.width &&
+    bullet.y + bullet.size > obstacle.y &&
+    bullet.y - bullet.size < obstacle.y + obstacle.height
+  );
+}
+
 function update_bullets() {
   for (let i = bullets.length - 1; i >= 0; i--) {
     let bullet = bullets[i];
@@ -676,18 +686,15 @@ function update_bullets() {
         continue;
       }
 
-      // 총알 관통 시 같은 적 중복 공격 방지
-      // 각도를 저장해서 해당 적을 공격한 각도가 동일하면 공격하지 않고 넘어감
+      // 관통 공격 시 같은 적 중복 공격 방지
       let last_angle = bullet.hit_angles.get(obs);
-      if (last_angle !== undefined && Math.abs(last_angle - bullet.angle) < 0.01) {
-        continue;
-      }
-      bullet.hit_angles.set(obs, bullet.angle);
+      let already_hit = last_angle !== undefined && Math.abs(last_angle - bullet.angle) < 0.01;
 
-      // 적에게 맞았으면 총알 공격력만큼 적의 체력을 깎음
-      // 0 이하로 내려가면 해당 적의 위치에 '+점수' 텍스트를 띄움
-      obs.hp -= bullet.damage;
-      hit = true;
+      if (!already_hit) {
+        bullet.hit_angles.set(obs, bullet.angle);
+        obs.hp -= bullet.damage;
+        hit = true;
+      }
 
       if (obs.hp <= 0) {
         score += kill_reward;
@@ -695,14 +702,13 @@ function update_bullets() {
         obstacles.splice(j, 1);
       }
 
-      // 총알이 적 관통 가능 횟수만큼 적을 관통함
-      if (bullet.pierce_count > 0) {
-        bullet.pierce_count--;
-      }
-      // 관통 횟수가 없으면 적에게 맞았을 때 총알 제거
-      else {
-        bullets.splice(i, 1);
-        break;
+      if (!already_hit) {
+        if (bullet.pierce_count > 0) {
+          bullet.pierce_count--;
+        } else {
+          bullets.splice(i, 1);
+          break;
+        }
       }
     }
 
@@ -754,16 +760,6 @@ function fire_bullet() {
 
   bullets.push(new Bullet(player.x, player.y, cursor_x, cursor_y));
   last_bullet_time = Date.now();
-}
-
-// 적과 총알의 충돌 감지
-function check_bullet_collision(bullet, obstacle) {
-  return (
-    bullet.x + bullet.size > obstacle.x &&
-    bullet.x - bullet.size < obstacle.x + obstacle.width &&
-    bullet.y + bullet.size > obstacle.y &&
-    bullet.y - bullet.size < obstacle.y + obstacle.height
-  );
 }
 
 //////////////
