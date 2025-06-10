@@ -597,7 +597,7 @@ let bullet_power = 1;
 let bullet_speed = 10;
 
 // 총알 크기
-let bullet_size = 4;
+let bullet_size = 6;
 
 // 기본 발사 빈도
 let bullet_interval = 1000;
