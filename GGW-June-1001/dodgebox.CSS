@@ -72,6 +72,7 @@ body {
   text-shadow: 0 0 4px white;
   cursor: pointer;
   z-index: 10;
+  cursor: url("cross_aim.png") 32 32, crosshair;
 }
 
 #center_overlay {
