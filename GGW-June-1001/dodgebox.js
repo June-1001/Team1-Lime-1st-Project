@@ -891,22 +891,40 @@ function update_shop_display() {
 function get_item_effect_description(key) {
   const item = shop_items[key];
   const level = item.current_level;
-
-  switch (key) {
-    case "bullet_power":
-      return `총알 공격력<br>${bullet_power_values[level]} → ${bullet_power_values[level + 1]}`;
-    case "bullet_speed":
-      return `총알 속도<br>${bullet_speed_values[level]} → ${bullet_speed_values[level + 1]}`;
-    case "fire_rate":
-      return `발사 속도<br>${fire_rate_values[level]}ms → ${fire_rate_values[level + 1]}ms`;
-    case "ricochet":
-      return `도탄<br>${ricochet_values[level]} → ${ricochet_values[level + 1]}`;
-    case "pierce":
-      return `관통<br>${pierce_values[level]} → ${pierce_values[level + 1]} enemies`;
-    case "kill_reward":
-      return `처치 시 점수<br>${kill_reward_values[level]} → ${kill_reward_values[level + 1]}`;
-    default:
-      return "";
+  if (level === item.max_level) {
+    switch (key) {
+      case "bullet_power":
+        return `총알 공격력 MAX<br>${bullet_power_values[level]}}`;
+      case "bullet_speed":
+        return `총알 속도 MAX<br>${bullet_speed_values[level]}`;
+      case "fire_rate":
+        return `발사 속도 MAX<br>${fire_rate_values[level]}ms`;
+      case "ricochet":
+        return `도탄 MAX<br>${ricochet_values[level]}`;
+      case "pierce":
+        return `관통 MAX<br>${pierce_values[level]}`;
+      case "kill_reward":
+        return `처치 시 점수 MAX<br>${kill_reward_values[level]}`;
+      default:
+        return "";
+    }
+  } else {
+    switch (key) {
+      case "bullet_power":
+        return `총알 공격력<br>${bullet_power_values[level]} >> ${bullet_power_values[level + 1]}`;
+      case "bullet_speed":
+        return `총알 속도<br>${bullet_speed_values[level]} >> ${bullet_speed_values[level + 1]}`;
+      case "fire_rate":
+        return `발사 속도<br>${fire_rate_values[level]}ms >> ${fire_rate_values[level + 1]}ms`;
+      case "ricochet":
+        return `도탄<br>${ricochet_values[level]} >> ${ricochet_values[level + 1]}`;
+      case "pierce":
+        return `적 관통<br>${pierce_values[level]} >> ${pierce_values[level + 1]}`;
+      case "kill_reward":
+        return `처치 시 점수<br>${kill_reward_values[level]} >> ${kill_reward_values[level + 1]}`;
+      default:
+        return "";
+    }
   }
 }
 
