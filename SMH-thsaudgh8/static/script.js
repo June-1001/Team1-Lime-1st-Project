@@ -32,6 +32,7 @@ function clearGame() {
     myGameArea.clear(); // 캔버스 지우기
     score.innerText = "Score: 0"; // 점수를 0으로 설정
     document.getElementById("timer").innerText = "Timer: 0";
+    gameTimer("off");
     return true;
 }
 
@@ -122,33 +123,40 @@ function startGameWithDelay() {
             count--; // 숫자 감소
             setTimeout(updateCountdown, 1000); // 1초 후 다시 실행
             score.innerText = "Score: 0";
+            document.getElementById("timer").innerText = "Timer: 0";
         } else {
             myGameArea.clear(); // 카운트다운 종료 후 캔버스 정리
             startGame(); // 게임 시작
-            gameTimer();
+            gameTimer("on");
         }
     }
     updateCountdown(); // 카운트다운 시작
 }
 
-function gameTimer() {
-  const timerE1 = document.getElementById("timer");
-  let timeLeft  = 10;
-  // 최초 표시
-  timerE1.innerText = "Timer: " + timeLeft;
+let intervalId=""; // 인터벌 ID를 저장할 변수
 
-  // 1초마다 timeLeft--, 0이 되면 Game Over
-  const intervalId = setInterval(() => {
-    timeLeft--;
-    if (timeLeft > 0) {
-      timerE1.innerText = "Timer: " + timeLeft;
-    } else{
-      clearInterval(intervalId);
-      myGamePieces = [];
-      timerE1.innerText = "Game Over";
-      drawGamePieces();
+function gameTimer(switchState) {
+    const timerEl = document.getElementById("timer");
+
+    if (switchState == "on") {
+        let timeLeft = 10;
+        timerEl.innerText = "Timer: " + timeLeft;
+
+        intervalId = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerEl.innerText = "Timer: " + timeLeft;
+            } else {
+                clearInterval(intervalId);
+                myGamePieces = [];
+                timerEl.innerText = "Game Over";
+                drawGamePieces();
+            }
+        }, 1000);
+    } else if (switchState == "off") {
+        clearInterval(intervalId);
+        timerEl.innerText = "Timer: 0"; // 타이머 초기화
     }
-  }, 1000);
 }
 // 시작할 때 초기값 넘기기
 myGameArea.start();
