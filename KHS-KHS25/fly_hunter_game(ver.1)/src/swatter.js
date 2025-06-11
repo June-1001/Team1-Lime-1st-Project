@@ -1,4 +1,4 @@
-export default class Swatter {
+export default class Swatter {    //파리채의 마우스 추적과 충돌판정을 책임지는 모듈 생성
   constructor(el, gameArea) {
     this.el = el;
     this.area = gameArea;
@@ -9,16 +9,18 @@ export default class Swatter {
   }
 
   followCursor() {
-    this.area.addEventListener('mousemove', e => {
-      const rect = this.area.getBoundingClientRect();
-      const w = this.el.offsetWidth, h = this.el.offsetHeight;
-      let x = e.clientX - rect.left - w/2;
-      let y = e.clientY - rect.top  - (h - 20);
-      x = Math.max(0, Math.min(x, rect.width  - w));
-      y = Math.max(0, Math.min(y, rect.height - h));
-      Object.assign(this.el.style, { left: `${x}px`, top: `${y}px` });
-    });
-  }
+  const HEAD_HEIGHT = 100;  
+  this.area.addEventListener('mousemove', e => {
+    const rect = this.area.getBoundingClientRect();
+    const w = this.el.offsetWidth, h = this.el.offsetHeight;
+    const x = e.clientX - rect.left - w/2;
+    const y = e.clientY - rect.top  - (h - HEAD_HEIGHT); 
+    const clampedX = Math.max(0, Math.min(x, rect.width - w));
+    const clampedY = Math.max(0, Math.min(y, rect.height - h));
+    Object.assign(this.el.style, { left: `${clampedX}px`, top: `${clampedY}px` });
+  });
+}
+
 
   getHeadRect() {
     const r = this.el.getBoundingClientRect();

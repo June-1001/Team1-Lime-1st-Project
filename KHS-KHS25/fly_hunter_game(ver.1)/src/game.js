@@ -1,7 +1,7 @@
 import Fly from './fly.js';
 import Swatter from './swatter.js';
 
-export default class Game {
+export default class Game {   //게임의 전체적인 흐름을 책임지는 모듈 생성
   constructor() {
     // DOM
     this.menu     = document.getElementById('menu');
@@ -119,7 +119,7 @@ export default class Game {
     });
     for (let i = arr.length; i < 10; i++) {
       const li = document.createElement('li');
-      li.textContent = '게임 플레이해주세요';
+      li.textContent = '...플레이 대기 중';
       this.ranking.appendChild(li);
     }
   }
