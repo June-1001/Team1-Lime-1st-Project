@@ -832,7 +832,7 @@ const shop_items = {
 const bullet_power_costs = [10, 50, 150, 300, 500, 800, 1200, 2000, 3000, 5000];
 const bullet_speed_costs = [5, 10, 20, 30, 45, 70, 100, 150, 200, 300];
 const fire_rate_costs = [30, 100, 300, 700, 1200, 2000, 3500, 5500, 7500, 10000];
-const ricochet_costs = [100, 500, 1000, 3000, 5000];
+const ricochet_costs = [100, 500, 1500, 3000, 5000];
 const kill_reward_costs = [25, 50, 150, 250, 500, 1000, 1500, 2500, 4000, 6000];
 const pierce_costs = [100, 250, 500, 1500, 3000];
 
