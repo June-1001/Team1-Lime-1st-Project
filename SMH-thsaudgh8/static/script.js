@@ -22,7 +22,7 @@ function startGame() {
 
     for (let i = 0; i < 6; i++) {
         let position = getRandomPosition();
-        myGamePieces.push(new component(40, "#00eeaa", position.x, position.y));
+        myGamePieces.push(new component(40, "#ff7777", position.x, position.y));
     }
 
     drawGamePieces();
@@ -55,7 +55,7 @@ function handleClick(event) {
         if (distance < piece.radius) {
             //랜덤한 위치에 원을 이동시킴
             let newPosition = getRandomPosition();
-            myGamePieces[i] = new component(40, "#00eeaa", newPosition.x, newPosition.y);
+            myGamePieces[i] = new component(40, "#ff7777", newPosition.x, newPosition.y);
 
             //변경 위치에 원 다시그리고 점수 증가
             drawGamePieces();
