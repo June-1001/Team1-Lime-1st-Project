@@ -12,16 +12,24 @@
       rel="stylesheet"
     />
     <link href="https://fonts.googleapis.com/css2?family=Orbit&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="dodgebox.CSS" />
+    <link rel="stylesheet" href="styles/main.css" />
   </head>
   <body>
     <div id="title">DODGEBOX</div>
     <div id="game_container">
       <video id="background_video" autoplay loop muted playsinline>
-        <source src="galaxy_loop_pixabay.mp4" type="video/mp4" />
+        <source src="assets/galaxy_loop_pixabay.mp4" type="video/mp4" />
       </video>
       <button id="start_button">시작</button>
       <button id="shop_button">SHOP</button>
+      <button id="help_button">게임 설명</button>
+      <div id="help_modal">
+        <h1>게임 방법</h1>
+        조작키 : WASD / 방향키<br /><br />
+        발사 : 마우스 방향 자동 발사<br /><br />
+
+        <button id="close_help_button" style="font-size: 20px">Close</button>
+      </div>
       <div id="shop_modal">
         <h2>UPGRADES</h2>
         <div style="color: white; margin-bottom: 10px; font-size: 20px">
@@ -38,6 +46,7 @@
       <div id="comment_restart">Press Space Bar to Restart</div>
     </div>
     <div id="score_display"></div>
-    <script src="dodgebox.js"></script>
+    <script type="module" src="source/main.js"></script>
+    <!-- <script src="dodgebox.js"></script> -->
   </body>
 </html>
