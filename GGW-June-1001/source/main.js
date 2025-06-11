@@ -32,12 +32,14 @@ import {
   shop_modal,
   help_button,
   help_modal,
+  costume_button,
+  costume_modal,
   is_block,
   show_div,
   update_coin_display,
   init_ui_event_listeners,
   update_game_over_display,
-  set_initial_ui_visibility,
+  display_check_all,
 } from "./UI/game_ui.js";
 import { player } from "./entities/player.js";
 import {
@@ -56,6 +58,10 @@ import {
   save_game_data,
   update_coins_based_on_score,
   add_coins,
+  all_maxed,
+  reset_shop_data,
+  check_all_shop_items_maxed,
+  notice_seen,
 } from "./systems/shop_system.js";
 
 export { game_container };
@@ -67,19 +73,33 @@ init_input(game_container);
 init_ui_event_listeners(
   start_game,
   restart_game,
-  (event) => {
-    if (event.target === shop_button) {
-      shop_modal.style.display = "block";
-      help_modal.style.display = "none";
-      update_shop_display();
-    } else if (event.target === help_button) {
-      shop_modal.style.display = "none";
-      help_modal.style.display = "block";
+  function (event) {
+    switch (event.target) {
+      case shop_button: {
+        shop_modal.style.display = "block";
+        help_modal.style.display = "none";
+        costume_modal.style.display = "none";
+        update_shop_display();
+        break;
+      }
+      case help_button: {
+        shop_modal.style.display = "none";
+        help_modal.style.display = "block";
+        costume_modal.style.display = "none";
+        break;
+      }
+      case costume_button: {
+        shop_modal.style.display = "none";
+        help_modal.style.display = "none";
+        costume_modal.style.display = "block";
+        break;
+      }
     }
   },
-  () => {
+  function () {
     shop_modal.style.display = "none";
     help_modal.style.display = "none";
+    costume_modal.style.display = "none";
   }
 );
 
@@ -124,10 +144,7 @@ function start_game() {
 
   start_btn.style.display = "none";
   center_overlay.style.display = "none";
-  show_div(comment_start, start_btn);
-  show_div(comment_restart, center_overlay);
-  show_div(shop_button, start_btn);
-  show_div(shop_modal, start_btn);
+  display_check_all(all_maxed);
 
   reset_spawn_system();
   player.reset_trail();
@@ -214,12 +231,11 @@ function restart_game() {
   set_game_running(false);
   video.pause();
   video.style.display = "none";
-  show_div(comment_start, start_btn);
-  show_div(comment_restart, center_overlay);
-  show_div(shop_button, start_btn);
+  display_check_all(all_maxed);
 }
 
 window.addEventListener("load", () => {
   load_game_data();
-  set_initial_ui_visibility();
+  check_all_shop_items_maxed();
+  display_check_all(all_maxed);
 });

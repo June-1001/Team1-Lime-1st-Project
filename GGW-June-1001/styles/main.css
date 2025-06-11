@@ -72,6 +72,11 @@ body {
   text-shadow: 0 0 4px white;
   z-index: 10;
   cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  transition: all 0.3s;
+}
+
+#start_button:hover {
+  background-color: #5555;
 }
 
 #center_overlay {
@@ -166,6 +171,7 @@ body {
 #shop_button:hover {
   background-color: rgba(100, 100, 0, 0.5);
   box-shadow: 0 0 5px gold;
+  transform: scale(1.05);
 }
 
 #shop_modal {
@@ -203,6 +209,7 @@ body {
   border-radius: 5px;
   font-family: "Orbitron";
   font-weight: bold;
+  text-align: center;
   transition: all 0.3s;
 }
 
@@ -259,6 +266,20 @@ body {
   transform: scale(1.05);
 }
 
+.close_button {
+  position: relative;
+  color: white;
+  border-radius: 4px;
+  width: 100px;
+  height: 60px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+  height: 60px;
+  transition: all 0.3s;
+}
+
 #help_button {
   position: absolute;
   background-color: rgba(0, 0, 0, 0.5);
@@ -285,6 +306,7 @@ body {
 #help_button:hover {
   background-color: rgba(0, 100, 100, 0.5);
   box-shadow: 0 0 5px lightblue;
+  transform: scale(1.05);
 }
 
 #help_modal {
@@ -315,7 +337,7 @@ body {
   padding-bottom: 30px;
 }
 
-#close_help_button {
+#close_help {
   position: relative;
   background-color: rgba(0, 100, 100, 0.3);
   box-shadow: 0 0 5px lightblue;
@@ -332,7 +354,84 @@ body {
   transition: all 0.3s;
 }
 
-#close_help_button:hover {
+#close_help:hover {
   background-color: rgba(0, 100, 150, 0.5);
   transform: scale(1.05);
+}
+
+#costume_button {
+  display: none;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  left: 20px;
+  bottom: 20px;
+  padding: 5px 15px;
+  width: auto;
+  height: 50px;
+  color: lightgreen;
+  border: 1px solid lightgreen;
+  border-radius: 8px;
+  z-index: 10;
+  transition: all 0.3s;
+  align-content: center;
+  box-shadow: 0 0 5px lightgreen;
+  font-family: "Orbitron";
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 0 0 5px lightgreen;
+  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+}
+
+#costume_button:hover {
+  background-color: rgba(0, 100, 50, 0.5);
+  box-shadow: 0 0 5px lightgreen;
+  transform: scale(1.05);
+}
+
+#costume_modal {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 600px;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.9);
+
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 255, 150, 0.7);
+  z-index: 20;
+  text-align: center;
+  align-content: center;
+  color: white;
+  font-family: "Orbitron";
+  font-size: 24px;
+  border: 1px solid lightgreen;
+  overflow: hidden;
+}
+
+#close_costume {
+  background-color: rgba(0, 100, 0, 0.3);
+  box-shadow: 0 0 5px lightgreen;
+  border: 2px solid lightgreen;
+}
+
+#close_costume:hover {
+  background-color: rgba(0, 100, 50, 0.5);
+  transform: scale(1.05);
+}
+
+#costume_notice {
+  position: absolute;
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  background-color: #333;
+  border: 1px solid white;
+  box-shadow: 0 0 8px white;
+  padding: 40px;
+  z-index: 99;
 }

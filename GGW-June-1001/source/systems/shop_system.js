@@ -77,6 +77,38 @@ export const shop_items = {
   },
 };
 
+export let all_maxed = false;
+import { display_check_all } from "../UI/game_ui.js";
+
+const costume_notice = document.getElementById("costume_notice");
+
+export let notice_seen = false;
+
+function show_costume_notice(notice_seen) {
+  if (!notice_seen) {
+    notice_seen = true;
+    costume_notice.style.display = "block";
+    setTimeout(function () {
+      costume_notice.style.display = "none";
+    }, 3000);
+  }
+}
+
+export function check_all_shop_items_maxed() {
+  let all_maxed_now = true;
+  for (let item of Object.values(shop_items)) {
+    if (item.current_level < item.max_level) {
+      all_maxed_now = false;
+      break;
+    }
+  }
+  if (all_maxed_now && !all_maxed) {
+    all_maxed = true;
+    show_costume_notice;
+    display_check_all(all_maxed);
+  }
+}
+
 export function update_shop_display() {
   update_coin_display(coins, get_coins_from_score());
   shop_items_container.innerHTML = "";
@@ -101,6 +133,10 @@ export function update_shop_display() {
             </button>
         `;
 
+    if (item.current_level >= item.max_level) {
+      item.current_level = item.max_level;
+    }
+
     shop_items_container.appendChild(item_element);
   }
 
@@ -108,6 +144,7 @@ export function update_shop_display() {
     button.addEventListener("click", function () {
       const item_key = this.getAttribute("data-item");
       buy_upgrade(item_key);
+      display_check_all(all_maxed);
     });
   });
 }
@@ -207,7 +244,7 @@ export function add_coins(amount) {
 
 export function reset_shop_data() {
   coins = 0;
-  set_kill_reward(10); // Reset kill_reward to default
+  set_kill_reward(10);
   for (const key in shop_items) {
     shop_items[key].current_level = 0;
     shop_items[key].effect();

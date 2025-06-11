@@ -1,17 +1,19 @@
 import { keys } from "../core/input.js";
 import { game_area_width, game_area_height, my_game_area } from "../core/game_core.js";
 import { game_running } from "../core/game_state.js";
+import { player_costumes } from "./player_costumes.js";
 
 export const player = {
   x: game_area_width / 2,
   y: game_area_height / 2,
   radius: 15,
-  color: "rgba(255,255,255,0.6)",
   speed: 9,
   trail: [],
   max_trail_length: 15,
   prev_x: game_area_width / 2,
   prev_y: game_area_height / 2,
+  current_costume: 0,
+  costumes: player_costumes,
 
   move: function () {
     this.prev_x = this.x;
@@ -33,17 +35,16 @@ export const player = {
 
   update: function () {
     const ctx = my_game_area.context;
-    if (!ctx) return;
+    if (!ctx) {
+      return;
+    }
 
-    ctx.save();
-    ctx.globalAlpha = 1;
-    ctx.shadowColor = "rgba(255,255,255,0.3)";
-    ctx.shadowBlur = 15;
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.restore();
+    const costume = this.costumes[this.current_costume];
+    if (!costume || typeof costume.draw !== "function") {
+      return;
+    }
+
+    costume.draw(ctx, this.x, this.y, this.radius);
 
     if (game_running) {
       this.trail.push({ x: this.x, y: this.y, alpha: 1 });
@@ -53,22 +54,22 @@ export const player = {
       }
     }
 
-    this.trail.forEach((t, i) => {
-      ctx.save();
-      ctx.globalAlpha = t.alpha;
-      ctx.shadowColor = "rgba(255,255,255,0.3)";
-      ctx.shadowBlur = 15;
-      ctx.beginPath();
-      ctx.arc(t.x, t.y, this.radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.restore();
+    if (typeof costume.trail_draw === "function") {
+      this.trail.forEach((t, i) => {
+        t.alpha = (i / this.max_trail_length) ** 2;
 
-      t.alpha = (i / this.max_trail_length) ** 3;
-    });
+        costume.trail_draw(ctx, t.x, t.y, this.radius, t.alpha);
+      });
+    }
   },
 
   reset_trail: function () {
     this.trail = [];
+  },
+
+  set_costume: function (costume_number) {
+    if (this.costumes.hasOwnProperty(costume_number)) {
+      this.current_costume = costume_number;
+    }
   },
 };

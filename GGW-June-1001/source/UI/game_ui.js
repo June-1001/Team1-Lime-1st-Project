@@ -9,11 +9,15 @@ export const center_overlay = document.getElementById("center_overlay");
 export const video = document.getElementById("background_video");
 export const shop_button = document.getElementById("shop_button");
 export const shop_modal = document.getElementById("shop_modal");
-export const close_shop_button = document.getElementById("close_shop_button");
+export const close_shop_button = document.getElementById("close_shop");
 
 export const help_button = document.getElementById("help_button");
 export const help_modal = document.getElementById("help_modal");
-export const close_help_button = document.getElementById("close_help_button");
+export const close_help_button = document.getElementById("close_help");
+
+export const costume_button = document.getElementById("costume_button");
+export const costume_modal = document.getElementById("costume_modal");
+export const close_costume_button = document.getElementById("close_costume");
 
 export const coin_display = document.getElementById("coin_display");
 export const shop_items_container = document.getElementById("shop_items");
@@ -46,15 +50,22 @@ export function init_ui_event_listeners(
   close_shop_button.addEventListener("click", close_modal_callback);
   help_button.addEventListener("click", open_modal_callback);
   close_help_button.addEventListener("click", close_modal_callback);
+  costume_button.addEventListener("click", open_modal_callback);
+  close_costume_button.addEventListener("click", close_modal_callback);
 }
 
 export function update_game_over_display(score, coins_from_score) {
   final_score_display.innerHTML = `점수: ${score}<br><span style="font-size: 26px; text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
 }
 
-export function set_initial_ui_visibility() {
+export function display_check_all(all_maxed) {
   show_div(shop_button, start_btn);
   show_div(help_button, start_btn);
   show_div(comment_start, start_btn);
   show_div(comment_restart, center_overlay);
+  if (all_maxed) {
+    show_div(costume_button, start_btn);
+  } else {
+    costume_button.style.display = "none";
+  }
 }
