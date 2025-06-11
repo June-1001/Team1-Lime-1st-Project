@@ -27,11 +27,11 @@ function startGame() {
 
     drawGamePieces();
 }
+
 function clearGame() {
     myGamePieces = [];  // 원 리스트 비우기
     myGameArea.clear(); // 캔버스 지우기
     score.innerText = "Score: 0"; // 점수를 0으로 설정
-    document.getElementById("timer").innerText = "Timer: 0";
     gameTimer("off");
     return true;
 }
@@ -42,15 +42,22 @@ function handleClick(event) {
     var mouseX = event.clientX - rect.left;
     var mouseY = event.clientY - rect.top;
 
+    //클릭된 원이 있는지 확인하기(for문)
     for (let i = 0; i < myGamePieces.length; i++) {
         let piece = myGamePieces[i];
+
+        // 클릭된 좌표와 원의 중심 간의 거리 계산
         let dx = mouseX - piece.x;
         let dy = mouseY - piece.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
 
+        //원의 반지름보다 클릭한 거리가 더 작으면 원의 내부임
         if (distance < piece.radius) {
+            //랜덤한 위치에 원을 이동시킴
             let newPosition = getRandomPosition();
             myGamePieces[i] = new component(40, "#00eeaa", newPosition.x, newPosition.y);
+
+            //변경 위치에 원 다시그리고 점수 증가
             drawGamePieces();
             addScore();
             break;
@@ -76,7 +83,7 @@ function drawGamePieces() {
         ctx.beginPath();
         ctx.arc(piece.x, piece.y, piece.radius, 0, 2 * Math.PI);
         ctx.fill();
-    }    
+    }
 }
 
 // 원끼리 겹치지 않도록 랜덤 위치 생성
@@ -133,7 +140,7 @@ function startGameWithDelay() {
     updateCountdown(); // 카운트다운 시작
 }
 
-let intervalId=""; // 인터벌 ID를 저장할 변수
+let intervalId = ""; // 인터벌 ID를 저장할 변수
 
 function gameTimer(switchState) {
     const timerEl = document.getElementById("timer");
