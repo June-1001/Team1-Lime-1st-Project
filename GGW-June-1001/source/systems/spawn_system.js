@@ -1,7 +1,7 @@
 import { my_game_area, game_area_width, game_area_height } from "../core/game_core.js";
 import {
   get_difficulty,
-  increment_difficulty,
+  increase_difficulty,
   get_score,
   game_running,
 } from "../core/game_state.js";
@@ -80,7 +80,7 @@ class SpawnTimer {
     obstacles.push(
       new Opponent(this.size, this.size, this.x - this.size / 2, this.y - this.size / 2)
     );
-    increment_difficulty();
+    increase_difficulty();
   }
 }
 

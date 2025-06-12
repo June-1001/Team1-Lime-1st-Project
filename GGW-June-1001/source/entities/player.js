@@ -57,12 +57,10 @@ export const player = {
     if (typeof costume.trail_draw === "function") {
       this.trail.forEach((t, i) => {
         t.alpha = (i / this.max_trail_length) ** 2;
-
         costume.trail_draw(ctx, t.x, t.y, this.radius, t.alpha);
       });
     }
   },
-
   reset_trail: function () {
     this.trail = [];
   },

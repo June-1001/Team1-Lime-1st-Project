@@ -108,6 +108,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 8px white;
   text-shadow: 0 0 4px white;
+  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
 }
 
 #score_display {
@@ -333,7 +334,7 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 800px;
+  width: 600px;
   height: 600px;
   transform: translate(-50%, -50%);
   background-color: #222;
@@ -346,14 +347,18 @@ body {
   align-content: center;
   color: white;
   font-family: "Orbitron";
-  font-size: 24px;
+  font-size: 20px;
   border: 1px solid lightblue;
   overflow: hidden;
 }
 
 #help_modal h1 {
-  font-size: 40px;
+  font-size: 30px;
   padding-bottom: 30px;
+}
+
+#help_modal p {
+  padding-bottom: 40px;
 }
 
 #close_help {
@@ -425,7 +430,7 @@ body {
   align-content: center;
   color: white;
   font-family: "Orbitron";
-  font-size: 24px;
+  font-size: 20px;
   border: 1px solid lightgreen;
   overflow: hidden;
 }
@@ -468,7 +473,7 @@ body {
 
 #costume_container {
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   padding: 10px;
   justify-content: center;

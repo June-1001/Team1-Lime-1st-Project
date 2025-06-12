@@ -12,7 +12,7 @@ import {
   game_running,
   set_game_running,
   reset_score,
-  increment_score,
+  increase_score,
   get_score,
   reset_difficulty,
   get_coins_from_score,
@@ -71,6 +71,12 @@ let game_update_interval_id;
 
 init_input(game_container);
 
+function close_all_modal() {
+  shop_modal.style.display = "none";
+  help_modal.style.display = "none";
+  costume_modal.style.display = "none";
+}
+
 init_ui_event_listeners(
   start_game,
   restart_game,
@@ -98,11 +104,7 @@ init_ui_event_listeners(
       }
     }
   },
-  function () {
-    shop_modal.style.display = "none";
-    help_modal.style.display = "none";
-    costume_modal.style.display = "none";
-  }
+  close_all_modal
 );
 
 document.addEventListener("keydown", function (event) {
@@ -146,7 +148,9 @@ function start_game() {
 
   start_btn.style.display = "none";
   center_overlay.style.display = "none";
+
   display_check_all(all_maxed);
+  close_all_modal();
 
   reset_spawn_system();
   player.reset_trail();
@@ -168,7 +172,7 @@ function update_game_area() {
   my_game_area.clear();
   if (!game_running) return;
 
-  increment_score();
+  increase_score();
   score_display.textContent = `점수: ${get_score()}`;
   update_coins_based_on_score();
 

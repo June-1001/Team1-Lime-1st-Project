@@ -14,7 +14,7 @@ export function reset_score() {
   coins_from_score = 0;
 }
 
-export function increment_score() {
+export function increase_score() {
   score_counter++;
   if (score_counter >= 5) {
     score++;
@@ -39,7 +39,7 @@ export function reset_difficulty() {
   difficulty = 0;
 }
 
-export function increment_difficulty() {
+export function increase_difficulty() {
   difficulty += 1;
 }
 
