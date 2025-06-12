@@ -58,7 +58,7 @@ html, body {
   position: absolute;
   width: 120px;
   height: 120px;
-  background: url('assets/fly_real.png') no-repeat center/contain;
+  background: url('img/fly_real.png') no-repeat center/contain;
   transition: left 0.6s linear, top 0.6s linear, transform 0.6s linear;
 }
 
@@ -67,7 +67,7 @@ html, body {
   position: absolute;
   width: 150px;    /* 컨테이너 너비 */
   height: 130px;   /* 컨테이너 높이 */
-  background: url('assets/swatter.png') no-repeat top center;
+  background: url('img/swatter.png') no-repeat top center;
   background-size: 120px 100px;  
   pointer-events: auto;
   z-index: 2;
