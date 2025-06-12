@@ -44,6 +44,8 @@ export const player_costumes = {
     description: "기본 코스튬",
     color: "rgba(255,255,255,0.6)",
     shadow_color: "rgba(255,255,255,0.3)",
+    radius: 15,
+    speed: 9,
 
     draw: function (ctx, x, y, radius) {
       ctx.save();
@@ -72,11 +74,155 @@ export const player_costumes = {
 
   1: {
     unlocked: true,
+    name: "빨강",
+    description: "3배 빨라집니다",
+    color: "rgba(255, 50, 50, 0.8)",
+    shadow_color: "rgba(255, 50, 50, 0.3)",
+    radius: 15,
+    speed: 27,
+
+    draw: function (ctx, x, y, radius) {
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 20;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+
+    trail_draw: function (ctx, x, y, radius, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 10;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+  },
+
+  2: {
+    unlocked: false,
+    name: "황금",
+    description: "100,000 코인 이상 획득 시 해금",
+    color: "rgba(255, 215, 0, 0.9)",
+    shadow_color: "rgba(255, 215, 0, 0.4)",
+    radius: 15,
+    speed: 9,
+
+    draw: function (ctx, x, y, radius) {
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 25;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+
+    trail_draw: function (ctx, x, y, radius, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+  },
+
+  3: {
+    unlocked: false,
+    name: "유령",
+    description: "적이 20명 이상 있을 때 생존 시 해금",
+    color: "rgba(200, 200, 255, 0.3)",
+    shadow_color: "rgba(200, 200, 255, 0.1)",
+    radius: 15,
+    speed: 9,
+
+    draw: function (ctx, x, y, radius) {
+      ctx.save();
+      ctx.globalAlpha = 0.4;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 5;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+
+    trail_draw: function (ctx, x, y, radius, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha * 0.3;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 5;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+  },
+
+  4: {
+    unlocked: false,
+    name: "3D",
+    description: "300,000점 이상 획득 시 해금",
+    color: "rgba(100, 100, 255, 1)",
+    shadow_color: "rgba(0, 0, 0, 0.5)",
+    radius: 15,
+    speed: 9,
+
+    draw: function (ctx, x, y, radius) {
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = this.shadow_color;
+      ctx.beginPath();
+      ctx.arc(x + 3, y + 3, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    },
+
+    trail_draw: function (ctx, x, y, radius, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = this.shadow_color;
+      ctx.beginPath();
+      ctx.arc(x + 2, y + 2, radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = this.color;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+    },
+  },
+
+  5: {
+    unlocked: true,
     name: "무지개",
-    description: " ",
+    description: "777,777점 이상 획득 시 해금",
     color: "rgba(231, 52, 52, 0.9)",
     shadow_color: "rgba(231, 52, 52, 0.3)",
     color_index: 0,
+    radius: 15,
+    speed: 9,
 
     draw: function (ctx, x, y, radius) {
       this.color_index = (this.color_index + 1) % costume_rainbow_colors.length;
@@ -95,7 +241,7 @@ export const player_costumes = {
 
     trail_draw: function (ctx, x, y, radius, alpha) {
       const trail_color_index = (this.color_index + 1) % costume_rainbow_colors.length;
-      const trail_color = costume_rainbow_colors[Math.floor(trail_color_index)];
+      const trail_color = costume_rainbow_colors[trail_color_index];
 
       ctx.save();
       ctx.globalAlpha = alpha;

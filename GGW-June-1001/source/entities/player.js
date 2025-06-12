@@ -10,7 +10,6 @@ import { player_costumes } from "./player_costumes.js";
 export const player = {
   x: game_area_width / 2,
   y: game_area_height / 2,
-  radius: 15,
   speed: 9,
   trail: [],
   max_trail_length: 15,
@@ -20,19 +19,22 @@ export const player = {
   costumes: player_costumes,
 
   move: function () {
+    const costume = this.costumes[this.current_costume];
+    const radius = costume.radius;
+
     this.prev_x = this.x;
     this.prev_y = this.y;
 
-    if ((keys.arrow_up || keys.w) && this.y - this.radius > 0) {
+    if ((keys.arrow_up || keys.w) && this.y - radius > 0) {
       this.y -= this.speed;
     }
-    if ((keys.arrow_down || keys.s) && this.y + this.radius < game_area_height) {
+    if ((keys.arrow_down || keys.s) && this.y + radius < game_area_height) {
       this.y += this.speed;
     }
-    if ((keys.arrow_left || keys.a) && this.x - this.radius > 0) {
+    if ((keys.arrow_left || keys.a) && this.x - radius > 0) {
       this.x -= this.speed;
     }
-    if ((keys.arrow_right || keys.d) && this.x + this.radius < game_area_width) {
+    if ((keys.arrow_right || keys.d) && this.x + radius < game_area_width) {
       this.x += this.speed;
     }
   },
@@ -48,7 +50,9 @@ export const player = {
       return;
     }
 
-    costume.draw(ctx, this.x, this.y, this.radius);
+    const radius = costume.radius;
+
+    costume.draw(ctx, this.x, this.y, radius);
 
     if (game_running) {
       this.trail.push({ x: this.x, y: this.y, alpha: 1 });
@@ -59,12 +63,13 @@ export const player = {
     }
 
     if (typeof costume.trail_draw === "function") {
-      this.trail.forEach((t, i) => {
+      this.trail.forEach(function (t, i) {
         t.alpha = (i / this.max_trail_length) ** 2;
-        costume.trail_draw(ctx, t.x, t.y, this.radius, t.alpha);
-      });
+        costume.trail_draw(ctx, t.x, t.y, radius, t.alpha);
+      }, this);
     }
   },
+
   reset_trail: function () {
     this.trail = [];
   },

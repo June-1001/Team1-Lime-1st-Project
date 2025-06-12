@@ -224,6 +224,9 @@ function update_game_area() {
 //----------------------------------------------//
 
 function check_collisions() {
+  const costume = player.costumes[player.current_costume];
+  const radius = costume.radius;
+
   for (let i = 0; i < obstacles.length; i++) {
     const obs = obstacles[i];
     const closest_x = Math.max(obs.x, Math.min(player.x, obs.x + obs.width));
@@ -231,7 +234,7 @@ function check_collisions() {
     const distance_x = player.x - closest_x;
     const distance_y = player.y - closest_y;
 
-    if (Math.sqrt(distance_x ** 2 + distance_y ** 2) < player.radius) {
+    if (Math.sqrt(distance_x * distance_x + distance_y * distance_y) < radius) {
       game_over();
       return;
     }
