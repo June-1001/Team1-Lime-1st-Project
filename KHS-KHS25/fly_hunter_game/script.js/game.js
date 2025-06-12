@@ -29,7 +29,7 @@ export default class Game {
     this.fly      = new Fly(this.flyEl, this.gameArea, this.backBtn);
     this.swatter  = new Swatter(this.swatterEl, this.gameArea);
 
-    // 이벤트 바인딩
+    // 이벤트
     this.swatter.onClick(() => this.hit());
     this.swatter.followCursor();
     this.restart.addEventListener('click', () => this.start());
@@ -75,7 +75,7 @@ export default class Game {
   // 파리채로 터치해 파리 죽이기
   hit = () => {
     const f = this.flyEl.getBoundingClientRect();
-    const h = this.swatter.getHeadRect();
+    const h = this.swatter.getHeadRect(); //swatter.js에서 작성한 영역만큼이 겹칠때 득점하도록 설정함
     if (
       !( h.right  < f.left  ||
          h.left   > f.right ||
