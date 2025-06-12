@@ -1,4 +1,4 @@
-import Game from './game.js';   //메인 메뉴 선택을 담당하는 모듈 생성
+import Game from './game.js'; 
 
 document.addEventListener('DOMContentLoaded', () => {
   const game = new Game();

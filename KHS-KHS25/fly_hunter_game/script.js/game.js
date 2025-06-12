@@ -7,7 +7,7 @@ const messages = {
   playWait:  '... 플레이 대기중'
 };
 
-export default class Game {
+export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 전반적인 흐름과 상태관리를 담당하는 모듈
   constructor() {
     // DOM 참조
     this.menu      = document.getElementById('menu');

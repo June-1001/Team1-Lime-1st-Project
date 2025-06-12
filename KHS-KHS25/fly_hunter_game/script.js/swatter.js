@@ -1,4 +1,4 @@
-export default class Swatter {    //파리채의 마우스 추적과 충돌판정을 책임지는 모듈 생성
+export default class Swatter {    //파리채의 마우스 추적과 충돌판정을 책임지는 모듈
   constructor(el, gameArea) {
     this.el = el;
     this.area = gameArea;

@@ -1,4 +1,4 @@
-export default class Fly {    //파리 위치 재계산과 이동을 책임지는 모듈 생성
+export default class Fly {    //파리 위치 재계산과 이동을 책임지는 모듈
   constructor(flyEl, gameArea, backBtn) {
     this.el = flyEl;
     this.area = gameArea;
