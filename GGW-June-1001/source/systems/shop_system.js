@@ -7,6 +7,11 @@ import {
   set_max_ricochet,
   set_max_pierce,
 } from "../entities/bullet.js";
+import { display_check_all } from "../UI/game_ui.js";
+
+//----------//
+// 코인 획득 //
+//----------//
 
 export let coins = 0;
 export let kill_reward = 10;
@@ -17,6 +22,15 @@ export function set_kill_reward(value) {
 export function get_kill_reward() {
   return kill_reward;
 }
+
+export function add_coins(amount) {
+  coins += amount;
+  save_game_data();
+}
+
+//-------------------------------//
+// 상점 업그레이드 가격 및 효과 맵 //
+//-------------------------------//
 
 const bullet_power_costs = [10, 50, 150, 300, 500, 800, 1200, 2000, 3000, 5000];
 const bullet_speed_costs = [5, 10, 20, 30, 45, 70, 100, 150, 200, 300];
@@ -31,6 +45,10 @@ const fire_rate_values = [600, 560, 520, 480, 440, 400, 360, 320, 280, 240, 200]
 const ricochet_values = [0, 1, 2, 3, 4, 5];
 const kill_reward_values = [10, 25, 50, 85, 125, 175, 225, 275, 350, 425, 500];
 const pierce_values = [0, 1, 2, 3, 4, 5];
+
+//-----------------------------//
+// 상점 업그레이드를 총알에 적용 //
+//-----------------------------//
 
 export const shop_items = {
   bullet_power: {
@@ -77,20 +95,23 @@ export const shop_items = {
   },
 };
 
+//--------------------------------------------------------//
+// 상점 아이템이 전부 MAX일 때 코스튬 기능 해금 메시지 띄우기 //
+//--------------------------------------------------------//
+
 export let all_maxed = false;
-import { display_check_all } from "../UI/game_ui.js";
 
 const costume_notice = document.getElementById("costume_notice");
-
 export let notice_seen = false;
 
-function show_costume_notice(notice_seen) {
-  if (!notice_seen) {
-    notice_seen = true;
+function show_costume_notice() {
+  if (!notice_seen && all_maxed) {
     costume_notice.style.display = "block";
+    notice_seen = true;
+    save_game_data();
     setTimeout(function () {
       costume_notice.style.display = "none";
-    }, 3000);
+    }, 5000);
   }
 }
 
@@ -102,12 +123,18 @@ export function check_all_shop_items_maxed() {
       break;
     }
   }
+
   if (all_maxed_now && !all_maxed) {
     all_maxed = true;
-    show_costume_notice;
+    show_costume_notice();
     display_check_all(all_maxed);
+    save_game_data();
   }
 }
+
+//-----------------------------------//
+// 상점 아이템 목록마다 상점 UI에 추가 //
+//-----------------------------------//
 
 export function update_shop_display() {
   update_coin_display(coins, get_coins_from_score());
@@ -144,10 +171,14 @@ export function update_shop_display() {
     button.addEventListener("click", function () {
       const item_key = this.getAttribute("data-item");
       buy_upgrade(item_key);
-      display_check_all(all_maxed);
+      check_all_shop_items_maxed();
     });
   });
 }
+
+//-----------------//
+// 상점  업그레이드 //
+//-----------------//
 
 function get_item_effect_description(key) {
   const item = shop_items[key];
@@ -206,9 +237,17 @@ export function update_coins_based_on_score() {
   update_coin_display(coins, get_coins_from_score());
 }
 
+//-------------------------//
+// 게임 데이터 세이브 / 로드 //
+//-------------------------//
+
+// 세이브할 데이터 목록
+// 코인, 코스튬 기능 해금 여부, 상점 업그레이드
 export function save_game_data() {
   const save_data = {
     coins,
+    notice_seen,
+    all_maxed,
     shop_items: {},
   };
 
@@ -227,6 +266,9 @@ export function load_game_data() {
     const data = JSON.parse(saved_data);
     coins = data.coins || 0;
 
+    notice_seen = !!data.notice_seen;
+    all_maxed = !!data.all_maxed;
+
     for (const key in shop_items) {
       if (data.shop_items && data.shop_items[key]) {
         shop_items[key].current_level = data.shop_items[key].current_level;
@@ -234,17 +276,20 @@ export function load_game_data() {
       }
     }
   }
+
   update_shop_display();
+  check_all_shop_items_maxed();
 }
 
-export function add_coins(amount) {
-  coins += amount;
-  save_game_data();
-}
+//----------------//
+// 리셋 (테스트용) //
+//----------------//
 
 export function reset_shop_data() {
   coins = 0;
-  set_kill_reward(10);
+  notice_seen = false;
+  all_maxed = false;
+
   for (const key in shop_items) {
     shop_items[key].current_level = 0;
     shop_items[key].effect();

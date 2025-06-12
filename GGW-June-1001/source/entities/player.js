@@ -3,6 +3,10 @@ import { game_area_width, game_area_height, my_game_area } from "../core/game_co
 import { game_running } from "../core/game_state.js";
 import { player_costumes } from "./player_costumes.js";
 
+//--------------//
+// 플레이어 설정 //
+//--------------//
+
 export const player = {
   x: game_area_width / 2,
   y: game_area_height / 2,

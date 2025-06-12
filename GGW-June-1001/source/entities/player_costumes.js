@@ -1,3 +1,7 @@
+//--------------------//
+// 무지개 전용 색깔 맵 //
+//--------------------//
+
 export const costume_rainbow_colors = [
   "rgba(231, 52, 52, 0.9)",
   "rgba(237, 88, 44, 0.9)",
@@ -28,6 +32,10 @@ export const costume_rainbow_colors = [
   "rgba(224, 53, 72, 0.9)",
   "rgba(231, 52, 52, 0.9)",
 ];
+
+//---------------------------//
+// 여기에 플레이어 코스튬 추가 //
+//---------------------------//
 
 export const player_costumes = {
   0: {
@@ -66,8 +74,8 @@ export const player_costumes = {
     unlocked: true,
     name: "무지개",
     description: " ",
-    color: "rgba(255,255,255,0.6)",
-    shadow_color: "rgba(255,255,255,0.3)",
+    color: "rgba(231, 52, 52, 0.9)",
+    shadow_color: "rgba(231, 52, 52, 0.3)",
     color_index: 0,
 
     draw: function (ctx, x, y, radius) {

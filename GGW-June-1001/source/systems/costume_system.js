@@ -1,5 +1,9 @@
 import { player_costumes } from "../entities/player_costumes.js";
 
+//--------------------------------//
+// 코스튬 기능 창 UI HTML 생성 함수 //
+//--------------------------------//
+
 export function update_costume_display(player) {
   let container = document.getElementById("costume_container");
   container.innerHTML = "";

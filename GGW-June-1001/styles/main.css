@@ -40,6 +40,10 @@ body {
   opacity: 0.3;
 }
 
+button {
+  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+}
+
 #game_container {
   position: relative;
   box-shadow: 0 0 4px white;
@@ -71,7 +75,6 @@ body {
   box-shadow: 0 0 8px white;
   text-shadow: 0 0 4px white;
   z-index: 10;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
   transition: all 0.3s;
 }
 
@@ -108,7 +111,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 8px white;
   text-shadow: 0 0 4px white;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
 }
 
 #score_display {
@@ -118,6 +120,10 @@ body {
   font-weight: bold;
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
 }
+
+/* ------------------------------------------ */
+/* 메인 메뉴 및 재시작 시 보여질 설명 텍스트 CSS */
+/* ------------------------------------------ */
 
 #comment_start {
   display: none;
@@ -145,6 +151,10 @@ body {
   font-weight: bold;
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
 }
+
+/* -------- */
+/* 상점 기능 */
+/* -------- */
 
 #shop_button {
   position: absolute;
@@ -299,6 +309,9 @@ body {
   height: 60px;
   transition: all 0.3s;
 }
+/* ---------- */
+/* 도움말 기능 */
+/* ---------- */
 
 #help_button {
   position: absolute;
@@ -380,8 +393,11 @@ body {
 
 #close_help:hover {
   background-color: rgba(0, 100, 150, 0.5);
-  transform: scale(1.05);
 }
+
+/* ---------- */
+/* 코스튬 기능 */
+/* ---------- */
 
 #costume_button {
   display: none;
@@ -464,11 +480,14 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 30px;
+  color: white;
+  text-shadow: 0 0 6px lightgreen;
   background-color: #333;
-  border: 1px solid white;
-  box-shadow: 0 0 8px white;
+  border: 2px solid lightgreen;
+  border-radius: 8px;
+  box-shadow: 0 0 8px lightgreen;
   padding: 40px;
-  z-index: 99;
+  z-index: 9999;
 }
 
 #costume_container {

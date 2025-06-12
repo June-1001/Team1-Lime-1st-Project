@@ -1,5 +1,9 @@
 import { game_area_width, game_area_height, my_game_area } from "../core/game_core.js";
 
+//-----------------//
+// 총알 초기 값 설정 //
+//-----------------//
+
 export let bullet_power = 1;
 export let bullet_speed = 10;
 export let bullet_size = 6;
@@ -24,6 +28,10 @@ export function set_max_ricochet(value) {
 export function set_max_pierce(value) {
   max_pierce = value;
 }
+
+//------------//
+// 총알 클래스 //
+//------------//
 
 export class Bullet {
   constructor(x, y, target_x, target_y) {
@@ -69,6 +77,7 @@ export class Bullet {
     ctx.restore();
   }
 
+  // 벽 충돌 감지
   is_out_of_bounds() {
     return this.x < 0 || this.x > game_area_width || this.y < 0 || this.y > game_area_height;
   }

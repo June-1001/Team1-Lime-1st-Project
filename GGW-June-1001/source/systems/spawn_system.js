@@ -13,6 +13,10 @@ export let spawn_timers = [];
 export let spawn_interval = 1000;
 export let last_spawn_time = 0;
 
+//--------------------------//
+// 점수 획득 시 텍스트 띄우기 //
+//--------------------------//
+
 export function add_floating_text(x, y, text) {
   floating_texts.push({
     x,
@@ -22,30 +26,39 @@ export function add_floating_text(x, y, text) {
     life: 50,
   });
 }
-
 export function update_floating_texts() {
   const ctx = my_game_area.context;
-  if (!ctx) return;
-
+  if (!ctx) {
+    return;
+  }
   for (let i = floating_texts.length - 1; i >= 0; i--) {
     const t = floating_texts[i];
+
     ctx.globalAlpha = t.opacity;
     ctx.font = "bold 20px Orbitron";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "white";
+
+    // 일단 남아있는 그림자를 한번 리셋하고 다시 흰색으로 그리기
+    ctx.shadowColor = "transparent";
+    ctx.shadowBlur = 0;
+    ctx.shadowColor = "white";
+    ctx.shadowBlur = 25;
+
     ctx.fillText(t.text, t.x, t.y);
     ctx.globalAlpha = 1;
-    ctx.shadowColor = "rgb(255, 255, 255)";
-    ctx.shadowBlur = 25;
     t.y -= 0.5;
-
     t.opacity -= 1 / t.life;
     if (t.opacity <= 0) {
       floating_texts.splice(i, 1);
     }
   }
 }
+
+//-------------------//
+// 스폰 타이머 클래스 //
+//-------------------//
 
 class SpawnTimer {
   constructor(x, y, size) {
@@ -80,9 +93,15 @@ class SpawnTimer {
     obstacles.push(
       new Opponent(this.size, this.size, this.x - this.size / 2, this.y - this.size / 2)
     );
+    // 적이 생성될 때마다 difficulty 값이 증가
+    // difficulty가 증가할수록 적의 체력이 증가
     increase_difficulty();
   }
 }
+
+//-----------------//
+// 스폰 타이머 생성 //
+//-----------------//
 
 export function create_spawn_timer() {
   const size = 30 + Math.random() * 30;
@@ -91,6 +110,10 @@ export function create_spawn_timer() {
 
   spawn_timers.push(new SpawnTimer(x, y, size));
 }
+
+//---------------------//
+// 스폰 타이머 업데이트 //
+//---------------------//
 
 export function update_spawn_timers() {
   const now = Date.now();
@@ -106,6 +129,10 @@ export function update_spawn_timers() {
     }
   }
 }
+
+//---------------------------//
+// 타이머 리셋 (게임 재시작용) //
+//---------------------------//
 
 export function reset_spawn_system() {
   obstacles = [];

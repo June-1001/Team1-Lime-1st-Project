@@ -9,6 +9,10 @@ import { get_kill_reward } from "./shop_system.js";
 export let bullets = [];
 let last_bullet_time = 0;
 
+//---------------//
+// 총알 충돌 감지 //
+//---------------//
+
 function check_bullet_collision(bullet, obstacle) {
   return (
     bullet.x + bullet.size > obstacle.x &&
@@ -17,6 +21,10 @@ function check_bullet_collision(bullet, obstacle) {
     bullet.y - bullet.size < obstacle.y + obstacle.height
   );
 }
+
+//----------------------------------------//
+// 총알 움직임 제어 및 충돌, 도탄, 관통 체크 //
+//----------------------------------------//
 
 export function update_bullets() {
   for (let i = bullets.length - 1; i >= 0; i--) {
@@ -76,6 +84,10 @@ export function update_bullets() {
     }
   }
 }
+
+//-----------------------//
+// 일정 시간마다 총알 발사 //
+//-----------------------//
 
 export function fire_bullet() {
   if (!game_running) {

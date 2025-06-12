@@ -65,11 +65,19 @@ import {
 } from "./systems/shop_system.js";
 import { update_costume_display } from "./systems/costume_system.js";
 
+//--------------------//
+// 게임 전체 흐름 제어 //
+//--------------------//
+
 export { game_container };
 
 let game_update_interval_id;
 
 init_input(game_container);
+
+//------------------//
+// 모든 모달 창 닫기 //
+//------------------//
 
 function close_all_modal() {
   shop_modal.style.display = "none";
@@ -77,6 +85,9 @@ function close_all_modal() {
   costume_modal.style.display = "none";
 }
 
+//-------------------------------------//
+// 게임 버튼 별 이벤트 함수 - UI에서 콜백 //
+//-------------------------------------//
 init_ui_event_listeners(
   start_game,
   restart_game,
@@ -107,6 +118,10 @@ init_ui_event_listeners(
   close_all_modal
 );
 
+//-------------//
+// 키 입력 제어 //
+//-------------//
+
 document.addEventListener("keydown", function (event) {
   if (event.code !== "Space") {
     return;
@@ -123,6 +138,9 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+//----------------------------------------//
+// 게임 화면에 포커스 없을 때 게임 잠시 멈춤 //
+//----------------------------------------//
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
     pause_game(game_update_interval_id, video);
@@ -142,6 +160,10 @@ function start_game_update_loop() {
   clearInterval(game_update_interval_id);
   game_update_interval_id = setInterval(update_game_area, game_update_rate);
 }
+
+//----------//
+// 게임 시작 //
+//----------//
 
 function start_game() {
   clearInterval(game_update_interval_id);
@@ -168,6 +190,9 @@ function start_game() {
   start_game_update_loop();
 }
 
+//--------------//
+// 게임 업데이트 //
+//--------------//
 function update_game_area() {
   my_game_area.clear();
   if (!game_running) return;
@@ -194,6 +219,10 @@ function update_game_area() {
   check_collisions();
 }
 
+//----------------------------------------------//
+// 플레이어와 적 충돌 감지 - 적과 충돌 시 게임 오버 //
+//----------------------------------------------//
+
 function check_collisions() {
   for (let i = 0; i < obstacles.length; i++) {
     const obs = obstacles[i];
@@ -208,6 +237,10 @@ function check_collisions() {
     }
   }
 }
+
+//-----------------------------//
+// 게임 오버 시 리셋할 것들 목록 //
+//-----------------------------//
 
 function game_over() {
   set_game_running(false);
@@ -230,6 +263,10 @@ function game_over() {
   save_game_data();
 }
 
+//----------------------------------//
+// 게임 재시작 시 메인 메뉴로 돌아가기 //
+//----------------------------------//
+
 function restart_game() {
   center_overlay.style.display = "none";
   start_btn.style.display = "block";
@@ -240,8 +277,14 @@ function restart_game() {
   display_check_all(all_maxed);
 }
 
+//-----------------------------//
+// 최초 로딩 시 상점 데이터 로딩 //
+//-----------------------------//
 window.addEventListener("load", () => {
   load_game_data();
-  check_all_shop_items_maxed();
   display_check_all(all_maxed);
 });
+
+// 테스트용
+// reset_shop_data();
+// add_coins(100000);

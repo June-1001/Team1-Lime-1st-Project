@@ -1,6 +1,10 @@
 import { game_area_width, game_area_height, my_game_area } from "../core/game_core.js";
 import { get_difficulty, get_score } from "../core/game_state.js";
 
+//------------------//
+// 적 전용 무지개 맵 //
+//------------------//
+
 export const rainbow_colors = [
   "rgba(231, 52, 52, 0.9)",
   "rgba(230, 130, 34, 0.9)",
@@ -10,6 +14,10 @@ export const rainbow_colors = [
   "rgba(80, 130, 255, 0.9)",
   "rgba(155, 89, 182, 0.9)",
 ];
+
+//----------//
+// 적 클래스 //
+//----------//
 
 export class Opponent {
   constructor(width, height, x, y) {

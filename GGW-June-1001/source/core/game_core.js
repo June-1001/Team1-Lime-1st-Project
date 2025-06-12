@@ -1,5 +1,9 @@
 import { game_container } from "../main.js";
 
+//-----------------//
+// 게임 캔버스 설정 //
+//-----------------//
+
 export const game_area_width = 900;
 export const game_area_height = 720;
 export const game_update_rate = 20;
@@ -21,6 +25,10 @@ export const my_game_area = {
     }
   },
 };
+
+//-----------------//
+// 게임 활성화 제어 //
+//-----------------//
 
 export let is_game_active = true;
 
