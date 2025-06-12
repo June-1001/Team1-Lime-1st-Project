@@ -5,7 +5,13 @@ export default class Swatter {    //파리채의 마우스 추적과 충돌판�
   }
 
   onClick(handler) {
-    this.el.addEventListener('click', handler);
+    this.el.addEventListener('click', e => {
+      this.el.style.transform = 'rotate(-25deg)';
+      setTimeout(() => {
+        this.el.style.transform = 'rotate(0deg)';
+      }, 100); 
+      handler(e);
+    });
   }
 
   followCursor() {

@@ -49,7 +49,7 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
   // 게임 시작
   start = () => {
     this.score = 0;
-    this.time  = 30;
+    this.time  = 15;
     this.updateHUD();
 
     this.menu.classList.add('hidden');

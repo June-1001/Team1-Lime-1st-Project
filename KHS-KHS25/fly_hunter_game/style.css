@@ -71,6 +71,8 @@ html, body {
   background-size: 120px 100px;  
   pointer-events: auto;
   z-index: 2;
+  transform-origin: top center;        
+  transition: transform 0.1s ease;     
 }
 
 /* Back, 끝내기 버튼 공통 스타일 */
