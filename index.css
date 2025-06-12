@@ -93,6 +93,11 @@ body {
   font-size: 2.5rem;
 }
 
+.game-title :lang(ko) {
+  font-family: "Orbit", sans-serif;
+  font-size: 2rem;
+}
+
 .member-name {
   font-size: 1.5rem;
 }

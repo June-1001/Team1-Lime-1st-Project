@@ -22,7 +22,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const container = document.getElementById("teamContainer");
 
-  team_members.forEach((member) => {
+  // 한글이 있으면 <span lang="ko">로 감싸기
+  function wrap_mixed_korean_text(text) {
+    const parts = text.match(/[\uac00-\ud7af]+|[^\uac00-\ud7af]+/g);
+    let result = "";
+
+    for (let i = 0; i < parts.length; i++) {
+      let part = parts[i];
+
+      if (/[\uac00-\ud7af]/.test(part)) {
+        result += `<span lang="ko">${part}</span>`;
+      } else {
+        result += part;
+      }
+    }
+
+    return result;
+  }
+
+  team_members.forEach(function (member) {
     const card = document.createElement("div");
     card.className = "card";
 
@@ -30,13 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const temp_thumbnail = "thumbnail/temp.png";
 
     card.innerHTML = `
-            <img src="${thumbnail_img}" alt="${member.name}" class="card-img" onerror="this.src='${temp_thumbnail}'">
-            <div class="card-body">
-                <div class="game-title">${member.title}</div>
-                <div class="member-name"><span lang="ko">${member.name}</span> / ${member.id}</div>
-                <button class="play-game" data-name="${member.id}">Play Game</button>
-            </div>
-        `;
+    <img src="${thumbnail_img}" alt="${
+      member.name
+    }" class="card-img" onerror="this.src='${temp_thumbnail}'">
+    <div class="card-body">
+      <div class="game-title">${wrap_mixed_korean_text(member.title)}</div>
+      <div class="member-name">${wrap_mixed_korean_text(member.name + " / " + member.id)}</div>
+      <button class="play-game" data-name="${member.id}">Play Game</button>
+    </div>
+  `;
 
     container.appendChild(card);
   });
