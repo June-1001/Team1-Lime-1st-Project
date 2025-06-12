@@ -10,7 +10,6 @@ import { player_costumes } from "./player_costumes.js";
 export const player = {
   x: game_area_width / 2,
   y: game_area_height / 2,
-  speed: 9,
   trail: [],
   max_trail_length: 15,
   prev_x: game_area_width / 2,
@@ -26,16 +25,16 @@ export const player = {
     this.prev_y = this.y;
 
     if ((keys.arrow_up || keys.w) && this.y - radius > 0) {
-      this.y -= this.speed;
+      this.y -= costume.speed;
     }
     if ((keys.arrow_down || keys.s) && this.y + radius < game_area_height) {
-      this.y += this.speed;
+      this.y += costume.speed;
     }
     if ((keys.arrow_left || keys.a) && this.x - radius > 0) {
-      this.x -= this.speed;
+      this.x -= costume.speed;
     }
     if ((keys.arrow_right || keys.d) && this.x + radius < game_area_width) {
-      this.x += this.speed;
+      this.x += costume.speed;
     }
   },
 

@@ -7,6 +7,8 @@ import {
   pause_game,
   resume_game,
   is_game_active,
+  load_game_data,
+  save_game_data,
 } from "./core/game_core.js";
 import {
   game_running,
@@ -51,11 +53,10 @@ import {
 } from "./systems/spawn_system.js";
 import { bullets, update_bullets, fire_bullet, reset_bullets } from "./systems/bullet_system.js";
 import {
+  coins,
   shop_items,
   update_shop_display,
   buy_upgrade,
-  load_game_data,
-  save_game_data,
   update_coins_based_on_score,
   add_coins,
   all_maxed,
@@ -63,7 +64,11 @@ import {
   check_all_shop_items_maxed,
   notice_seen,
 } from "./systems/shop_system.js";
-import { update_costume_display } from "./systems/costume_system.js";
+import {
+  update_costume_display,
+  update_costume_unlocks,
+  unlock_all_costumes,
+} from "./systems/costume_system.js";
 
 //--------------------//
 // 게임 전체 흐름 제어 //
@@ -193,6 +198,7 @@ function start_game() {
 //--------------//
 // 게임 업데이트 //
 //--------------//
+
 function update_game_area() {
   my_game_area.clear();
   if (!game_running) return;
@@ -210,6 +216,7 @@ function update_game_area() {
   }
 
   update_spawn_timers();
+  update_costume_unlocks(get_score(), coins, obstacles);
 
   fire_bullet();
   update_bullets();
@@ -236,7 +243,6 @@ function check_collisions() {
 
     if (Math.sqrt(distance_x * distance_x + distance_y * distance_y) < radius) {
       game_over();
-      return;
     }
   }
 }
@@ -256,13 +262,12 @@ function game_over() {
 
   add_coins(get_coins_from_score());
 
+  my_game_area.clear();
   reset_spawn_system();
   player.reset_trail();
   reset_bullets();
   reset_score();
   reset_difficulty();
-  my_game_area.clear();
-
   save_game_data();
 }
 
@@ -290,4 +295,7 @@ window.addEventListener("load", () => {
 
 // 테스트용
 // reset_shop_data();
+
 // add_coins(100000);
+
+// unlock_all_costumes();

@@ -1,7 +1,4 @@
 import { player_costumes } from "../entities/player_costumes.js";
-import { get_score } from "../core/game_state.js";
-import { coins } from "./shop_system.js";
-import { obstacles } from "./spawn_system.js";
 
 //--------------------------------//
 // 코스튬 기능 창 UI HTML 생성 함수 //
@@ -63,7 +60,7 @@ export function update_costume_display(player) {
 
     let description_element = document.createElement("div");
     description_element.className = "costume_description";
-    description_element.textContent = costume.description;
+    description_element.innerHTML = costume.description;
 
     wrapper.appendChild(canvas);
     wrapper.appendChild(spacer);
@@ -78,24 +75,28 @@ export function update_costume_display(player) {
 // 코스튬 해금 //
 //------------//
 
-export function update_costume_unlocks() {
-  const unlock_score = get_score();
-  const unlock_coin = coins;
-  const unlock_obstacles = obstacles;
-
-  if (unlock_coin >= 100000) {
+export function update_costume_unlocks(score, coins, obstacles) {
+  if (coins >= 100000) {
     player_costumes[2].unlocked = true;
   }
 
-  if (unlock_obstacles.length >= 20) {
+  if (obstacles && obstacles.length >= 3) {
     player_costumes[3].unlocked = true;
   }
 
-  if (unlock_score >= 300000) {
+  if (score >= 300000) {
     player_costumes[4].unlocked = true;
   }
 
-  if (unlock_score >= 777777) {
+  if (score >= 777777) {
     player_costumes[5].unlocked = true;
   }
+}
+
+//테스트용
+export function unlock_all_costumes() {
+  player_costumes[2].unlocked = true;
+  player_costumes[3].unlocked = true;
+  player_costumes[4].unlocked = true;
+  player_costumes[5].unlocked = true;
 }

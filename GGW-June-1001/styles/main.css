@@ -438,7 +438,7 @@ button {
   transform: translate(-50%, -50%);
   background-color: #222;
 
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0, 255, 150, 0.7);
   z-index: 20;
@@ -455,8 +455,10 @@ button {
   font-family: "Orbitron";
   color: lightgreen;
   text-align: center;
-  margin-bottom: 20px;
+  margin-top: 0;
+  margin-bottom: 5px;
   text-shadow: 0 0 5px lightgreen;
+  transform: translate(0, -120%);
 }
 
 #close_costume {
@@ -492,13 +494,14 @@ button {
 
 #costume_container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 10px;
   justify-content: center;
   align-items: center;
   justify-items: center;
   align-content: start;
+  transform: translate(0, -8%);
 }
 
 .costume_wrapper {
@@ -508,7 +511,7 @@ button {
 
   flex: 0 0 auto;
   width: 180px;
-  height: 240px;
+  height: 180px;
   padding: 5px;
   margin: 0;
   border-radius: 10px;
@@ -544,10 +547,10 @@ button {
 
 .costume_canvas {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   display: block;
-  margin: 0 auto 10px auto;
+  margin-top: 8px;
   background-color: black;
   border: 1px solid lightgreen;
   box-shadow: 0 0 5px lightgreen;

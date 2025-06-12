@@ -39,3 +39,9 @@ export function init_input(game_container) {
     cursor_y = e.clientY - rect.top;
   });
 }
+
+export function reset_keys() {
+  Object.keys(keys).forEach((key) => {
+    keys[key] = false;
+  });
+}
