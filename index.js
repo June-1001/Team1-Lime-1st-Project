@@ -2,17 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
   //여기에 game.html 대신 본인 게임 html 이름 입력
   const URL_map = {
     "June-1001": "GGW-June-1001/dodgebox_game.html",
-    thsaudgh8: "SMH-thsaudgh8/game.html",
-    KHS25: "KHS-KHS25/game.html",
-    DODOVX: "CJH-DODOVX/game.html",
+    thsaudgh8: "SMH-thsaudgh8/main.html ",
+    KHS25: "KHS-KHS25/fly_hunter_game.html",
+    DODOVX: "CJH-DODOVX/index.html",
   };
 
   // title 부분에 각자 게임 타이틀 입력
   const team_members = [
-    { name: "고건우", id: "June-1001", title: "Dodgebox" },
-    { name: "손명호", id: "thsaudgh8", title: "" },
-    { name: "권혜숙", id: "KHS25", title: "" },
-    { name: "최전호", id: "DODOVX", title: "" },
+    { name: "고건우", id: "June-1001", title: "Dodgebox", thumbnail: "dodgebox.jpg" },
+    {
+      name: "손명호",
+      id: "thsaudgh8",
+      title: "Simple Aimlab",
+      thumbnail: "simple_aimlab.png",
+    },
+    { name: "권혜숙", id: "KHS25", title: "파리잡기 게임", thumbnail: "fly_hunter_game.png" },
+    { name: "최전호", id: "DODOVX", title: "Nonograms", thumbnail: "nonograms.png" },
   ];
 
   const container = document.getElementById("teamContainer");
@@ -21,9 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const card = document.createElement("div");
     card.className = "card";
 
-    // 본인 썸네일 파일명 : thumbnail 폴더에 본인id-thumbnail.jpg로 저장
-    // ex) June-1001-thumbnail.jpg
-    const thumbnail_img = `thumbnail/${member.id}-thumbnail.jpg`;
+    const thumbnail_img = `./thumbnail/${member.thumbnail}`;
     const temp_thumbnail = "thumbnail/temp.png";
 
     card.innerHTML = `
