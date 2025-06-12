@@ -67,8 +67,12 @@ export const player = {
     this.trail = [];
   },
 
+  set_costumes: function (costumes) {
+    this.costumes = costumes;
+  },
+
   set_costume: function (costume_number) {
-    if (this.costumes.hasOwnProperty(costume_number)) {
+    if (this.costumes[costume_number] && this.costumes[costume_number].unlocked) {
       this.current_costume = costume_number;
     }
   },

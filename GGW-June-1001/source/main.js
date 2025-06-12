@@ -63,6 +63,7 @@ import {
   check_all_shop_items_maxed,
   notice_seen,
 } from "./systems/shop_system.js";
+import { update_costume_display } from "./systems/costume_system.js";
 
 export { game_container };
 
@@ -92,6 +93,7 @@ init_ui_event_listeners(
         shop_modal.style.display = "none";
         help_modal.style.display = "none";
         costume_modal.style.display = "block";
+        update_costume_display(player);
         break;
       }
     }

@@ -46,10 +46,13 @@ export function init_ui_event_listeners(
 ) {
   start_btn.addEventListener("click", start_game_callback);
   restart_btn.addEventListener("click", restart_game_callback);
+
   shop_button.addEventListener("click", open_modal_callback);
   close_shop_button.addEventListener("click", close_modal_callback);
+
   help_button.addEventListener("click", open_modal_callback);
   close_help_button.addEventListener("click", close_modal_callback);
+
   costume_button.addEventListener("click", open_modal_callback);
   close_costume_button.addEventListener("click", close_modal_callback);
 }
