@@ -1,6 +1,41 @@
-//게임 공간 생성, 게임 오브젝트 선언, 게임 에리어의 속성 넣어주기 
+class Component {
+    constructor(radius, color, x, y) {
+        this.radius = radius;
+        this.color = color;
+        this.x = x;
+        this.y = y;
+    }
+
+    draw(ctx) {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.fill();
+    }
+
+    static getRandomPosition(canvas, radius, existingPieces) {
+        let x, y, valid;
+
+        do {
+            x = Math.random() * (canvas.width - 2 * radius) + radius;
+            y = Math.random() * (canvas.height - 2 * radius) + radius;
+
+            valid = existingPieces.every(piece => {
+                const dx = x - piece.x;
+                const dy = y - piece.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                return distance >= radius * 2.5;
+            });
+        } while (!valid);
+
+        return { x, y };
+    }
+}
+
+// 게임 관련 변수
 var myGamePieces = [];
 var score = document.getElementById("score");
+
 var myGameArea = {
     canvas: document.getElementById("gameCanvas"),
     start: function () {
@@ -8,7 +43,6 @@ var myGameArea = {
         this.canvas.height = 480;
         this.context = this.canvas.getContext("2d");
 
-        // 캔버스 클릭 이벤트 추가
         this.canvas.addEventListener("click", handleClick);
     },
     clear: function () {
@@ -16,48 +50,42 @@ var myGameArea = {
     }
 };
 
-// 게임 시작 (원 생성)
+// 게임 시작
 function startGame() {
     myGamePieces = [];
 
     for (let i = 0; i < 6; i++) {
-        let position = getRandomPosition();
-        myGamePieces.push(new component(40, "#ff7777", position.x, position.y));
+        let position = Component.getRandomPosition(myGameArea.canvas, 40, myGamePieces);
+        myGamePieces.push(new Component(40, "#ff7777", position.x, position.y));
     }
 
     drawGamePieces();
 }
 
+// 게임 초기화
 function clearGame() {
-    myGamePieces = [];  // 원 리스트 비우기
-    myGameArea.clear(); // 캔버스 지우기
-    score.innerText = "Score: 0"; // 점수를 0으로 설정
+    myGamePieces = [];
+    myGameArea.clear();
+    score.innerText = "Score: 0";
     gameTimer("off");
     return true;
 }
 
-// 원 클릭 시 삭제 후 재생성
+// 클릭 처리
 function handleClick(event) {
-    var rect = myGameArea.canvas.getBoundingClientRect();
-    var mouseX = event.clientX - rect.left;
-    var mouseY = event.clientY - rect.top;
+    const rect = myGameArea.canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
 
-    //클릭된 원이 있는지 확인하기(for문)
     for (let i = 0; i < myGamePieces.length; i++) {
-        let piece = myGamePieces[i];
+        const piece = myGamePieces[i];
+        const dx = mouseX - piece.x;
+        const dy = mouseY - piece.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // 클릭된 좌표와 원의 중심 간의 거리 계산
-        let dx = mouseX - piece.x;
-        let dy = mouseY - piece.y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        //원의 반지름보다 클릭한 거리가 더 작으면 원의 내부임
         if (distance < piece.radius) {
-            //랜덤한 위치에 원을 이동시킴
-            let newPosition = getRandomPosition();
-            myGamePieces[i] = new component(40, "#ff7777", newPosition.x, newPosition.y);
-
-            //변경 위치에 원 다시그리고 점수 증가
+            const pos = Component.getRandomPosition(myGameArea.canvas, 40, myGamePieces);
+            myGamePieces[i] = new Component(40, "#ff7777", pos.x, pos.y);
             drawGamePieces();
             addScore();
             break;
@@ -65,87 +93,55 @@ function handleClick(event) {
     }
 }
 
+// 점수 증가
 function addScore() {
-    // 현재 점수 가져오기
-    let currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;
-
-    // 점수 증가 후 업데이트
+    const currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;
     score.innerText = "Score: " + (currentScore + 1);
 }
 
-// 원을 화면에 그리는 함수
+// 원 그리기
 function drawGamePieces() {
     myGameArea.clear();
-    let ctx = myGameArea.context;
+    const ctx = myGameArea.context;
 
-    for (let piece of myGamePieces) {
-        ctx.fillStyle = piece.color;
-        ctx.beginPath();
-        ctx.arc(piece.x, piece.y, piece.radius, 0, 2 * Math.PI);
-        ctx.fill();
-    }
+    myGamePieces.forEach(piece => piece.draw(ctx));
 }
 
-// 원끼리 겹치지 않도록 랜덤 위치 생성
-function getRandomPosition() {
-    let x, y, valid;
-    let radius = 40;
-
-    do {
-        x = Math.random() * (myGameArea.canvas.width - 2 * radius) + radius;
-        y = Math.random() * (myGameArea.canvas.height - 2 * radius) + radius;
-
-        valid = myGamePieces.every(piece => {
-            let dx = x - piece.x;
-            let dy = y - piece.y;
-            let distance = Math.sqrt(dx * dx + dy * dy);
-            return distance >= radius * 2.5;
-        });
-    } while (!valid);
-
-    return { x, y };
-}
-
-function component(radius, color, x, y) {
-    this.radius = radius;
-    this.x = x;
-    this.y = y;
-    this.color = color;
-}
-
+// 카운트다운 후 게임 시작
 function startGameWithDelay() {
-    let ctx = myGameArea.context; // 캔버스 컨텍스트 가져오기
-    let count = 3; // 시작 숫자
+    const ctx = myGameArea.context;
+    let count = 3;
 
     function updateCountdown() {
-        myGameArea.clear(); // 캔버스 초기화
+        myGameArea.clear();
 
-        // 카운트다운 텍스트 스타일 설정
-        ctx.fillStyle = "#000"; // 글자 색상
-        ctx.font = "48px Arial"; // 글자 스타일
-        ctx.textAlign = "center"; // 중앙 정렬
-        ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2); // 캔버스 중앙에 출력
+        ctx.fillStyle = "#000";
+        ctx.font = "48px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);
 
         if (count > 0) {
-            count--; // 숫자 감소
-            setTimeout(updateCountdown, 1000); // 1초 후 다시 실행
+            count--;
+            setTimeout(updateCountdown, 1000);
             score.innerText = "Score: 0";
             document.getElementById("timer").innerText = "Timer: 0";
         } else {
-            myGameArea.clear(); // 카운트다운 종료 후 캔버스 정리
-            startGame(); // 게임 시작
+            myGameArea.clear();
+            startGame();
             gameTimer("on");
         }
     }
-    updateCountdown(); // 카운트다운 시작
+
+    updateCountdown();
 }
 
-let intervalId = ""; // 인터벌 ID를 저장할 변수
+// 타이머
+let intervalId = "";
 
 function gameTimer(switchState) {
     const timerEl = document.getElementById("timer");
 
-    if (switchState == "on") {
+    if (switchState === "on") {
         let timeLeft = 10;
         timerEl.innerText = "Timer: " + timeLeft;
 
@@ -160,10 +156,11 @@ function gameTimer(switchState) {
                 drawGamePieces();
             }
         }, 1000);
-    } else if (switchState == "off") {
+    } else {
         clearInterval(intervalId);
-        timerEl.innerText = "Timer: 0"; // 타이머 초기화
+        timerEl.innerText = "Timer: 0";
     }
 }
-// 시작할 때 초기값 넘기기
+
+// 시작
 myGameArea.start();
