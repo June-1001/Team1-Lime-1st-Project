@@ -1,6 +1,6 @@
 class Component {
-    constructor(radius, color, x, y) {
-        this.radius = radius;
+    constructor(radius, color, x, y) { //원의 속성 선언 : 반지름, 색, x좌표, y좌표  
+        this.radius = radius;   //여기서 this는 새로 생성되는 객체를 가리킴
         this.color = color;
         this.x = x;
         this.y = y;
@@ -13,8 +13,8 @@ class Component {
         ctx.fill();
     }
 
-    static getRandomPosition(canvas, radius, existingPieces) {
-        let x, y, valid;
+    static getRandomPosition(canvas, radius, existingPieces) { //랜덤한 위치에 원을 생성하기위한 함수 , static 사용 = 인스턴스 없이 사용할 수 있어서 
+        let x, y, valid;                                       //Component.getRandomPosition(. . .) 식으로 사용 가능
 
         do {
             x = Math.random() * (canvas.width - 2 * radius) + radius;
@@ -34,7 +34,6 @@ class Component {
 
 // 게임 관련 변수
 var myGamePieces = [];
-var score = document.getElementById("score");
 
 var myGameArea = {
     canvas: document.getElementById("gameCanvas"),
@@ -66,7 +65,7 @@ function startGame() {
 function clearGame() {
     myGamePieces = [];
     myGameArea.clear();
-    score.innerText = "Score: 0";
+    document.getElementById("score").innerText = "Score: 0";
     gameTimer("off");
     return true;
 }
@@ -95,9 +94,11 @@ function handleClick(event) {
 
 // 점수 증가
 function addScore() {
+    const score = document.getElementById("score");
     const currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;
     score.innerText = "Score: " + (currentScore + 1);
 }
+
 
 // 원 그리기
 function drawGamePieces() {
