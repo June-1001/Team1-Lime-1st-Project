@@ -1,18 +1,31 @@
 .but {
-    width: 20px;
-    height: 20px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 30px;
+    height: 30px;
     text-align: center;
     /* color: transparent; */
 }
+
 .hot {
-    width: 10px;
-    height: 10px;
+    font-size: 20px;
+    text-align: right
+}
+
+.cot {
     font-size: 20px;
     text-align: center;
+    vertical-align: bottom;
 }
+
 table {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+button {
+    width: 30px;
+    height: 30px;
+    color: transparent
 }
