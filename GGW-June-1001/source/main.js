@@ -48,6 +48,7 @@ import {
   reset_spawn_system,
   update_floating_texts,
   add_floating_text,
+  obs_counter,
 } from "./systems/spawn_system.js";
 import { bullets, update_bullets, fire_bullet, reset_bullets } from "./systems/bullet_system.js";
 import {
@@ -200,6 +201,7 @@ function start_game() {
 
 function update_game_area() {
   my_game_area.clear();
+
   if (!game_running) return;
 
   if (player.current_costume === 2) {
@@ -220,7 +222,7 @@ function update_game_area() {
   }
 
   update_spawn_timers();
-  update_costume_unlocks(get_score(), coins, obstacles);
+  update_costume_unlocks(get_score(), coins, obs_counter);
 
   fire_bullet();
   update_bullets();
@@ -332,17 +334,14 @@ function load_game_data() {
 // 테스트용 //
 //---------//
 // import { reset_shop_data } from "./systems/shop_system.js";
-// import { reset_costume_data, unlock_all_costumes } from "./systems/costume_system.js";
+// import { reset_costume_data} from "./systems/costume_system.js";
 
 // function reset_data() {
 //   reset_shop_data();
 //   update_shop_display();
-
 //   reset_costume_data();
 //   update_costume_display(player);
-
 //   display_check_all(all_maxed);
-
 //   save_game_data();
 // }
 
@@ -350,4 +349,5 @@ function load_game_data() {
 
 // add_coins(100000);
 
+//import {unlock_all_costumes } from "./systems/costume_system.js";
 // unlock_all_costumes();

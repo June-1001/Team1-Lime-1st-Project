@@ -12,6 +12,7 @@ export let floating_texts = [];
 export let spawn_timers = [];
 export let spawn_interval = 1000;
 export let last_spawn_time = 0;
+export let obs_counter = 0;
 
 //--------------------------//
 // 점수 획득 시 텍스트 띄우기 //
@@ -96,6 +97,7 @@ class SpawnTimer {
     );
     // 적이 생성될 때마다 difficulty 값이 증가
     // difficulty가 증가할수록 적의 체력이 증가
+    obs_counter++;
     increase_difficulty();
   }
 }
@@ -136,6 +138,7 @@ export function update_spawn_timers() {
 //---------------------------//
 
 export function reset_spawn_system() {
+  obs_counter = 0;
   obstacles = [];
   spawn_timers = [];
   floating_texts = [];

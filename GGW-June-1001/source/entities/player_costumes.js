@@ -160,7 +160,7 @@ export const player_costumes = {
   3: {
     unlocked: false,
     name: "유령",
-    description: "적이 15명 이상 있을 때<br>생존 시 해금",
+    description: "한 게임에서<br>300명 이상의 적 처치 시 해금",
     description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다.",
     color: "rgba(200, 200, 255, 0.5)",
     shadow_color: "rgba(200, 200, 255, 0.1)",

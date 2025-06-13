@@ -79,7 +79,7 @@ export function update_costume_display(player) {
 // 코스튬 해금 //
 //------------//
 
-export function update_costume_unlocks(score, coins, obstacles) {
+export function update_costume_unlocks(score, coins, obs_counter) {
   let unlocked_any = false;
 
   if (coins >= 100000 && !player_costumes[2].unlocked) {
@@ -87,7 +87,7 @@ export function update_costume_unlocks(score, coins, obstacles) {
     unlocked_any = true;
   }
 
-  if (obstacles && obstacles.length >= 15 && !player_costumes[3].unlocked) {
+  if (obs_counter >= 300 && !player_costumes[3].unlocked) {
     player_costumes[3].unlocked = true;
     unlocked_any = true;
   }
