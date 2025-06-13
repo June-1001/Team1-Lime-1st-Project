@@ -13,7 +13,7 @@ export function gameTimer(switchState) {
                 timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
             } else {
                 clearInterval(intervalId);
-                myGamePieces = [];
+                switchState = "off";
                 timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
                 myGameArea.clear();     // 타이머 부분에 Game Over 출력 후 게임 공간 초기화
             }
