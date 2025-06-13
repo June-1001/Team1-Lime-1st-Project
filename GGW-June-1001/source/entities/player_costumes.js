@@ -93,7 +93,7 @@ export const player_costumes = {
     name: "빨강",
     description: "3배 빨라집니다",
     color: "rgba(255, 50, 50, 1)",
-    shadow_color: "rgba(255, 50, 50, 0.3)",
+    shadow_color: "rgba(255, 50, 50, 0.7)",
     radius: 16,
     speed: 27,
 
@@ -127,8 +127,8 @@ export const player_costumes = {
     name: "황금",
     description: "100,000 코인 이상<br>획득 시 해금",
     description_unlocked: "기본 획득 점수가<br>초당 100점으로 증가합니다",
-    color: "rgba(255, 215, 0, 1)",
-    shadow_color: "rgba(255, 215, 0, 0.4)",
+    color: "rgb(255, 215, 0)",
+    shadow_color: "rgba(255, 215, 0, 0.8)",
     radius: 16,
     speed: 9,
 
@@ -148,7 +148,7 @@ export const player_costumes = {
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.shadowColor = this.shadow_color;
-      ctx.shadowBlur = 12;
+      ctx.shadowBlur = 25;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
@@ -205,7 +205,7 @@ export const player_costumes = {
     description: "150,000점 이상<br>획득 시 해금",
     description_unlocked: "크기가 더 작아집니다",
     color: "rgb(255, 255, 255)",
-    shadow_color: "rgba(255, 255, 255, 0.5)",
+    shadow_color: "rgb(255, 255, 255)",
     radius: 12,
     speed: 9,
 
@@ -213,7 +213,7 @@ export const player_costumes = {
       ctx.save();
       ctx.globalAlpha = 1;
       ctx.shadowColor = this.shadow_color;
-      ctx.shadowBlur = 30;
+      ctx.shadowBlur = 50;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
@@ -225,7 +225,7 @@ export const player_costumes = {
       ctx.save();
       ctx.globalAlpha = alpha;
       ctx.shadowColor = this.shadow_color;
-      ctx.shadowBlur = 15;
+      ctx.shadowBlur = 50;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
