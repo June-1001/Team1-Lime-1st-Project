@@ -190,7 +190,7 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 800px;
+  width: 700px;
   transform: translate(-50%, -50%);
   background-color: #222;
   padding: 20px;
@@ -376,6 +376,7 @@ button {
 
 #close_help {
   position: relative;
+  transform: translateY(-2px);
   background-color: rgba(0, 100, 100, 0.3);
   box-shadow: 0 0 5px lightblue;
   color: white;
