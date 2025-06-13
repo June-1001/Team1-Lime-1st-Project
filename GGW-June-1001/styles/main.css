@@ -528,9 +528,9 @@ button {
 }
 
 .costume_wrapper.disabled {
-  opacity: 0.4;
+  opacity: 0.6;
   pointer-events: none;
-  filter: grayscale(80%);
+  filter: grayscale(90%);
   user-select: none;
 }
 
