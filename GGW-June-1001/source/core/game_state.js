@@ -21,10 +21,10 @@ export function reset_score() {
 }
 
 // 시간이 지나면서 기본 점수 획득
-export function increase_score() {
+export function increase_score(number) {
   score_counter++;
   if (score_counter >= 5) {
-    score++;
+    score += number;
     score_counter = 0;
     update_coins_from_score();
   }

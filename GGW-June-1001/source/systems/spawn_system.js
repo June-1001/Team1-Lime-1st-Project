@@ -26,6 +26,7 @@ export function add_floating_text(x, y, text) {
     life: 50,
   });
 }
+
 export function update_floating_texts() {
   const ctx = my_game_area.context;
   if (!ctx) {
