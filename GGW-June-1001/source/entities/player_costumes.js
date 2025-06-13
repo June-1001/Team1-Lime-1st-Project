@@ -1,33 +1,23 @@
 //--------------------//
 // 코스튬 전용 색깔 맵 //
 //--------------------//
-const costume_ghost_colors = [
-  "rgba(200, 200, 255, 0.1)",
-  "rgba(200, 200, 255, 0.15)",
-  "rgba(200, 200, 255, 0.2)",
-  "rgba(200, 200, 255, 0.25)",
-  "rgba(200, 200, 255, 0.3)",
-  "rgba(200, 200, 255, 0.35)",
-  "rgba(200, 200, 255, 0.4)",
-  "rgba(200, 200, 255, 0.45)",
-  "rgba(200, 200, 255, 0.5)",
-  "rgba(200, 200, 255, 0.55)",
-  "rgba(200, 200, 255, 0.6)",
-  "rgba(200, 200, 255, 0.65)",
-  "rgba(200, 200, 255, 0.7)",
-  "rgba(200, 200, 255, 0.65)",
-  "rgba(200, 200, 255, 0.6)",
-  "rgba(200, 200, 255, 0.55)",
-  "rgba(200, 200, 255, 0.5)",
-  "rgba(200, 200, 255, 0.45)",
-  "rgba(200, 200, 255, 0.4)",
-  "rgba(200, 200, 255, 0.35)",
-  "rgba(200, 200, 255, 0.3)",
-  "rgba(200, 200, 255, 0.25)",
-  "rgba(200, 200, 255, 0.2)",
-  "rgba(200, 200, 255, 0.15)",
-  "rgba(200, 200, 255, 0.1)",
-];
+
+let costume_ghost_colors = [];
+
+// 50개의 색깔 인덱스 만ㄷ르기
+function generate_costume_ghost_colors(steps) {
+  let colors = [];
+  let i;
+  for (i = 0; i < steps; i++) {
+    let t = i / (steps - 1);
+    let alpha = Math.sin(t * Math.PI);
+    let rgba = "rgba(200, 200, 255, " + (alpha * 0.7).toFixed(3) + ")";
+    colors.push(rgba);
+  }
+  return colors;
+}
+
+costume_ghost_colors = generate_costume_ghost_colors(50);
 
 const costume_rainbow_colors = [
   "rgba(231, 52, 52, 1)",
@@ -57,7 +47,6 @@ const costume_rainbow_colors = [
   "rgba(198, 59, 117, 1)",
   "rgba(213, 55, 95, 1)",
   "rgba(224, 53, 72, 1)",
-  "rgba(231, 52, 52, 1)",
 ];
 
 //---------------------------//
@@ -172,7 +161,7 @@ export const player_costumes = {
     unlocked: false,
     name: "유령",
     description: "적이 15명 이상 있을 때<br>생존 시 해금",
-    description_unlocked: "적과 충돌 시 30% 확률로 생존하고<br>1초동안 무적 상태가 됩니다.",
+    description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다.",
     color: "rgba(200, 200, 255, 0.5)",
     shadow_color: "rgba(200, 200, 255, 0.1)",
     color_index: 0,
