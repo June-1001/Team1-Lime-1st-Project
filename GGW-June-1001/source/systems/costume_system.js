@@ -83,7 +83,7 @@ export function update_costume_unlocks(score, coins, obstacles) {
     unlocked_any = true;
   }
 
-  if (obstacles && obstacles.length >= 3 && !player_costumes[3].unlocked) {
+  if (obstacles && obstacles.length >= 20 && !player_costumes[3].unlocked) {
     player_costumes[3].unlocked = true;
     unlocked_any = true;
   }

@@ -314,16 +314,33 @@ import { reset_costume_data, unlock_all_costumes } from "./systems/costume_syste
 
 function reset_data() {
   reset_shop_data();
-  reset_costume_data();
-
   update_shop_display();
+
+  reset_costume_data();
   update_costume_display(player);
+
   display_check_all(all_maxed);
 
   save_game_data();
 }
 
+function reset_shop_only() {
+  reset_shop_data();
+  update_shop_display();
+  display_check_all(all_maxed);
+  save_game_data();
+}
+
+function reset_costume_only() {
+  reset_costume_data();
+  update_costume_display(player);
+  display_check_all(all_maxed);
+  save_game_data();
+}
+
 // reset_data();
+// reset_shop_only();
+// reset_costume_only();
 
 // add_coins(100000);
 
