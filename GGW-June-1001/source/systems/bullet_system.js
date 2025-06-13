@@ -94,7 +94,7 @@ export function fire_bullet() {
     return;
   }
   if (player.current_costume === 5) {
-    if ((Date.now() - last_bullet_time) * 1.3 < bullet_interval) {
+    if ((Date.now() - last_bullet_time) * 2 < bullet_interval) {
       return;
     }
   } else {
