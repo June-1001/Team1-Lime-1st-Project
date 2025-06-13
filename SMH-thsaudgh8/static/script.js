@@ -5,6 +5,35 @@ import { addScore } from "./addScore.js";   // 스코어 추가 로직
 // 게임 관련 변수
 var myGamePieces = [];      //게임 피스 즉, 원들을 배열로 관리 할 수 있게끔 배열 선언 
 
+// 카운트다운 후 게임 시작
+function startGameWithDelay() {
+    const ctx = myGameArea.context; //게임 공간 안에있는 요소 참조
+    let count = 3;  // 카운트 3초를 주고싶으니 3할당
+
+    function updateCountdown() {
+        myGameArea.clear();     // 게임 화면 초기화 
+
+        ctx.fillStyle = "#000";
+        ctx.font = "48px Arial";
+        ctx.textAlign = "center";
+        ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);     // 함수가 표시될 폰트,위치,사이즈등을 정해줌
+
+        if (count > 0) {
+            count--;
+            setTimeout(updateCountdown, 1000);
+            document.getElementById("score").innerText = "Score: 0";
+            document.getElementById("timer").innerText = "Timer: 0";    // 0보다 count가 크면 1씩 작아지면서 1초에 한번씩 실행됨 ,score와 timer를 0으로 설정
+        } else {
+            myGameArea.clear();
+            startGame();
+            gameTimer("on");        // 0보다 같거나 작은 경우 , 게임 공간 초기화 후 게임과 타이머 실행
+        }
+    }
+
+    updateCountdown();      // 카운트다운 시작
+}
+
+
 // 게임 시작
 function startGame() {      // 게임을 시작함
     myGamePieces = [];      // 게임 피스를 저장할 배열을 초기화함
@@ -15,6 +44,30 @@ function startGame() {      // 게임을 시작함
     }
 
     drawGamePieces();       // drawGamePieces() 함수를 호출해서 캔버스에 그려줌
+}
+
+function gameTimer(switchState) {
+    const timerEl = document.getElementById("timer");
+
+    if (switchState == "on") {
+        let timeLeft = 10;
+        timerEl.innerText = "Timer: " + timeLeft;   // 스위치 상태가 on일때 시간제한을 10초로 설정하고 타이머에 추가
+
+        intervalId = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
+            } else {
+                clearInterval(intervalId);
+                timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
+                myGamePieces = [];
+                myGameArea.clear();
+            }
+        }, 1000);   // interval을 1000ms(1초) 간격으로 실행
+    } else {
+        clearInterval(intervalId);
+        timerEl.innerText = "Timer: 0";     // 스위치 상태가 on이 아닐경우 interval 중지, Timer: 0 출력
+    }   // timer가 6,5,4 등 0이 아닐때 급하게 리셋버튼 눌렀을 시 실행되게끔 하는 로직
 }
 
 // 게임 초기화
@@ -57,58 +110,6 @@ function drawGamePieces() {
     myGamePieces.forEach(piece => piece.draw(ctx)); //게임 공간 안에있는 요소(배열)들을 그려줌
 }
  let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
-
-function gameTimer(switchState) {
-    const timerEl = document.getElementById("timer");
-
-    if (switchState == "on") {
-        let timeLeft = 10;
-        timerEl.innerText = "Timer: " + timeLeft;   // 스위치 상태가 on일때 시간제한을 10초로 설정하고 타이머에 추가
-
-        intervalId = setInterval(() => {
-            timeLeft--;
-            if (timeLeft > 0) {
-                timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
-            } else {
-                clearInterval(intervalId);
-                timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
-                myGamePieces = [];
-                myGameArea.clear();
-            }
-        }, 1000);   // interval을 1000ms(1초) 간격으로 실행
-    } else {
-        clearInterval(intervalId);
-        timerEl.innerText = "Timer: 0";     // 스위치 상태가 on이 아닐경우 interval 중지, Timer: 0 출력
-    }   // timer가 6,5,4 등 0이 아닐때 급하게 리셋버튼 눌렀을 시 실행되게끔 하는 로직
-}
-
-// 카운트다운 후 게임 시작
-function startGameWithDelay() {
-    const ctx = myGameArea.context; //게임 공간 안에있는 요소 참조
-    let count = 3;  // 카운트 3초를 주고싶으니 3할당
-
-    function updateCountdown() {
-        myGameArea.clear();     // 게임 화면 초기화 
-
-        ctx.fillStyle = "#000";
-        ctx.font = "48px Arial";
-        ctx.textAlign = "center";
-        ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);     // 함수가 표시될 폰트,위치,사이즈등을 정해줌
-
-        if (count > 0) {
-            count--;
-            setTimeout(updateCountdown, 1000);
-            document.getElementById("score").innerText = "Score: 0";
-            document.getElementById("timer").innerText = "Timer: 0";    // 0보다 count가 크면 1씩 작아지면서 1초에 한번씩 실행됨 ,score와 timer를 0으로 설정
-        } else {
-            myGameArea.clear();
-            startGame();
-            gameTimer("on");        // 0보다 같거나 작은 경우 , 게임 공간 초기화 후 게임과 타이머 실행
-        }
-    }
-
-    updateCountdown();      // 카운트다운 시작
-}
 
 // 시작
 myGameArea.start(handleClick);
