@@ -1,8 +1,35 @@
 //--------------------//
-// 무지개 전용 색깔 맵 //
+// 코스튬 전용 색깔 맵 //
 //--------------------//
+const costume_ghost_colors = [
+  "rgba(200, 200, 255, 0.1)",
+  "rgba(200, 200, 255, 0.15)",
+  "rgba(200, 200, 255, 0.2)",
+  "rgba(200, 200, 255, 0.25)",
+  "rgba(200, 200, 255, 0.3)",
+  "rgba(200, 200, 255, 0.35)",
+  "rgba(200, 200, 255, 0.4)",
+  "rgba(200, 200, 255, 0.45)",
+  "rgba(200, 200, 255, 0.5)",
+  "rgba(200, 200, 255, 0.55)",
+  "rgba(200, 200, 255, 0.6)",
+  "rgba(200, 200, 255, 0.65)",
+  "rgba(200, 200, 255, 0.7)",
+  "rgba(200, 200, 255, 0.65)",
+  "rgba(200, 200, 255, 0.6)",
+  "rgba(200, 200, 255, 0.55)",
+  "rgba(200, 200, 255, 0.5)",
+  "rgba(200, 200, 255, 0.45)",
+  "rgba(200, 200, 255, 0.4)",
+  "rgba(200, 200, 255, 0.35)",
+  "rgba(200, 200, 255, 0.3)",
+  "rgba(200, 200, 255, 0.25)",
+  "rgba(200, 200, 255, 0.2)",
+  "rgba(200, 200, 255, 0.15)",
+  "rgba(200, 200, 255, 0.1)",
+];
 
-export const costume_rainbow_colors = [
+const costume_rainbow_colors = [
   "rgba(231, 52, 52, 1)",
   "rgba(237, 88, 44, 1)",
   "rgba(236, 112, 36, 1)",
@@ -144,33 +171,40 @@ export const player_costumes = {
   3: {
     unlocked: false,
     name: "유령",
-    description: "적이 20명 이상 있을 때<br>생존 시 해금",
-    description_unlocked: "충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다",
-    color: "rgba(200, 200, 255, 0.1)",
+    description: "적이 15명 이상 있을 때<br>생존 시 해금",
+    description_unlocked: "적과 충돌 시 30% 확률로 생존하고<br>1초동안 무적 상태가 됩니다.",
+    color: "rgba(200, 200, 255, 0.5)",
     shadow_color: "rgba(200, 200, 255, 0.1)",
+    color_index: 0,
     radius: 16,
     speed: 9,
 
     draw: function (ctx, x, y, radius) {
+      this.color_index = (this.color_index + 1) % costume_ghost_colors.length;
+      let current_color = costume_ghost_colors[this.color_index];
+
       ctx.save();
-      ctx.globalAlpha = 0.4;
-      ctx.shadowColor = this.shadow_color;
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = current_color;
       ctx.shadowBlur = 5;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
+      ctx.fillStyle = current_color;
       ctx.fill();
       ctx.restore();
     },
 
     trail_draw: function (ctx, x, y, radius, alpha) {
+      let trail_color_index = (this.color_index + 1) % costume_ghost_colors.length;
+      let trail_color = costume_ghost_colors[trail_color_index];
+
       ctx.save();
       ctx.globalAlpha = alpha * 0.3;
-      ctx.shadowColor = this.shadow_color;
+      ctx.shadowColor = trail_color;
       ctx.shadowBlur = 5;
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
+      ctx.fillStyle = trail_color;
       ctx.fill();
       ctx.restore();
     },
