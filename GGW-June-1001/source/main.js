@@ -331,20 +331,20 @@ function load_game_data() {
 //---------//
 // 테스트용 //
 //---------//
-import { reset_shop_data } from "./systems/shop_system.js";
-import { reset_costume_data, unlock_all_costumes } from "./systems/costume_system.js";
+// import { reset_shop_data } from "./systems/shop_system.js";
+// import { reset_costume_data, unlock_all_costumes } from "./systems/costume_system.js";
 
-function reset_data() {
-  reset_shop_data();
-  update_shop_display();
+// function reset_data() {
+//   reset_shop_data();
+//   update_shop_display();
 
-  reset_costume_data();
-  update_costume_display(player);
+//   reset_costume_data();
+//   update_costume_display(player);
 
-  display_check_all(all_maxed);
+//   display_check_all(all_maxed);
 
-  save_game_data();
-}
+//   save_game_data();
+// }
 
 // reset_data();
 
