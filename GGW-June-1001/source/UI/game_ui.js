@@ -98,6 +98,8 @@ export function display_check_all(all_maxed) {
 // 게임 오버 시 점수 및 획득한 코인 표시 HTML에 텍스트 제어 //
 //------------------------------------------------------//
 
-export function update_game_over_display(score, coins_from_score) {
-  final_score_display.innerHTML = `점수: ${score}<br><span style="font-size: 26px; text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
+export function update_game_over_display(score, highscore, coins_from_score) {
+  final_score_display.innerHTML = `<span style="text-shadow: 0 0 12px lightgreen">최고 점수: ${highscore}</span><br>
+ <span style="text-shadow: 0 0 8px lightblue">점수: ${score}</span><br>
+    <span style="text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
 }

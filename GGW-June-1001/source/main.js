@@ -14,6 +14,8 @@ import {
   reset_score,
   increase_score,
   get_score,
+  get_highscore,
+  set_highscore,
   reset_difficulty,
   get_coins_from_score,
   add_score,
@@ -70,6 +72,7 @@ import {
   save_costume_data,
   load_costume_data,
 } from "./systems/costume_system.js";
+
 //--------------------//
 // 게임 전체 흐름 제어 //
 //--------------------//
@@ -278,13 +281,12 @@ function game_over() {
   set_game_running(false);
   center_overlay.style.display = "block";
   score_display.textContent = "";
-  update_game_over_display(get_score(), get_coins_from_score());
+  set_highscore();
+  update_game_over_display(get_score(), get_highscore(), get_coins_from_score());
   show_div(comment_start, start_btn);
   show_div(comment_restart, center_overlay);
   clearInterval(game_update_interval_id);
-
   add_coins(get_coins_from_score());
-
   my_game_area.clear();
   reset_spawn_system();
   player.reset_trail();

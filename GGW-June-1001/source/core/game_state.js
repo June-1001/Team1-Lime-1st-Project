@@ -7,6 +7,7 @@ export let score = 0;
 export let score_counter = 0;
 export let difficulty = 0;
 export let coins_from_score = 0;
+export let highscore = 0;
 
 // 게임 진행 상태 설정
 export function set_game_running(value) {
@@ -27,6 +28,12 @@ export function increase_score(number) {
     score += number;
     score_counter = 0;
     update_coins_from_score();
+  }
+}
+
+export function set_highscore() {
+  if (highscore < score) {
+    highscore = score;
   }
 }
 
@@ -57,9 +64,15 @@ export function increase_difficulty() {
 export function get_score() {
   return score;
 }
+
+export function get_highscore() {
+  return highscore;
+}
+
 export function get_difficulty() {
   return difficulty;
 }
+
 export function get_coins_from_score() {
   return coins_from_score;
 }
