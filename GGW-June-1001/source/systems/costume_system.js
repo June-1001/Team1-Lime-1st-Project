@@ -60,7 +60,11 @@ export function update_costume_display(player) {
 
     let description_element = document.createElement("div");
     description_element.className = "costume_description";
-    description_element.innerHTML = costume.description;
+    if (costume.unlocked && costume.description_unlocked) {
+      description_element.innerHTML = costume.description_unlocked;
+    } else {
+      description_element.innerHTML = costume.description;
+    }
 
     wrapper.appendChild(canvas);
     wrapper.appendChild(spacer);
@@ -75,28 +79,81 @@ export function update_costume_display(player) {
 // 코스튬 해금 //
 //------------//
 
-export function update_costume_unlocks(score, coins, obstacles) {
-  if (coins >= 100000) {
+export function update_costume_unlocks(score, coins, obs_counter) {
+  let unlocked_any = false;
+
+  if (coins >= 100000 && !player_costumes[2].unlocked) {
     player_costumes[2].unlocked = true;
+    unlocked_any = true;
   }
 
-  if (obstacles && obstacles.length >= 3) {
+  if (obs_counter >= 200 && !player_costumes[3].unlocked) {
     player_costumes[3].unlocked = true;
+    unlocked_any = true;
   }
 
-  if (score >= 300000) {
+  if (score >= 150000 && !player_costumes[4].unlocked) {
     player_costumes[4].unlocked = true;
+    unlocked_any = true;
   }
 
-  if (score >= 777777) {
+  if (score >= 300000 && !player_costumes[5].unlocked) {
     player_costumes[5].unlocked = true;
+    unlocked_any = true;
+  }
+
+  if (unlocked_any) {
+    save_costume_data();
   }
 }
 
-//테스트용
+//-------------------//
+// 코스튬 세이브 로드 //
+//-------------------//
+
+export function save_costume_data() {
+  let costume_save_data = {};
+  for (let id in player_costumes) {
+    costume_save_data[id] = {
+      unlocked: player_costumes[id].unlocked,
+    };
+  }
+  localStorage.setItem("dodgebox_costume_save", JSON.stringify(costume_save_data));
+}
+
+export function load_costume_data() {
+  let saved_data = localStorage.getItem("dodgebox_costume_save");
+  if (saved_data) {
+    let data = JSON.parse(saved_data);
+    for (let id in player_costumes) {
+      if (data[id]) {
+        player_costumes[id].unlocked = data[id].unlocked;
+      }
+    }
+  }
+}
+
+//---------//
+// 테스트용 //
+//---------//
+
+// 리셋
+export function reset_costume_data() {
+  for (let id in player_costumes) {
+    if (player_costumes[id]) {
+      if (id === "0" || id === "1") {
+        player_costumes[id].unlocked = true;
+      } else {
+        player_costumes[id].unlocked = false;
+      }
+    }
+  }
+}
+
+//
 export function unlock_all_costumes() {
-  player_costumes[2].unlocked = true;
-  player_costumes[3].unlocked = true;
-  player_costumes[4].unlocked = true;
-  player_costumes[5].unlocked = true;
+  for (let id in player_costumes) {
+    player_costumes[id].unlocked = true;
+  }
+  save_costume_data();
 }

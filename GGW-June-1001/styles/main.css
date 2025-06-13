@@ -190,7 +190,7 @@ button {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 800px;
+  width: 700px;
   transform: translate(-50%, -50%);
   background-color: #222;
   padding: 20px;
@@ -376,6 +376,7 @@ button {
 
 #close_help {
   position: relative;
+  transform: translateY(-2px);
   background-color: rgba(0, 100, 100, 0.3);
   box-shadow: 0 0 5px lightblue;
   color: white;
@@ -495,7 +496,7 @@ button {
 #costume_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
   padding: 10px;
   justify-content: center;
   align-items: center;
@@ -510,8 +511,8 @@ button {
   align-items: center;
 
   flex: 0 0 auto;
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   padding: 5px;
   margin: 0;
   border-radius: 10px;
@@ -527,9 +528,9 @@ button {
 }
 
 .costume_wrapper.disabled {
-  opacity: 0.4;
+  opacity: 0.6;
   pointer-events: none;
-  filter: grayscale(80%);
+  filter: grayscale(90%);
   user-select: none;
 }
 
@@ -547,8 +548,8 @@ button {
 
 .costume_canvas {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   display: block;
   margin-top: 8px;
   background-color: black;

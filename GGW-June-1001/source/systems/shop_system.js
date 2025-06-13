@@ -25,7 +25,7 @@ export function get_kill_reward() {
 
 export function add_coins(amount) {
   coins += amount;
-  save_game_data();
+  save_shop_data();
 }
 
 //-------------------------------//
@@ -108,7 +108,7 @@ function show_costume_notice() {
   if (!notice_seen && all_maxed) {
     costume_notice.style.display = "block";
     notice_seen = true;
-    save_game_data();
+    save_shop_data();
     setTimeout(function () {
       costume_notice.style.display = "none";
     }, 5000);
@@ -128,7 +128,7 @@ export function check_all_shop_items_maxed() {
     all_maxed = true;
     show_costume_notice();
     display_check_all(all_maxed);
-    save_game_data();
+    save_shop_data();
   }
 }
 
@@ -229,7 +229,7 @@ export function buy_upgrade(item_key) {
     item.current_level++;
     item.effect();
     update_shop_display();
-    save_game_data();
+    save_shop_data();
   }
 }
 
@@ -243,7 +243,7 @@ export function update_coins_based_on_score() {
 
 // 세이브할 데이터 목록
 // 코인, 코스튬 기능 해금 여부, 상점 업그레이드
-export function save_game_data() {
+export function save_shop_data() {
   const save_data = {
     coins,
     notice_seen,
@@ -260,7 +260,7 @@ export function save_game_data() {
   localStorage.setItem("dodgebox_save", JSON.stringify(save_data));
 }
 
-export function load_game_data() {
+export function load_shop_data() {
   const saved_data = localStorage.getItem("dodgebox_save");
   if (saved_data) {
     const data = JSON.parse(saved_data);
@@ -281,18 +281,14 @@ export function load_game_data() {
   check_all_shop_items_maxed();
 }
 
-//----------------//
-// 리셋 (테스트용) //
-//----------------//
-
+// 테스트용 리셋 함수
 export function reset_shop_data() {
   coins = 0;
   notice_seen = false;
   all_maxed = false;
 
-  for (const key in shop_items) {
+  for (let key in shop_items) {
     shop_items[key].current_level = 0;
     shop_items[key].effect();
   }
-  save_game_data();
 }

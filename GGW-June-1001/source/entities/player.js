@@ -17,6 +17,14 @@ export const player = {
   current_costume: 0,
   costumes: player_costumes,
 
+  get color() {
+    return this.costumes[this.current_costume].color;
+  },
+
+  get shadow_color() {
+    return this.costumes[this.current_costume].shadow_color;
+  },
+
   move: function () {
     const costume = this.costumes[this.current_costume];
     const radius = costume.radius;
