@@ -1,5 +1,6 @@
 import { Component } from "./component.js";   // 원 컴포넌트 가져오기
 import { myGameArea } from "./myGameArea.js";   // 게임 공간 가져오기
+import { addScore } from "./addScore.js";   // 스코어 추가 로직
 // import { gameTimer } from "./gameTimer.js";     // 게임 타이머 가져오기
 // 게임 관련 변수
 var myGamePieces = [];      //게임 피스 즉, 원들을 배열로 관리 할 수 있게끔 배열 선언 
@@ -46,13 +47,6 @@ function handleClick(event) {
             break;      //break를 사용해서 한번만 처리함
         }
     }
-}
-
-// 점수 증가
-function addScore() {
-    const score = document.getElementById("score");     //score 요소를 참조
-    const currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;     // 기존 점수를 currentScore 변수에 저장, 숫자가 없으면 0을 넣어줌
-    score.innerText = "Score: " + (currentScore + 1);       // 점수를 1점 증가시켜서 표기
 }
 
 // 원 그리기
