@@ -202,7 +202,12 @@ function update_game_area() {
   my_game_area.clear();
   if (!game_running) return;
 
-  increase_score();
+  if (player.current_costume === 2) {
+    increase_score(10);
+  } else {
+    increase_score(1);
+  }
+
   score_display.textContent = `점수: ${get_score()}`;
   update_coins_based_on_score();
 
@@ -229,9 +234,16 @@ function update_game_area() {
 // 플레이어와 적 충돌 감지 - 적과 충돌 시 게임 오버 //
 //----------------------------------------------//
 
+let collision_disabled = false;
+
 function check_collisions() {
+  if (collision_disabled) {
+    return;
+  }
+
   const costume = player.costumes[player.current_costume];
   const radius = costume.radius;
+  const ghost_check = Math.random() * 10;
 
   for (let i = 0; i < obstacles.length; i++) {
     const obs = obstacles[i];
@@ -241,6 +253,16 @@ function check_collisions() {
     const distance_y = player.y - closest_y;
 
     if (Math.sqrt(distance_x * distance_x + distance_y * distance_y) < radius) {
+      if (player.current_costume === 3 || ghost_check < 3) {
+        add_floating_text(player.x, player.y, "무적");
+
+        collision_disabled = true;
+
+        setTimeout(function () {
+          collision_disabled = false;
+        }, 1000);
+        return;
+      }
       game_over();
     }
   }

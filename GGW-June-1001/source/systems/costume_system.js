@@ -60,7 +60,11 @@ export function update_costume_display(player) {
 
     let description_element = document.createElement("div");
     description_element.className = "costume_description";
-    description_element.innerHTML = costume.description;
+    if (costume.unlocked && costume.description_unlocked) {
+      description_element.innerHTML = costume.description_unlocked;
+    } else {
+      description_element.innerHTML = costume.description;
+    }
 
     wrapper.appendChild(canvas);
     wrapper.appendChild(spacer);
@@ -78,22 +82,22 @@ export function update_costume_display(player) {
 export function update_costume_unlocks(score, coins, obstacles) {
   let unlocked_any = false;
 
-  if (coins >= 1000000 && !player_costumes[2].unlocked) {
+  if (coins >= 100000 && !player_costumes[2].unlocked) {
     player_costumes[2].unlocked = true;
     unlocked_any = true;
   }
 
-  if (obstacles && obstacles.length >= 20 && !player_costumes[3].unlocked) {
+  if (obstacles && obstacles.length >= 15 && !player_costumes[3].unlocked) {
     player_costumes[3].unlocked = true;
     unlocked_any = true;
   }
 
-  if (score >= 300000 && !player_costumes[4].unlocked) {
+  if (score >= 150000 && !player_costumes[4].unlocked) {
     player_costumes[4].unlocked = true;
     unlocked_any = true;
   }
 
-  if (score >= 777777 && !player_costumes[5].unlocked) {
+  if (score >= 300000 && !player_costumes[5].unlocked) {
     player_costumes[5].unlocked = true;
     unlocked_any = true;
   }

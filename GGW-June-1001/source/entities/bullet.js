@@ -1,4 +1,5 @@
 import { game_area_width, game_area_height, my_game_area } from "../core/game_core.js";
+import { player } from "./player.js";
 
 //-----------------//
 // 총알 초기 값 설정 //
@@ -66,8 +67,8 @@ export class Bullet {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
-    ctx.shadowColor = "rgb(0, 140, 255)";
+    ctx.fillStyle = player.color;
+    ctx.shadowColor = player.shadow_color;
     ctx.shadowBlur = 20;
 
     ctx.beginPath();

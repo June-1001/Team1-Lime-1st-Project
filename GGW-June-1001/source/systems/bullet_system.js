@@ -93,10 +93,16 @@ export function fire_bullet() {
   if (!game_running) {
     return;
   }
-
-  if (Date.now() - last_bullet_time < bullet_interval) {
-    return;
+  if (player.current_costume === 5) {
+    if ((Date.now() - last_bullet_time) * 1.3 < bullet_interval) {
+      return;
+    }
+  } else {
+    if (Date.now() - last_bullet_time < bullet_interval) {
+      return;
+    }
   }
+
   if (typeof cursor_x !== "number" || typeof cursor_y !== "number") {
     return;
   }
