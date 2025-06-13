@@ -1,6 +1,6 @@
 import { Component } from "./component.js";   // 원 컴포넌트 가져오기
 import { myGameArea } from "./myGameArea.js";   // 게임 공간 가져오기
-import { gameTimer } from "./gameTimer.js";     // 게임 타이머 가져오기
+// import { gameTimer } from "./gameTimer.js";     // 게임 타이머 가져오기
 // 게임 관련 변수
 var myGamePieces = [];      //게임 피스 즉, 원들을 배열로 관리 할 수 있게끔 배열 선언 
 
@@ -61,6 +61,31 @@ function drawGamePieces() {
     const ctx = myGameArea.context;     //게임 공간 안에있는 요소 참조(배열)
 
     myGamePieces.forEach(piece => piece.draw(ctx)); //게임 공간 안에있는 요소(배열)들을 그려줌
+}
+ let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
+
+function gameTimer(switchState) {
+    const timerEl = document.getElementById("timer");
+
+    if (switchState == "on") {
+        let timeLeft = 10;
+        timerEl.innerText = "Timer: " + timeLeft;   // 스위치 상태가 on일때 시간제한을 10초로 설정하고 타이머에 추가
+
+        intervalId = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
+            } else {
+                clearInterval(intervalId);
+                timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
+                myGamePieces = [];
+                myGameArea.clear();
+            }
+        }, 1000);   // interval을 1000ms(1초) 간격으로 실행
+    } else {
+        clearInterval(intervalId);
+        timerEl.innerText = "Timer: 0";     // 스위치 상태가 on이 아닐경우 interval 중지, Timer: 0 출력
+    }   // timer가 6,5,4 등 0이 아닐때 급하게 리셋버튼 눌렀을 시 실행되게끔 하는 로직
 }
 
 // 카운트다운 후 게임 시작
