@@ -99,7 +99,7 @@ export function display_check_all(all_maxed) {
 //------------------------------------------------------//
 
 export function update_game_over_display(score, highscore, coins_from_score) {
-  final_score_display.innerHTML = `<span style="text-shadow: 0 0 12px lightgreen">최고 점수: ${highscore}</span><br>
- <span style="text-shadow: 0 0 8px lightblue">점수: ${score}</span><br>
+  final_score_display.innerHTML = `<span style="text-shadow: 0 0 8px lightblue">점수: ${score}</span><br>
+ <span style="text-shadow: 0 0 12px lightgreen">최고 점수: ${highscore}</span><br>
     <span style="text-shadow: 0 0 8px gold">획득 코인: ${coins_from_score}</span>`;
 }

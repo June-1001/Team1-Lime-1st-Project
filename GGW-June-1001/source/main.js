@@ -16,6 +16,7 @@ import {
   get_score,
   get_highscore,
   set_highscore,
+  set_highscore_value,
   reset_difficulty,
   get_coins_from_score,
   add_score,
@@ -314,13 +315,29 @@ function restart_game() {
 //-----------------//
 
 function save_game_data() {
+  // 상점
   save_shop_data();
+  // 코스튬
   save_costume_data();
+  // 현재 코스튬
+  localStorage.setItem("current_costume", player.current_costume);
+  // 최고 점수
+  localStorage.setItem("highscore", get_highscore());
 }
 
 function load_game_data() {
   load_shop_data();
   load_costume_data();
+
+  let saved_costume = localStorage.getItem("current_costume");
+  if (saved_costume !== null) {
+    player.current_costume = parseInt(saved_costume);
+  }
+
+  let saved_highscore = localStorage.getItem("highscore");
+  if (saved_highscore !== null) {
+    set_highscore_value(parseInt(saved_highscore));
+  }
 }
 
 //-----------------------------//

@@ -31,12 +31,6 @@ export function increase_score(number) {
   }
 }
 
-export function set_highscore() {
-  if (highscore < score) {
-    highscore = score;
-  }
-}
-
 // 적 처치 시 점수 획득 및 코인 추가
 export function add_score(amount) {
   score += amount;
@@ -75,4 +69,14 @@ export function get_difficulty() {
 
 export function get_coins_from_score() {
   return coins_from_score;
+}
+
+export function set_highscore() {
+  if (highscore < score) {
+    highscore = score;
+  }
+}
+
+export function set_highscore_value(value) {
+  highscore = value;
 }
