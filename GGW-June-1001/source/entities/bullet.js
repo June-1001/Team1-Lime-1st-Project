@@ -45,6 +45,8 @@ export class Bullet {
     this.damage = bullet_power;
     this.ricochet_count = max_ricochet;
     this.pierce_count = max_pierce;
+    this.color = player.color;
+    this.shadow_color = player.shadow_color;
 
     const dx = target_x - x;
     const dy = target_y - y;
@@ -67,8 +69,8 @@ export class Bullet {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(this.angle);
-    ctx.fillStyle = player.color;
-    ctx.shadowColor = player.shadow_color;
+    ctx.fillStyle = this.color;
+    ctx.shadowColor = this.shadow_color;
     ctx.shadowBlur = 20;
 
     ctx.beginPath();

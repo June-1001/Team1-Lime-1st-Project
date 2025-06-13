@@ -160,8 +160,8 @@ export const player_costumes = {
   3: {
     unlocked: false,
     name: "유령",
-    description: "한 게임에서<br>200명 이상의 적 처치 시 해금",
-    description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다.",
+    description: "한 게임에서<br>200명 이상의<br>적 처치 시 해금",
+    description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다",
     color: "rgba(200, 200, 255, 0.5)",
     shadow_color: "rgba(200, 200, 255, 0.1)",
     color_index: 0,
@@ -202,7 +202,7 @@ export const player_costumes = {
   4: {
     unlocked: false,
     name: "백색왜성",
-    description: "150,000점 이상<br>획득 시 해금",
+    description: "한 게임에서<br>150,000점 이상<br>획득 시 해금",
     description_unlocked: "크기가 더 작아집니다",
     color: "rgb(255, 255, 255)",
     shadow_color: "rgb(255, 255, 255)",
@@ -237,7 +237,7 @@ export const player_costumes = {
   5: {
     unlocked: false,
     name: "무지개",
-    description: "300,000점 이상<br>획득 시 해금",
+    description: "한 게임에서<br>300,000점 이상<br>획득 시 해금",
     description_unlocked: "총알 발사 속도가<br>2배로 빨라집니다",
     color: "rgba(231, 52, 52, 1)",
     shadow_color: "rgba(231, 52, 52, 0.3)",
@@ -259,7 +259,9 @@ export const player_costumes = {
       ctx.fill();
       ctx.restore();
 
-      this.color = current_color;
+      this.color =
+        costume_rainbow_colors[Math.floor(Math.random() * costume_rainbow_colors.length)];
+      this.shadow_color = this.color.replace("1", "0.5");
     },
 
     trail_draw: function (ctx, x, y, radius, alpha) {
