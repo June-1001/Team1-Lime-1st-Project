@@ -7,8 +7,6 @@ import {
   pause_game,
   resume_game,
   is_game_active,
-  load_game_data,
-  save_game_data,
 } from "./core/game_core.js";
 import {
   game_running,
@@ -60,16 +58,17 @@ import {
   update_coins_based_on_score,
   add_coins,
   all_maxed,
-  reset_shop_data,
   check_all_shop_items_maxed,
   notice_seen,
+  load_shop_data,
+  save_shop_data,
 } from "./systems/shop_system.js";
 import {
   update_costume_display,
   update_costume_unlocks,
-  unlock_all_costumes,
+  save_costume_data,
+  load_costume_data,
 } from "./systems/costume_system.js";
-
 //--------------------//
 // 게임 전체 흐름 제어 //
 //--------------------//
@@ -293,8 +292,31 @@ window.addEventListener("load", () => {
   display_check_all(all_maxed);
 });
 
-// 테스트용
-// reset_shop_data();
+//-----------------//
+// 게임 세이브 로드 //
+//-----------------//
+
+function save_game_data() {
+  save_shop_data();
+  save_costume_data();
+}
+
+function load_game_data() {
+  load_shop_data();
+  load_costume_data();
+}
+
+//---------//
+// 테스트용 //
+//---------//
+import { reset_shop_data } from "./systems/shop_system.js";
+import { reset_costume_data, unlock_all_costumes } from "./systems/costume_system.js";
+function reset_data() {
+  reset_shop_data();
+  reset_costume_data();
+}
+
+// reset_data();
 
 // add_coins(100000);
 

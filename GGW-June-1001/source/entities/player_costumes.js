@@ -109,7 +109,7 @@ export const player_costumes = {
   2: {
     unlocked: false,
     name: "황금",
-    description: "100,000 코인 이상<br>획득 시 해금",
+    description: "1,000,000 코인 이상<br>획득 시 해금",
     color: "rgba(255, 215, 0, 1)",
     shadow_color: "rgba(255, 215, 0, 0.4)",
     radius: 18,
@@ -178,7 +178,7 @@ export const player_costumes = {
     unlocked: false,
     name: "3D",
     description: "300,000점 이상<br>획득 시 해금",
-    color: "rgb(151, 151, 151)",
+    color: "rgb(104, 194, 255)",
     shadow_color: "rgba(0, 0, 0, 0.5)",
     radius: 18,
     speed: 9,
