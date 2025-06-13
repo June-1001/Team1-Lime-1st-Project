@@ -253,7 +253,7 @@ function check_collisions() {
     const distance_y = player.y - closest_y;
 
     if (Math.sqrt(distance_x * distance_x + distance_y * distance_y) < radius) {
-      if (player.current_costume === 3 || ghost_check < 3) {
+      if (player.current_costume === 3 && ghost_check < 3) {
         add_floating_text(player.x, player.y, "무적");
 
         collision_disabled = true;
