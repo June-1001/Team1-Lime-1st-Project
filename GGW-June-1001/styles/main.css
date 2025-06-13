@@ -546,6 +546,19 @@ button {
   z-index: 5;
 }
 
+.costume_wrapper.unlockable {
+  cursor: pointer;
+  border: 2px dashed gold;
+  background-color: rgba(50, 50, 0, 0.3);
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+.costume_wrapper.unlockable:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
+}
+
 .costume_canvas {
   position: absolute;
   width: 100px;

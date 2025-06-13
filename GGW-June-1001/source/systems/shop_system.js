@@ -111,7 +111,7 @@ function show_costume_notice() {
     save_shop_data();
     setTimeout(function () {
       costume_notice.style.display = "none";
-    }, 5000);
+    }, 3000);
   }
 }
 

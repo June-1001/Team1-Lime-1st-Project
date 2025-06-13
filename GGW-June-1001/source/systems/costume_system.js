@@ -15,7 +15,11 @@ export function update_costume_display(player) {
     wrapper.setAttribute("data-id", id);
 
     if (!costume.unlocked) {
-      wrapper.classList.add("disabled");
+      if (costume.unlockable) {
+        wrapper.classList.add("unlockable");
+      } else {
+        wrapper.classList.add("disabled");
+      }
     }
 
     let name_element = document.createElement("div");
@@ -29,7 +33,17 @@ export function update_costume_display(player) {
 
     wrapper.addEventListener("click", function () {
       if (!costume.unlocked) {
-        return;
+        if (costume.unlockable) {
+          costume.unlocked = true;
+          wrapper.classList.remove("unlockable");
+          wrapper.classList.remove("disabled");
+
+          if (costume.description_unlocked) {
+            description_element.innerHTML = costume.description_unlocked;
+          }
+        } else {
+          return;
+        }
       }
 
       player.set_costume(Number(id));
@@ -83,22 +97,22 @@ export function update_costume_unlocks(score, coins, obs_counter) {
   let unlocked_any = false;
 
   if (coins >= 100000 && !player_costumes[2].unlocked) {
-    player_costumes[2].unlocked = true;
+    player_costumes[2].unlockable = true;
     unlocked_any = true;
   }
 
   if (obs_counter >= 200 && !player_costumes[3].unlocked) {
-    player_costumes[3].unlocked = true;
+    player_costumes[3].unlockable = true;
     unlocked_any = true;
   }
 
   if (score >= 150000 && !player_costumes[4].unlocked) {
-    player_costumes[4].unlocked = true;
+    player_costumes[4].unlockable = true;
     unlocked_any = true;
   }
 
   if (score >= 300000 && !player_costumes[5].unlocked) {
-    player_costumes[5].unlocked = true;
+    player_costumes[5].unlockable = true;
     unlocked_any = true;
   }
 
@@ -116,6 +130,7 @@ export function save_costume_data() {
   for (let id in player_costumes) {
     costume_save_data[id] = {
       unlocked: player_costumes[id].unlocked,
+      unlockable: player_costumes[id].unlockable,
     };
   }
   localStorage.setItem("dodgebox_costume_save", JSON.stringify(costume_save_data));
@@ -128,6 +143,7 @@ export function load_costume_data() {
     for (let id in player_costumes) {
       if (data[id]) {
         player_costumes[id].unlocked = data[id].unlocked;
+        player_costumes[id].unlockable = data[id].unlockable;
       }
     }
   }
@@ -141,19 +157,24 @@ export function load_costume_data() {
 export function reset_costume_data() {
   for (let id in player_costumes) {
     if (player_costumes[id]) {
-      if (id === "0" || id === "1") {
+      if (id === "0") {
         player_costumes[id].unlocked = true;
+        player_costumes[id].unlockable = true;
+      } else if (id === "1") {
+        player_costumes[id].unlocked = false;
+        player_costumes[id].unlockable = true;
       } else {
         player_costumes[id].unlocked = false;
+        player_costumes[id].unlockable = false;
       }
     }
   }
 }
 
-//
+// 모든 코스튬 해금
 export function unlock_all_costumes() {
   for (let id in player_costumes) {
-    player_costumes[id].unlocked = true;
+    player_costumes[id].unlockable = true;
   }
   save_costume_data();
 }

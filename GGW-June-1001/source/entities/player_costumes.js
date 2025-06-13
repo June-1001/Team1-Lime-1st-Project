@@ -89,7 +89,8 @@ export const player_costumes = {
   },
 
   1: {
-    unlocked: true,
+    unlocked: false,
+    unlockable: true,
     name: "빨강",
     description: "3배 빨라집니다",
     color: "rgba(255, 50, 50, 1)",
@@ -124,6 +125,7 @@ export const player_costumes = {
 
   2: {
     unlocked: false,
+    unlockable: false,
     name: "황금",
     description: "100,000 코인 이상<br>획득 시 해금",
     description_unlocked: "기본 획득 점수가<br>초당 100점으로 증가합니다",
@@ -159,6 +161,7 @@ export const player_costumes = {
 
   3: {
     unlocked: false,
+    unlockable: false,
     name: "유령",
     description: "한 게임에서<br>200명 이상의<br>적 처치 시 해금",
     description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다",
@@ -201,6 +204,7 @@ export const player_costumes = {
 
   4: {
     unlocked: false,
+    unlockable: false,
     name: "백색왜성",
     description: "한 게임에서<br>150,000점 이상<br>획득 시 해금",
     description_unlocked: "크기가 더 작아집니다",
@@ -236,6 +240,7 @@ export const player_costumes = {
 
   5: {
     unlocked: false,
+    unlockable: false,
     name: "무지개",
     description: "한 게임에서<br>300,000점 이상<br>획득 시 해금",
     description_unlocked: "총알 발사 속도가<br>2배로 빨라집니다",

@@ -307,15 +307,6 @@ function restart_game() {
   video.style.display = "none";
   display_check_all(all_maxed);
 }
-
-//-----------------------------//
-// 최초 로딩 시 상점 데이터 로딩 //
-//-----------------------------//
-window.addEventListener("load", () => {
-  load_game_data();
-  display_check_all(all_maxed);
-});
-
 //-----------------//
 // 게임 세이브 로드 //
 //-----------------//
@@ -330,9 +321,25 @@ function load_game_data() {
   load_costume_data();
 }
 
+//-----------------------------//
+// 최초 로딩 시 상점 데이터 로딩 //
+//-----------------------------//
+window.addEventListener("load", () => {
+  load_game_data();
+  display_check_all(all_maxed);
+});
+//--------------------//
+// 종료 시 자동 세이브 //
+//--------------------//
+
+window.addEventListener("beforeunload", function () {
+  save_game_data();
+});
+
 //---------//
 // 테스트용 //
 //---------//
+
 // import { reset_shop_data } from "./systems/shop_system.js";
 // import { reset_costume_data} from "./systems/costume_system.js";
 
