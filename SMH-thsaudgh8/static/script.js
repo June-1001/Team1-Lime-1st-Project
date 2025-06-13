@@ -1,53 +1,9 @@
-class Component {
-    constructor(radius, color, x, y) { //원의 속성 선언 : 반지름, 색, x좌표, y좌표  
-        this.radius = radius;   //여기서 this는 새로 생성되는 객체를 가리킴
-        this.color = color;
-        this.x = x;
-        this.y = y;
-    }
-
-    draw(ctx) {
-        ctx.fillStyle = this.color;  //ctx 색 결정하는 부분
-        ctx.beginPath();    //독립된 개체로 그려지게끔 만드는 코드
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI); // 독립된 개체에 들어갈 속성 , x좌표, y좌표, 반지름, 원을 그리는 시작 각도, 끝 각도
-        ctx.fill();         // 채우기 
-    }
-
-    static getRandomPosition(canvas, radius, gamePieces) { //랜덤한 위치에 원을 생성하기위한 함수 , static 사용 = 인스턴스 없이 사용할 수 있어서 
-        let x, y, valid;                                   //Component.getRandomPosition(. . .) 식으로 사용 가능  Component.getRandomPosition(myGameArea.canvas, 40, myGamePieces);
-
-        do {
-            x = Math.random() * (canvas.width - 2 * radius) + radius;   //원이 캔버스 안에 있게끔 만들어주는 코드
-            y = Math.random() * (canvas.height - 2 * radius) + radius;
-
-            valid = gamePieces.every(piece => { //every는 배열의 모든 요소가 조건을 충족해야 true가 된다 myGamePieces를 받고 있으므로 배열임
-                const dx = x - piece.x;     //새로 생길 원의 x좌표와 y좌표 비교한것
-                const dy = y - piece.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);  // 피타고라스 정리를 활용한 두 점 사이의 거리 구하기 
-                return distance >= radius * 2.5;        // 거리가 반지름의 2.5배 이상 떨어져야 함
-            });
-        } while (!valid);
-
-        return { x, y };        // 모든 배열 요소의 x좌표와 y좌표를 비교하고 만약 거리가 2.5r 이상 안떨어져 있으면 다시구하는 함수
-    }
-}
-
+import { Component } from "./component.js";   // 원 컴포넌트 가져오기
+import { myGameArea } from "./myGameArea.js";   // 게임 공간 가져오기
+import { addScore } from "./addScore.js";   // 스코어 추가 로직
+// import { gameTimer } from "./gameTimer.js";     // 게임 타이머 가져오기
 // 게임 관련 변수
 var myGamePieces = [];      //게임 피스 즉, 원들을 배열로 관리 할 수 있게끔 배열 선언 
-
-var myGameArea = {          //게임 공간을 할당함 , canvas 요소를 가져오며 캔버스의 가로 세로 크기를 정함
-    canvas: document.getElementById("gameCanvas"),
-    start: function () {
-        this.canvas.width = 720;
-        this.canvas.height = 480;
-        this.context = this.canvas.getContext("2d");
-
-        this.canvas.addEventListener("click", handleClick);     // 캔버스에 들어갈 효과를 넣어줌 (캔버스 클릭시 발생하는 이벤트를 입력)
-    },
-    clear: function () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);    // 캔버스를 초기화 해주는 함수
-    }
-};
 
 // 게임 시작
 function startGame() {      // 게임을 시작함
@@ -93,19 +49,37 @@ function handleClick(event) {
     }
 }
 
-// 점수 증가
-function addScore() {
-    const score = document.getElementById("score");     //score 요소를 참조
-    const currentScore = parseInt(score.innerText.replace("Score: ", "")) || 0;     // 기존 점수를 currentScore 변수에 저장, 숫자가 없으면 0을 넣어줌
-    score.innerText = "Score: " + (currentScore + 1);       // 점수를 1점 증가시켜서 표기
-}
-
 // 원 그리기
 function drawGamePieces() {
     myGameArea.clear();     //게임 공간 초기화
     const ctx = myGameArea.context;     //게임 공간 안에있는 요소 참조(배열)
 
     myGamePieces.forEach(piece => piece.draw(ctx)); //게임 공간 안에있는 요소(배열)들을 그려줌
+}
+ let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
+
+function gameTimer(switchState) {
+    const timerEl = document.getElementById("timer");
+
+    if (switchState == "on") {
+        let timeLeft = 10;
+        timerEl.innerText = "Timer: " + timeLeft;   // 스위치 상태가 on일때 시간제한을 10초로 설정하고 타이머에 추가
+
+        intervalId = setInterval(() => {
+            timeLeft--;
+            if (timeLeft > 0) {
+                timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
+            } else {
+                clearInterval(intervalId);
+                timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
+                myGamePieces = [];
+                myGameArea.clear();
+            }
+        }, 1000);   // interval을 1000ms(1초) 간격으로 실행
+    } else {
+        clearInterval(intervalId);
+        timerEl.innerText = "Timer: 0";     // 스위치 상태가 on이 아닐경우 interval 중지, Timer: 0 출력
+    }   // timer가 6,5,4 등 0이 아닐때 급하게 리셋버튼 눌렀을 시 실행되게끔 하는 로직
 }
 
 // 카운트다운 후 게임 시작
@@ -136,32 +110,10 @@ function startGameWithDelay() {
     updateCountdown();      // 카운트다운 시작
 }
 
-// 타이머
-let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
-
-function gameTimer(switchState) {
-    const timerEl = document.getElementById("timer");
-
-    if (switchState == "on") {
-        let timeLeft = 10;
-        timerEl.innerText = "Timer: " + timeLeft;   // 스위치 상태가 on일때 시간제한을 10초로 설정하고 타이머에 추가
-
-        intervalId = setInterval(() => {
-            timeLeft--;
-            if (timeLeft > 0) {
-                timerEl.innerText = "Timer: " + timeLeft;   // timeLeft 1감소 후, 가 0보다 클 경우 Timer에 출력
-            } else {
-                clearInterval(intervalId);
-                myGamePieces = [];
-                timerEl.innerText = "Game Over";    // timeLeft가 0보다 작거나 같을 경우 , interval중지 , 게임 피스 초기화
-                myGameArea.clear();     // 타이머 부분에 Game Over 출력 후 게임 공간 초기화
-            }
-        }, 1000);   // interval을 1000ms(1초) 간격으로 실행
-    } else {
-        clearInterval(intervalId);
-        timerEl.innerText = "Timer: 0";     // 스위치 상태가 on이 아닐경우 interval 중지, Timer: 0 출력
-    }   // timer가 6,5,4 등 0이 아닐때 급하게 리셋버튼 눌렀을 시 실행되게끔 하는 로직
-}
-
 // 시작
-myGameArea.start();
+myGameArea.start(handleClick);
+// 제일 아래쪽에 추가
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("startBtn").addEventListener("click", startGameWithDelay);
+    document.getElementById("resetBtn").addEventListener("click", clearGame);
+}); // html이 다 로딩된 후 실행되게끔 하는 코드★
