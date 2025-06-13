@@ -311,9 +311,16 @@ function load_game_data() {
 //---------//
 import { reset_shop_data } from "./systems/shop_system.js";
 import { reset_costume_data, unlock_all_costumes } from "./systems/costume_system.js";
+
 function reset_data() {
   reset_shop_data();
   reset_costume_data();
+
+  update_shop_display();
+  update_costume_display(player);
+  display_check_all(all_maxed);
+
+  save_game_data();
 }
 
 // reset_data();

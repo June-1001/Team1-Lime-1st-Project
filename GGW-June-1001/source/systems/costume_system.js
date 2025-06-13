@@ -144,7 +144,6 @@ export function reset_costume_data() {
       }
     }
   }
-  save_costume_data();
 }
 
 //

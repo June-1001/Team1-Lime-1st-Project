@@ -291,9 +291,4 @@ export function reset_shop_data() {
     shop_items[key].current_level = 0;
     shop_items[key].effect();
   }
-
-  update_shop_display();
-  update_costume_display(player);
-  display_check_all(all_maxed);
-  save_shop_data();
 }
