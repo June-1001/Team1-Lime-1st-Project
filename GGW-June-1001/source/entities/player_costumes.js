@@ -20,35 +20,13 @@ function generate_costume_ghost_colors(steps) {
 costume_ghost_colors = generate_costume_ghost_colors(50);
 
 // 무지개 코스튬 색깔 맵
-const costume_rainbow_colors = [
-  "rgba(231, 52, 52, 1)",
-  "rgba(237, 88, 44, 1)",
-  "rgba(236, 112, 36, 1)",
-  "rgba(236, 136, 32, 1)",
-  "rgba(239, 165, 26, 1)",
-  "rgba(241, 186, 20, 1)",
-  "rgba(224, 199, 35, 1)",
-  "rgba(145, 194, 65, 1)",
-  "rgba(75, 184, 94, 1)",
-  "rgba(31, 177, 122, 1)",
-  "rgba(0, 174, 150, 1)",
-  "rgba(10, 160, 174, 1)",
-  "rgba(39, 145, 198, 1)",
-  "rgba(68, 130, 223, 1)",
-  "rgba(104, 116, 230, 1)",
-  "rgba(130, 101, 222, 1)",
-  "rgba(145, 94, 205, 1)",
-  "rgba(153, 91, 194, 1)",
-  "rgba(156, 90, 188, 1)",
-  "rgba(157, 89, 185, 1)",
-  "rgba(157, 89, 182, 1)",
-  "rgba(157, 89, 182, 1)",
-  "rgba(166, 78, 163, 1)",
-  "rgba(182, 66, 140, 1)",
-  "rgba(198, 59, 117, 1)",
-  "rgba(213, 55, 95, 1)",
-  "rgba(224, 53, 72, 1)",
-];
+const costume_rainbow_colors = [];
+
+const rainbow_length = 36;
+for (let i = 0; i < rainbow_length; i++) {
+  let hue = (i * 360) / rainbow_length;
+  costume_rainbow_colors.push(`hsl(${hue}, 80%, 65%)`);
+}
 
 //---------------------------//
 // 여기에 플레이어 코스튬 추가 //
