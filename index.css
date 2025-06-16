@@ -33,7 +33,7 @@ body {
   text-shadow: 0 0 12px #0f0;
 }
 
-.team-container {
+#team_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 40px;
@@ -61,13 +61,13 @@ body {
 }
 
 .card img {
-  width: 100%;
+  width: 300px;
   height: 200px;
   object-fit: cover;
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 8px;
-  box-shadow: 0 0 15px #0f0;
+  box-shadow: 0 0 5px #0f0;
   transition: all 0.4s ease;
 }
 
@@ -77,7 +77,7 @@ body {
 
 .card-body {
   background-color: #222;
-  box-shadow: 0 0 15px #0f0;
+  box-shadow: 0 0 5px #0f0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -91,6 +91,11 @@ body {
 .game-title {
   font-family: "Alumni Sans SC", sans-serif;
   font-size: 2.5rem;
+}
+
+.game-title :lang(ko) {
+  font-family: "Orbit", sans-serif;
+  font-size: 2rem;
 }
 
 .member-name {
