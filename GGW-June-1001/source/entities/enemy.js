@@ -26,7 +26,7 @@ export class Opponent {
     this.x = x;
     this.y = y;
 
-    this.speed_up = get_score() / 200000;
+    this.speed_up = get_score() / 150000;
 
     this.dx = Math.sign(Math.random() - 0.5) * (Math.random() * 3.5 + this.speed_up);
     this.dy = Math.sign(Math.random() - 0.5) * (Math.random() * 3.5 + this.speed_up);
