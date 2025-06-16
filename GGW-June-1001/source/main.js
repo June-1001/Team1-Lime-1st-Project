@@ -209,7 +209,7 @@ function update_game_area() {
   if (!game_running) return;
 
   if (player.current_costume === 2) {
-    increase_score(10);
+    increase_score(50);
   } else {
     increase_score(1);
   }

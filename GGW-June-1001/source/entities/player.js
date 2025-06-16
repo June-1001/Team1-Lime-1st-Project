@@ -32,17 +32,36 @@ export const player = {
     this.prev_x = this.x;
     this.prev_y = this.y;
 
-    if ((keys.arrow_up || keys.w) && this.y - radius > 0) {
-      this.y -= costume.speed;
+    if (keys.arrow_up || keys.w) {
+      if (this.y - radius - costume.speed >= 0) {
+        this.y -= costume.speed;
+      } else {
+        this.y = radius;
+      }
     }
-    if ((keys.arrow_down || keys.s) && this.y + radius < game_area_height) {
-      this.y += costume.speed;
+
+    if (keys.arrow_down || keys.s) {
+      if (this.y + radius + costume.speed <= game_area_height) {
+        this.y += costume.speed;
+      } else {
+        this.y = game_area_height - radius;
+      }
     }
-    if ((keys.arrow_left || keys.a) && this.x - radius > 0) {
-      this.x -= costume.speed;
+
+    if (keys.arrow_left || keys.a) {
+      if (this.x - radius - costume.speed >= 0) {
+        this.x -= costume.speed;
+      } else {
+        this.x = radius;
+      }
     }
-    if ((keys.arrow_right || keys.d) && this.x + radius < game_area_width) {
-      this.x += costume.speed;
+
+    if (keys.arrow_right || keys.d) {
+      if (this.x + radius + costume.speed <= game_area_width) {
+        this.x += costume.speed;
+      } else {
+        this.x = game_area_width - radius;
+      }
     }
   },
 
