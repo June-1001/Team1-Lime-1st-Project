@@ -77,8 +77,8 @@ export function update_costume_display(player) {
       requestAnimationFrame(draw_loop);
     }
 
-    // Start the loop
     draw_loop();
+
     let spacer = document.createElement("div");
     spacer.className = "costume_spacer";
 
