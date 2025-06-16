@@ -97,8 +97,8 @@ export const player = {
   },
 
   reset_starting_point: function () {
-    this.x = game_area_width;
-    this.y = game_area_height;
+    this.x = game_area_width / 2;
+    this.y = game_area_height / 2;
   },
 
   reset_trail: function () {
