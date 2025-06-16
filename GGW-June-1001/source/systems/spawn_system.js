@@ -120,10 +120,17 @@ export function create_spawn_timer() {
 
 export function update_spawn_timers() {
   const now = Date.now();
+
   if (now - last_spawn_time > spawn_interval && game_running) {
     create_spawn_timer();
     last_spawn_time = now;
-    spawn_interval = Math.max(200, 1000 - get_score() / 50);
+
+    let base_interval = 1000;
+    let min_interval = 200;
+    let score = get_score();
+    let factor = 1 + score / 10000;
+
+    spawn_interval = Math.max(min_interval, base_interval / factor);
   }
 
   for (let i = spawn_timers.length - 1; i >= 0; i--) {
