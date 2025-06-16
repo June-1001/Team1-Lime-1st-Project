@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const URL_map = {
     "June-1001": "GGW-June-1001/dodgebox_game.html",
     thsaudgh8: "SMH-thsaudgh8/main.html ",
-    KHS25: "KHS-KHS25/fly_hunter_game.html",
+    KHS25: "KHS-KHS25/fly_hunter_game/index.html",
     DODOVX: "CJH-DODOVX/index.html",
   };
 
