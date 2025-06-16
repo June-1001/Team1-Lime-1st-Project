@@ -10,30 +10,31 @@ const messages = {
 export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 전반적인 흐름과 상태관리를 담당하는 모듈
   constructor() {
     // DOM 참조
-    this.menu      = document.getElementById('menu');
-    this.container = document.getElementById('game-container');
-    this.flyEl     = document.getElementById('fly');
-    this.swatterEl = document.getElementById('swatter');
-    this.backBtn   = document.getElementById('backBtn');
-    this.finishBtn = document.getElementById('finishBtn');
-    this.scoreEl   = document.getElementById('score');
-    this.timeEl    = document.getElementById('time');
-    this.endBox    = document.getElementById('end');
-    this.finalMsg  = document.getElementById('finalMsg');
-    this.rankTitle = document.getElementById('rankTitle');
-    this.ranking   = document.getElementById('ranking');
-    this.restart   = document.getElementById('restartBtn');
-    this.gameArea  = document.getElementById('game');
+    this.menu          = document.getElementById('menu');
+    this.container     = document.getElementById('game-container');
+    this.infoContainer = document.getElementById('info-container');  // ← 추가
+    this.flyEl         = document.getElementById('fly');
+    this.swatterEl     = document.getElementById('swatter');
+    this.backBtn       = document.getElementById('backBtn');
+    this.finishBtn     = document.getElementById('finishBtn');
+    this.scoreEl       = document.getElementById('score');
+    this.timeEl        = document.getElementById('time');
+    this.endBox        = document.getElementById('end');
+    this.finalMsg      = document.getElementById('finalMsg');
+    this.rankTitle     = document.getElementById('rankTitle');
+    this.ranking       = document.getElementById('ranking');
+    this.restart       = document.getElementById('restartBtn');
+    this.gameArea      = document.getElementById('game');
 
     // 객체 인스턴스
-    this.fly      = new Fly(this.flyEl, this.gameArea, this.backBtn);
-    this.swatter  = new Swatter(this.swatterEl, this.gameArea);
+    this.fly     = new Fly(this.flyEl, this.gameArea, this.backBtn);
+    this.swatter = new Swatter(this.swatterEl, this.gameArea);
 
     // 이벤트
     this.swatter.onClick(() => this.hit());
     this.swatter.followCursor();
     this.restart.addEventListener('click', () => this.start());
-    this.backBtn .addEventListener('click', () => this.backToMenu());
+    this.backBtn.addEventListener('click', () => this.backToMenu());
     this.finishBtn.addEventListener('click', () => this.end());
 
     // 초기 숨김
@@ -48,18 +49,27 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
 
   // 게임 시작
   start = () => {
+    // 1) 정보 섹션 전부 숨기기
+    this.infoContainer.classList.add('hidden');     // ← 추가
+
+    // 2) 점수·시간 초기화
     this.score = 0;
     this.time  = 15;
     this.updateHUD();
 
+    // 3) 메뉴 숨기고 게임 화면 보이기
     this.menu.classList.add('hidden');
     this.container.classList.remove('hidden');
+
+    // 4) 끝내기 버튼 보이기
     this.finishBtn.classList.remove('hidden');
     this.endBox.style.display = 'none';
 
+    // 5) 파리·채 보이기
     this.fly.show();
     this.swatter.show();
 
+    // 6) 첫 이동 및 인터벌/타이머 시작
     this.fly.move(true);
     this.timerId = setInterval(() => this.tick(), 1000);
     this.moveId  = setInterval(() => this.fly.move(), this.moveInterval);
@@ -75,7 +85,7 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
   // 파리채로 터치해 파리 죽이기
   hit = () => {
     const f = this.flyEl.getBoundingClientRect();
-    const h = this.swatter.getHeadRect(); //swatter.js에서 작성한 영역만큼이 겹칠때 득점하도록 설정함
+    const h = this.swatter.getHeadRect();
     if (
       !( h.right  < f.left  ||
          h.left   > f.right ||
@@ -98,6 +108,7 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
   end = () => {
     clearInterval(this.timerId);
     clearInterval(this.moveId);
+
     this.fly.hide();
     this.swatter.hide();
     this.finishBtn.classList.add('hidden');
@@ -133,7 +144,6 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
       this.ranking.appendChild(li);
     });
 
-    // 빈 순위는 playWait(...플레이 대기중) 메시지로 채웠음(나중에 더 좋은 문구 생각나면 변경)
     for (let i = arr.length; i < 10; i++) {
       const li = document.createElement('li');
       li.innerText = messages.playWait;
@@ -145,7 +155,11 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
   backToMenu = () => {
     clearInterval(this.timerId);
     clearInterval(this.moveId);
+
     this.container.classList.add('hidden');
     this.menu.classList.remove('hidden');
+
+    // 정보 영역 다시 보이기
+    this.infoContainer.classList.remove('hidden'); // ← 추가
   }
 }

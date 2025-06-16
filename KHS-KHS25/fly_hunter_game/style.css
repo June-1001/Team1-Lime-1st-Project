@@ -1,80 +1,97 @@
-/* 화면 전체 스크롤 제거, 100% 높이 보장 */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  overflow: hidden;
+/* 전역 */
+html, body { margin:0; padding:0; height:100%; overflow:hidden; }
+.hidden    { display:none !important; }
+
+/* 메인 메뉴 전체 */
+#menu {
+    position: relative; 
+  width: 100vw; 
+  height: 100vh;
+  display: flex;
+  justify-content: center; 
+  align-items: center;      
 }
 
-/* 난이도 메뉴 */
-#menu {
+/* 공통 박스 스타일 */
+.menu-column {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20vh;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid #333;
+  border-radius: 8px;
 }
-#menu p { font-size: 1.5rem; margin-bottom: 1rem; }
-#menu button {
-  margin: 0.5rem;
-  padding: 0.6rem 1.2rem;
+
+/* 난이도 선택 박스 */
+#difficulty-menu {
+  background: #888; 
+}
+
+/* 정보 버튼 박스 */
+#info-menu {
+  background: #fff;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+/* 메뉴 버튼 공통 스타일 */
+.menu-column button {
+  width: 160px;
+  height: 48px;
   font-size: 1rem;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-/* 숨김 처리 */
-.hidden { display: none !important; }
-
-/* 게임 컨테이너 전체 */
-#game-container {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+/* 버튼 호버 효과 */
+.menu-column button:hover {
+  opacity: 0.9;
 }
 
-/* 상단 바, 점수/시간 배치 */
+/* 정보 컨테이너 */
+#info-container {
+  max-width: 800px;
+  margin: 0 auto 2rem;
+  padding: 1rem;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* 게임 화면 스타일 */
+#game-container {
+  width: 100vw; height: 100vh;
+  display: flex; flex-direction: column;
+}
 #hud {
-  background: #222;
-  color: #fff;
-  height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #222; color: #fff;
+  height: 48px; display: flex;
+  justify-content: center; align-items: center;
 }
 #hud span { margin: 0 1rem; }
-
-/* 게임 영역 */
 #game {
   position: relative;
-  width: 100%;
-  height: calc(100% - 48px);
-  background: #000;        
-  cursor: crosshair;    
+  width: 100%; height: calc(100% - 48px);
+  background: #000; cursor: crosshair;
   overflow: hidden;
 }
-
-/* 파리 */
 #fly {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 120px; height: 120px;
   background: url('img/fly_real.png') no-repeat center/contain;
-  transition: left 0.6s linear, top 0.6s linear, transform 0.6s linear;
+  transition: left .6s linear, top .6s linear, transform .6s linear;
 }
-
-/* 파리채 */
 #swatter {
   position: absolute;
-  width: 150px;   
-  height: 130px;  
+  width: 150px; height: 130px;
   background: url('img/swatter.png') no-repeat top center;
-  background-size: 120px 100px;  
-  pointer-events: auto;
-  z-index: 2;
-  transform-origin: top center;        
-  transition: transform 0.1s ease;     
+  background-size: 120px 100px;
+  pointer-events: auto; z-index: 2;
+  transform-origin: top center;
+  transition: transform .1s ease;
 }
-
 /* Back, 끝내기 버튼 공통 스타일 */
 #backBtn,
 #finishBtn {
