@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "June-1001": "GGW-June-1001/dodgebox_game.html",
     thsaudgh8: "SMH-thsaudgh8/main.html ",
     KHS25: "KHS-KHS25/fly_hunter_game/index.html",
-    DODOVX: "CJH-DODOVX/index.html",
+    DODOVX: "",
   };
 
   // title 부분에 각자 게임 타이틀 입력
@@ -66,7 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".play-game").forEach((button) => {
     button.addEventListener("click", () => {
       const fileURL = URL_map[button.getAttribute("data-name")];
-      window.open(fileURL, "_blank");
+      if (fileURL) {
+        window.open(fileURL, "_blank");
+      }
     });
   });
 });
