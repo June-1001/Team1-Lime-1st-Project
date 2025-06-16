@@ -70,14 +70,8 @@ export function update_costume_display(player) {
     let ctx = canvas.getContext("2d");
 
     let costume_id = id;
-
-    function draw_loop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      player_costumes[costume_id].draw(ctx, canvas.width / 2, canvas.height / 2, 20);
-      requestAnimationFrame(draw_loop);
-    }
-
-    draw_loop();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    player_costumes[costume_id].draw(ctx, canvas.width / 2, canvas.height / 2, 20);
 
     let spacer = document.createElement("div");
     spacer.className = "costume_spacer";
