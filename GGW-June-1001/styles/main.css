@@ -41,7 +41,7 @@ body {
 }
 
 button {
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #game_container {
@@ -50,14 +50,14 @@ button {
   width: 900px;
   height: 720px;
   overflow: hidden;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #game_container canvas {
   position: absolute;
   background: transparent;
   display: block;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #start_button {
@@ -175,7 +175,7 @@ button {
   font-size: 20px;
   font-weight: bold;
   text-shadow: 0 0 5px gold;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #shop_button:hover {
@@ -332,7 +332,7 @@ button {
   font-size: 20px;
   font-weight: bold;
   text-shadow: 0 0 5px lightblue;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #help_button:hover {
@@ -419,7 +419,7 @@ button {
   font-size: 20px;
   font-weight: bold;
   text-shadow: 0 0 5px lightgreen;
-  cursor: url("../assets/cross_aim.png") 32 32, crosshair;
+  cursor: url("../assets/cross_aim.png") 32 32, default;
 }
 
 #costume_button:hover {
