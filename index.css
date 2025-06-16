@@ -33,7 +33,7 @@ body {
   text-shadow: 0 0 12px #0f0;
 }
 
-.team-container {
+#team_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 40px;
