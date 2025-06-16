@@ -43,7 +43,7 @@ const bullet_power_values = [1, 2, 3.5, 5.5, 8, 12, 18, 25, 35, 45, 60];
 const bullet_speed_values = [10, 14, 18, 22, 26, 30];
 const fire_rate_values = [600, 560, 520, 480, 440, 400, 360, 320, 280, 240, 200];
 const ricochet_values = [0, 1, 2, 3, 4, 5];
-const kill_reward_values = [10, 25, 50, 85, 125, 175, 225, 275, 350, 425, 500];
+const kill_reward_values = [10, 50, 100, 170, 250, 350, 450, 550, 700, 850, 1000];
 const pierce_values = [0, 1, 2, 3, 4, 5];
 
 //-----------------------------//
