@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return result;
   }
 
+  // 팀 멤버 별 카드 생성
   team_members.forEach(function (member) {
     const card = document.createElement("div");
     card.className = "card";
@@ -61,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
     container.appendChild(card);
   });
 
+  // 새 탭에서 열기
   document.querySelectorAll(".play-game").forEach((button) => {
     button.addEventListener("click", () => {
       const fileURL = URL_map[button.getAttribute("data-name")];
