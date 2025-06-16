@@ -1,8 +1,7 @@
 body {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100;
     margin: 0;
 }
 
@@ -15,6 +14,7 @@ body {
 canvas {
     border: 1px solid #d3d3d3;
     background-color: #f1f1f1;
+    border-radius: 12px;
 }
 
 .controls {
@@ -46,4 +46,26 @@ button {
     padding: 10px 20px;
     font-size: 24px;
     cursor: pointer;
+}
+
+.container {
+    padding-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info {
+    max-width: 720px;
+    padding: 30px 100px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.info h2, .info h3 {
+    margin-top: 0;
 }
