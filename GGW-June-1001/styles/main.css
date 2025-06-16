@@ -553,6 +553,10 @@ button {
   box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
+.costume_wrapper.unlockable canvas {
+  filter: grayscale(90%);
+}
+
 .costume_wrapper.unlockable:hover {
   transform: scale(1.05);
   background-color: rgba(255, 215, 0, 0.3);

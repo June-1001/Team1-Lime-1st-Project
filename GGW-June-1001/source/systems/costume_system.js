@@ -40,6 +40,7 @@ export function update_costume_display(player) {
 
           if (costume.description_unlocked) {
             description_element.innerHTML = costume.description_unlocked;
+            start_animation_loop();
           }
         } else {
           return;
@@ -69,9 +70,26 @@ export function update_costume_display(player) {
 
     let ctx = canvas.getContext("2d");
 
-    let costume_id = id;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    player_costumes[costume_id].draw(ctx, canvas.width / 2, canvas.height / 2, 20);
+    function start_animation_loop() {
+      let last_time = 0;
+      let frame_interval = 20;
+
+      function draw_loop(time) {
+        if (time - last_time >= frame_interval) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          costume.draw(ctx, canvas.width / 2, canvas.height / 2, 20);
+          last_time = time;
+        }
+        requestAnimationFrame(draw_loop);
+      }
+      requestAnimationFrame(draw_loop);
+    }
+
+    if (costume.unlocked) {
+      start_animation_loop();
+    } else {
+      costume.draw(ctx, canvas.width / 2, canvas.height / 2, 20);
+    }
 
     let spacer = document.createElement("div");
     spacer.className = "costume_spacer";
