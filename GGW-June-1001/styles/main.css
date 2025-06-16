@@ -120,6 +120,20 @@ button {
   text-shadow: 0 0 8px rgba(0, 255, 255, 0.8);
 }
 
+.close_button {
+  position: relative;
+  color: white;
+  width: 100px;
+  height: 60px;
+  font-family: "Orbitron";
+  font-size: 16px;
+  font-weight: bold;
+  align-content: center;
+  text-align: center;
+  height: 60px;
+  transition: all 0.3s;
+}
+
 /* ------------------------------------------ */
 /* 메인 메뉴 및 재시작 시 보여질 설명 텍스트 CSS */
 /* ------------------------------------------ */
@@ -294,20 +308,6 @@ button {
   transform: scale(1.05);
 }
 
-.close_button {
-  position: relative;
-  color: white;
-  border-radius: 6px;
-  width: 100px;
-  height: 60px;
-  font-family: "Orbitron";
-  font-size: 16px;
-  font-weight: bold;
-  align-content: center;
-  text-align: center;
-  height: 60px;
-  transition: all 0.3s;
-}
 /* ---------- */
 /* 도움말 기능 */
 /* ---------- */
@@ -469,6 +469,7 @@ button {
   background-color: rgba(0, 100, 0, 0.3);
   box-shadow: 0 0 5px lightgreen;
   border: 2px solid lightgreen;
+  border-radius: 4px;
 }
 
 #close_costume:hover {
