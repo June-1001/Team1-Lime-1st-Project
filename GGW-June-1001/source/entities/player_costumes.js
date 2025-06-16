@@ -2,9 +2,10 @@
 // 코스튬 전용 색깔 맵 //
 //--------------------//
 
+// 유령 코스튬 색깔 맵
 let costume_ghost_colors = [];
 
-// 50개의 색깔 인덱스 만ㄷ르기
+// 50개의 색깔 인덱스 만들기
 function generate_costume_ghost_colors(steps) {
   let colors = [];
   let i;
@@ -16,9 +17,9 @@ function generate_costume_ghost_colors(steps) {
   }
   return colors;
 }
-
 costume_ghost_colors = generate_costume_ghost_colors(50);
 
+// 무지개 코스튬 색깔 맵
 const costume_rainbow_colors = [
   "rgba(231, 52, 52, 1)",
   "rgba(237, 88, 44, 1)",
