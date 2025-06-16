@@ -128,7 +128,7 @@ export function update_spawn_timers() {
     let base_interval = 1000;
     let min_interval = 200;
     let score = get_score();
-    let factor = 1 + score / 40000;
+    let factor = 1 + score / 30000;
 
     spawn_interval = Math.max(min_interval, base_interval / factor);
   }
