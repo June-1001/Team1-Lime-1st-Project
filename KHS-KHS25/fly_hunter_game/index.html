@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>파리 잡기 게임</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <!-- 메인 메뉴 -->
+  <div id="menu">
+    <!-- 난이도 선택 박스 -->
+    <div id="difficulty-menu" class="menu-column">
+      <button data-speed="10000" data-level="beginner">초급 (느림)</button>
+      <button data-speed="5000"  data-level="intermediate">중급 (보통)</button>
+      <button data-speed="1000"  data-level="advanced">고급 (빠름)</button>
+    </div>
+
+    <!-- 정보 버튼 박스 -->
+    <div id="info-menu" class="menu-column">
+      <button id="btnGameInfo">게임설명</button>
+      <button id="btnCodeInfo">코드설명</button>
+      <button id="btnFlowchart">플로우차트</button>
+    </div>
+  </div>
+
+  <!-- 정보 영역 -->
+  <div id="info-container" class="hidden">
+    <button id="infoBackBtn" class="back-btn">Back</button>
+    <section id="game-info" class="hidden">
+      <h2>게임설명</h2>
+      <p>
+        사용자는 난이도를 선택한 뒤 파리를 클릭해 잡습니다.<br>
+        30초 동안 최대한 많은 파리를 잡아 점수를 올리고,<br>
+        끝나면 Top 10 랭킹이 표시됩니다.
+      </p>
+    </section>
+
+    <section id="code-info" class="hidden">
+      <h2>코드설명</h2>
+      <ul>
+        <li><strong>main.js</strong>: 진입점, 메뉴·난이도 버튼 이벤트 바인딩</li>
+        <li><strong>game.js</strong>: 게임 흐름·타이머·랭킹 관리</li>
+        <li><strong>fly.js</strong>: 파리 이동 로직(난수 위치 + 회전)</li>
+        <li><strong>swatter.js</strong>: 파리채 추적·충돌 판정 로직</li>
+      </ul>
+    </section>
+
+    <section id="flowchart-info" class="hidden">
+      <h2>플로우차트</h2>
+      <pre>
+            앱 로드 (DOMContentLoaded)
+      ├─ 정보 버튼 바인딩:  
+      │    • [게임설명] → showSection(gameInfo)  
+      │    • [코드설명] → showSection(codeInfo)  
+      │    • [플로우차트] → showSection(flowchartInfo)  
+      │    • [Info Back] → showSection(null)  
+      ├─ Game 인스턴스 생성 & 버튼 이벤트 등록  
+      │    • swatter 클릭 → hit()  
+      │    • 마우스 무브 → followCursor()  
+      │    • restart → start()  
+      │    • back → backToMenu()  
+      │    • finish → end()  
+      └─ 난이도 버튼 클릭  
+            1) setDifficulty(level, speed)  
+            2) showSection(null) → 메뉴로 복귀  
+            3) start() → 게임 시작  
+
+      게임 시작 (start)
+      ├─ info 숨김 → 메뉴 숨김 → 게임창 표시  
+      ├─ score/time 초기화 → updateHUD()  
+      ├─ finishBtn 보임 → fly.show()/swatter.show()  
+      ├─ fly.move(init) → interval(tick, move) 시작  
+
+      플레이 중  
+      ├─ tick(): time-- → updateHUD() → time≤0? end()  
+      └─ swatter.onClick → hit(): 충돌 시 score++ → fly.move()  
+
+      게임 종료 (end)
+      ├─ clearInterval → fly.hide()/swatter.hide() → finishBtn 숨김  
+      ├─ 랭킹 저장/정렬 → showRanking(top10)  
+      ├─ finalMsg 표시 → endBox·restartBtn 보이기  
+
+      메뉴 복귀 (backToMenu)
+      ├─ clearInterval → 게임창 숨김 → 메뉴·info 보이기  
+      </pre>
+    </section>
+  </div>
+
+  <!-- 기존 게임 화면 -->
+  <div id="game-container" class="hidden">
+    <div id="hud">
+      <span>점수: <strong id="score">0</strong></span>
+      <span>남은 시간: <strong id="time">30</strong>s</span>
+    </div>
+    <button id="finishBtn" class="hidden">끝내기</button>
+    <div id="game">
+      <div id="fly"></div>
+      <div id="swatter"></div>
+      <button id="backBtn">Back</button>
+      <div id="end">
+        <p id="finalMsg"></p>
+        <h3 id="rankTitle"></h3>
+        <ol id="ranking"></ol>
+        <button id="restartBtn" style="display:none;">다시 하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./script.js/main.js"></script>
+</body>
+</html>
