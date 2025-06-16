@@ -184,6 +184,7 @@ function start_game() {
   close_all_modal();
 
   reset_spawn_system();
+  player.reset_starting_point();
   player.reset_trail();
   reset_bullets();
   reset_score();

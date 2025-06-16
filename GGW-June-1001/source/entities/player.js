@@ -96,6 +96,11 @@ export const player = {
     }
   },
 
+  reset_starting_point: function () {
+    this.x = game_area_width;
+    this.y = game_area_height;
+  },
+
   reset_trail: function () {
     this.trail = [];
   },
