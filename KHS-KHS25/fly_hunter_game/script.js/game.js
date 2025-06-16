@@ -9,6 +9,7 @@ const messages = {
 
 export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 전반적인 흐름과 상태관리를 담당하는 모듈
   constructor() {
+    this._ended = false;    //게임 종료 여부 확인
     // DOM 참조
     this.menu          = document.getElementById('menu');
     this.container     = document.getElementById('game-container');
@@ -49,6 +50,7 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
 
   // 게임 시작
   start = () => {
+    this._ended = false;    //매번 시작할때 종료되지 않은 상태로 리셋
     // 1) 정보 섹션 전부 숨기기
     this.infoContainer.classList.add('hidden');     // ← 추가
 
@@ -106,6 +108,9 @@ export default class Game { //게임 시작, 타이머, 득점, 랭킹 등의 �
 
   // 게임 종료
   end = () => {
+    if (this._ended) return;  // 이미 한 번 종료된 상태면 바로 리턴
+    this._ended = true;       // 이제 종료 처리 시작
+    
     clearInterval(this.timerId);
     clearInterval(this.moveId);
 
