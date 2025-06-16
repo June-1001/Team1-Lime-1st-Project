@@ -39,7 +39,7 @@ export const player_costumes = {
     description: "기본 코스튬",
     color: "rgba(255,255,255,1)",
     shadow_color: "rgba(255,255,255,0.3)",
-    radius: 16,
+    radius: 18,
     speed: 9,
 
     draw: function (ctx, x, y, radius) {
@@ -74,7 +74,7 @@ export const player_costumes = {
     description: "이동 속도가 3배 빨라집니다",
     color: "rgba(255, 50, 50, 1)",
     shadow_color: "rgba(255, 50, 50, 0.7)",
-    radius: 16,
+    radius: 18,
     speed: 27,
 
     draw: function (ctx, x, y, radius) {
@@ -110,7 +110,7 @@ export const player_costumes = {
     description_unlocked: "기본 획득 점수가<br>초당 500점으로 증가합니다",
     color: "rgb(255, 215, 0)",
     shadow_color: "rgba(255, 215, 0, 0.8)",
-    radius: 16,
+    radius: 18,
     speed: 9,
 
     draw: function (ctx, x, y, radius) {
@@ -147,7 +147,7 @@ export const player_costumes = {
     color: "rgba(200, 200, 255, 0.5)",
     shadow_color: "rgba(200, 200, 255, 0.1)",
     color_index: 0,
-    radius: 16,
+    radius: 18,
     speed: 9,
 
     draw: function (ctx, x, y, radius) {
@@ -226,7 +226,7 @@ export const player_costumes = {
     color: "rgba(231, 52, 52, 1)",
     shadow_color: "rgba(231, 52, 52, 0.3)",
     color_index: 0,
-    radius: 16,
+    radius: 18,
     speed: 9,
 
     draw: function (ctx, x, y, radius) {
