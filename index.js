@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "최전호", id: "DODOVX", title: "Nonograms", thumbnail: "nonograms.png" },
   ];
 
-  const container = document.getElementById("teamContainer");
+  const container = document.getElementById("team_container");
 
   // 한글이 있으면 <span lang="ko">로 감싸기
   function wrap_mixed_korean_text(text) {
