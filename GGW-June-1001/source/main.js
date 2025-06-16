@@ -289,6 +289,7 @@ function game_over() {
   show_div(comment_restart, center_overlay);
   clearInterval(game_update_interval_id);
   add_coins(get_coins_from_score());
+  update_costume_unlocks(get_score(), coins, obs_counter);
   my_game_area.clear();
   reset_spawn_system();
   player.reset_trail();
