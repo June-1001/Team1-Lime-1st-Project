@@ -73,6 +73,7 @@ button#resetBtn:hover {
     max-width: 720px;
     padding: 30px 100px;
     margin-top: 20px;
+    margin-bottom: 30px;
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 12px;
