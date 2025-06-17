@@ -1,0 +1,58 @@
+.but {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.hot {
+    font-size: 20px;
+    text-align: right
+}
+
+.cot {
+    font-size: 20px;
+    text-align: center;
+    vertical-align: bottom;
+}
+
+table {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tot {
+    width: 31px;
+    height: 31px;
+    background-color: transparent;
+}
+
+.clicked {
+    background-color: black;
+}
+
+.not {
+    position: relative;
+}
+
+.not:before,
+.not::after {
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    content: '';
+    height: 12px;
+    width: 1px;
+    background-color: red
+}
+
+.not:before {
+    transform: rotate(45deg);
+}
+
+.not::after {
+    transform: rotate(-45deg);
+}
