@@ -123,7 +123,7 @@ export function update_costume_unlocks(score, coins, obs_counter) {
     unlocked_any = true;
   }
 
-  if (score >= 150000 && !player_costumes[3].unlocked) {
+  if (score >= 200000 && !player_costumes[3].unlocked) {
     player_costumes[3].unlockable = true;
     unlocked_any = true;
   }
@@ -133,7 +133,7 @@ export function update_costume_unlocks(score, coins, obs_counter) {
     unlocked_any = true;
   }
 
-  if (score >= 300000 && !player_costumes[5].unlocked) {
+  if (score >= 400000 && !player_costumes[5].unlocked) {
     player_costumes[5].unlockable = true;
     unlocked_any = true;
   }
