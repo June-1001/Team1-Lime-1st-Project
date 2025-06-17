@@ -28,8 +28,8 @@ export class Opponent {
 
     this.speed_up = get_score() / 300000;
 
-    this.dx = Math.sign(Math.random() - 0.5) * (Math.random() * 3.5 + this.speed_up);
-    this.dy = Math.sign(Math.random() - 0.5) * (Math.random() * 3.5 + this.speed_up);
+    this.dx = Math.sign(Math.random() - 0.5) * ((Math.random() * this.width) / 20 + this.speed_up);
+    this.dy = Math.sign(Math.random() - 0.5) * ((Math.random() * this.height) / 20 + this.speed_up);
     this.color_index = Math.floor(Math.random() * rainbow_colors.length);
 
     this.hp = Math.floor(1 + get_difficulty());
@@ -40,11 +40,11 @@ export class Opponent {
     const next_x = this.x + this.dx;
     const next_y = this.y + this.dy;
     if (next_x > game_area_width - this.width || next_x < 0) {
-      this.dx = -Math.sign(this.dx) * (Math.random() * 3.5 + this.speed_up);
+      this.dx = -Math.sign(this.dx) * ((Math.random() * this.width) / 20 + this.speed_up);
       this.color_index = (this.color_index + 1) % rainbow_colors.length;
     }
     if (next_y > game_area_height - this.height || next_y < 0) {
-      this.dy = -Math.sign(this.dy) * (Math.random() * 3.5 + this.speed_up);
+      this.dy = -Math.sign(this.dy) * ((Math.random() * this.height) / 20 + this.speed_up);
       this.color_index = (this.color_index + 1) % rainbow_colors.length;
     }
     this.x += this.dx;
