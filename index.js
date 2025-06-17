@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "June-1001": "GGW-June-1001/dodgebox_game.html",
     thsaudgh8: "SMH-thsaudgh8/main.html ",
     KHS25: "KHS-KHS25/fly_hunter_game/index.html",
-    DODOVX: "",
+    DODOVX: "CJH-DODOVX/index.html",
   };
 
   // title 부분에 각자 게임 타이틀 입력
