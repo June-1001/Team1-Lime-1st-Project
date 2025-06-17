@@ -46,7 +46,21 @@ button {
     padding: 10px 20px;
     font-size: 24px;
     cursor: pointer;
+    background-color: white;
 }
+
+button#startBtn:hover {
+    background-color: #4CAF50; /* 초록색 계열 */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button#resetBtn:hover {
+    background-color: #f77; /* 노란색 계열 */
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
 
 .container {
     padding-top: 50px;
