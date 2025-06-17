@@ -41,26 +41,39 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // 팀 멤버 별 카드 생성
+  let grid_repeat = 0;
+
   team_members.forEach(function (member) {
-    const card = document.createElement("div");
-    card.className = "card";
+    let url = URL_map[member.id];
 
-    const thumbnail_img = `./thumbnail/${member.thumbnail}`;
-    const temp_thumbnail = "thumbnail/temp.png";
+    if (url && url.trim() !== "") {
+      const card = document.createElement("div");
+      card.className = "card";
 
-    card.innerHTML = `
-    <img src="${thumbnail_img}" alt="${
-      member.name
-    }" class="card-img" onerror="this.src='${temp_thumbnail}'">
-    <div class="card-body">
-      <div class="game-title">${wrap_mixed_korean_text(member.title)}</div>
-      <div class="member-name">${wrap_mixed_korean_text(member.name + " / " + member.id)}</div>
-      <button class="play-game" data-name="${member.id}">Play Game</button>
-    </div>
-  `;
+      const thumbnail_img = "./thumbnail/" + member.thumbnail;
+      const temp_thumbnail = "thumbnail/temp.png";
 
-    container.appendChild(card);
+      card.innerHTML = `
+      <img src="${thumbnail_img}" alt="${
+        member.name
+      }" class="card-img" onerror="this.src='${temp_thumbnail}'">
+      <div class="card-body">
+        <div class="game-title">${wrap_mixed_korean_text(member.title)}</div>
+        <div class="member-name">${wrap_mixed_korean_text(member.name + " / " + member.id)}</div>
+        <button class="play-game" data-name="${member.id}">Play Game</button>
+      </div>
+    `;
+
+      container.appendChild(card);
+      grid_repeat++;
+    }
   });
+
+  if (grid_repeat >= 4) {
+    container.style.marginTop = "0px";
+  } else {
+    container.style.gridTemplateColumns = `repeat(${grid_repeat}, 1fr)`;
+  }
 
   // 새 탭에서 열기
   document.querySelectorAll(".play-game").forEach((button) => {

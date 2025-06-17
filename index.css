@@ -28,15 +28,23 @@ body {
   background: linear-gradient(to bottom, #000, #333);
   white-space: nowrap;
   font-family: "Alumni Sans SC", sans-serif;
+  margin-bottom: -50px;
   font-size: 48px;
   color: #fff;
   text-shadow: 0 0 12px #0f0;
 }
 
+#container_center {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
 #team_container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px 40px;
+  gap: 10px 40px;
   justify-content: center;
 }
 
