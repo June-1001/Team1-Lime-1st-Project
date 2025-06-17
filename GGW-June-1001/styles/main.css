@@ -18,6 +18,7 @@ body {
 }
 
 #title {
+  position: relative;
   align-content: center;
   width: 900px;
   height: 80px;
@@ -25,6 +26,17 @@ body {
   font-size: 60px;
   font-weight: bold;
   text-shadow: 0 0 12px rgb(255, 0, 0);
+}
+
+#title a {
+  position: absolute;
+  right: 1%;
+  bottom: 0%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: white;
+  text-shadow: 0 0 4px white;
+  text-decoration: none;
 }
 
 #background_video {
