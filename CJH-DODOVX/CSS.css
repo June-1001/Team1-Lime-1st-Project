@@ -4,7 +4,6 @@
     width: 30px;
     height: 30px;
     text-align: center;
-    /* color: transparent; */
 }
 
 .hot {
@@ -24,8 +23,36 @@ table {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-button {
+
+.tot {
     width: 30px;
     height: 30px;
-    color: transparent
+    background-color: transparent;
+}
+
+.clicked {
+    background-color: black;
+}
+
+.not {
+    position: relative;
+}
+
+.not:before,
+.not::after {
+    position: absolute;
+    right: 12px;
+    top: 9px;
+    content: '';
+    height: 12px;
+    width: 1px;
+    background-color: red
+}
+
+.not:before {
+    transform: rotate(45deg);
+}
+
+.not::after {
+    transform: rotate(-45deg);
 }

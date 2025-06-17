@@ -4,6 +4,10 @@ var size = 5
 var arr_H = []
 var arr_V = []
 var score = []
+
+document.addEventListener("contextmenu", function(even) {
+    even.preventDefault()
+})
 for (um = 0; um < size; um++) {
     var arr = []
     for (num = 0; num < size; num++) {
@@ -55,7 +59,7 @@ for (mon = 0; mon < arr_all.length; mon++) {
                 num = 0
             }
         }
-    } 
+    }
     if (num > 0) {
         ko += num
         ko += "<br>"
@@ -73,33 +77,32 @@ for (mo = 0; mo < size; mo++) {
     tab += "<tr>"
     tab += "<th class='hot'>" + space(arr_H[mo]) + "</th>"
     for (po = 0; po < size; po++) {
-        tab += "<td class='but'>" + "<button id='butt'>" + "</button>" + "</td>"
+        tab += "<td class='but'>"
+        tab += `<button class='tot' onmousedown='put(event, ${mo}, ${po})'></button>`;
+        tab += "</td>"
     } tab += "</tr>"
 }
 
 tab += "</table>"
 area.innerHTML = tab
-console.log(tab)
-document.getElementById("butt").addEventListener('click',put)
-function put() {
-    if (score[1][1] < 1){
-    score[1][1] += 1} else {
-        score[1][1] = 0
-    }console.log(score)
+function put(event, mop, pop) {
+    let bot = event.target
+    if (event.button === 0) {
+        if (score[mop][pop] < 1) {
+            score[mop][pop] += 1
+            bot.classList.add("clicked")
+            bot.classList.remove("not")
+        } else {
+            score[mop][pop] = 0
+            bot.classList.remove("clicked")
+        }
+        if (JSON.stringify(arr_all) === JSON.stringify(score)) {
+            alert("승리!")
+        }
+        
+    } else if (event.button === 2) {
+        bot.classList.remove("clicked")
+        score[mop][pop] = 0
+        bot.classList.toggle("not")
+    }
 }
-// console.log(end_score)
-// document.querySelectorAll('#area td')
-//     .forEach(e => e.addEventListener("click", function () {
-//         td = this.children
-//         if (2 >= this.innerHTML > 1) {
-
-//         }
-//         if (2 > this.innerHTML > 0) {
-//             score += 1
-//             console.log(score)
-
-//             if (score >= end_score) {
-//                 alert("승리입니다.")
-//             }
-//         } else { alert("패배입니다.") }
-//     }))
