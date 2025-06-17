@@ -141,6 +141,42 @@ export const player_costumes = {
   3: {
     unlocked: false,
     unlockable: false,
+    name: "백색왜성",
+    description: "한 게임에서<br>150,000점 이상<br>획득 시 해금",
+    description_unlocked: "크기가 더 작아집니다",
+    color: "rgb(255, 255, 255)",
+    shadow_color: "rgb(255, 255, 255)",
+    radius: 12,
+    speed: 9,
+
+    draw: function (ctx, x, y, radius) {
+      ctx.save();
+      ctx.globalAlpha = 1;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 50;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+
+    trail_draw: function (ctx, x, y, radius, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.shadowColor = this.shadow_color;
+      ctx.shadowBlur = 50;
+      ctx.beginPath();
+      ctx.arc(x, y, radius, 0, Math.PI * 2);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.restore();
+    },
+  },
+
+  4: {
+    unlocked: false,
+    unlockable: false,
     name: "유령",
     description: "한 게임에서<br>300명 이상의<br>적 처치 시 해금",
     description_unlocked: "적과 충돌 시 30% 확률로<br>1초동안 무적 상태가 됩니다",
@@ -176,42 +212,6 @@ export const player_costumes = {
       ctx.beginPath();
       ctx.arc(x, y, radius, 0, Math.PI * 2);
       ctx.fillStyle = trail_color;
-      ctx.fill();
-      ctx.restore();
-    },
-  },
-
-  4: {
-    unlocked: false,
-    unlockable: false,
-    name: "백색왜성",
-    description: "한 게임에서<br>150,000점 이상<br>획득 시 해금",
-    description_unlocked: "크기가 더 작아집니다",
-    color: "rgb(255, 255, 255)",
-    shadow_color: "rgb(255, 255, 255)",
-    radius: 12,
-    speed: 9,
-
-    draw: function (ctx, x, y, radius) {
-      ctx.save();
-      ctx.globalAlpha = 1;
-      ctx.shadowColor = this.shadow_color;
-      ctx.shadowBlur = 50;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.restore();
-    },
-
-    trail_draw: function (ctx, x, y, radius, alpha) {
-      ctx.save();
-      ctx.globalAlpha = alpha;
-      ctx.shadowColor = this.shadow_color;
-      ctx.shadowBlur = 50;
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
       ctx.fill();
       ctx.restore();
     },
