@@ -80,7 +80,10 @@ export class Bullet {
     ctx.restore();
   }
 
-  // 벽 충돌 감지
+  //-------------//
+  // 벽 충돌 감지 //
+  //-------------//
+
   is_out_of_bounds() {
     return this.x < 0 || this.x > game_area_width || this.y < 0 || this.y > game_area_height;
   }

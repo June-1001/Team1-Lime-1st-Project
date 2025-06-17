@@ -1,13 +1,5 @@
 import { init_input } from "./core/input.js";
-import {
-  game_area_width,
-  game_area_height,
-  game_update_rate,
-  my_game_area,
-  pause_game,
-  resume_game,
-  is_game_active,
-} from "./core/game_core.js";
+import { game_update_rate, my_game_area, pause_game, resume_game } from "./core/game_core.js";
 import {
   game_running,
   set_game_running,
@@ -19,16 +11,13 @@ import {
   set_highscore_value,
   reset_difficulty,
   get_coins_from_score,
-  add_score,
 } from "./core/game_state.js";
 import {
   game_container,
   start_btn,
-  restart_btn,
   comment_start,
   comment_restart,
   score_display,
-  final_score_display,
   center_overlay,
   video,
   shop_button,
@@ -39,7 +28,6 @@ import {
   costume_modal,
   is_block,
   show_div,
-  update_coin_display,
   init_ui_event_listeners,
   update_game_over_display,
   display_check_all,
@@ -56,14 +44,10 @@ import {
 import { bullets, update_bullets, fire_bullet, reset_bullets } from "./systems/bullet_system.js";
 import {
   coins,
-  shop_items,
   update_shop_display,
-  buy_upgrade,
   update_coins_based_on_score,
   add_coins,
   all_maxed,
-  check_all_shop_items_maxed,
-  notice_seen,
   load_shop_data,
   save_shop_data,
 } from "./systems/shop_system.js";
@@ -97,6 +81,7 @@ function close_all_modal() {
 //-------------------------------------//
 // 게임 버튼 별 이벤트 함수 - UI에서 콜백 //
 //-------------------------------------//
+
 init_ui_event_listeners(
   start_game,
   restart_game,
@@ -150,6 +135,7 @@ document.addEventListener("keydown", function (event) {
 //----------------------------------------//
 // 게임 화면에 포커스 없을 때 게임 잠시 멈춤 //
 //----------------------------------------//
+
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) {
     pause_game(game_update_interval_id, video);
@@ -312,6 +298,7 @@ function restart_game() {
   video.style.display = "none";
   display_check_all(all_maxed);
 }
+
 //-----------------//
 // 게임 세이브 로드 //
 //-----------------//
@@ -345,10 +332,12 @@ function load_game_data() {
 //-----------------------------//
 // 최초 로딩 시 상점 데이터 로딩 //
 //-----------------------------//
+
 window.addEventListener("load", () => {
   load_game_data();
   display_check_all(all_maxed);
 });
+
 //--------------------//
 // 종료 시 자동 세이브 //
 //--------------------//

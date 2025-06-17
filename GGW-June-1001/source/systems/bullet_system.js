@@ -111,6 +111,10 @@ export function fire_bullet() {
   last_bullet_time = Date.now();
 }
 
+//------------------------//
+// 개임 재시작 시 총알 리셋 //
+//------------------------//
+
 export function reset_bullets() {
   bullets = [];
   last_bullet_time = 0;
