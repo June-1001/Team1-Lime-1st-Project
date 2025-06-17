@@ -221,7 +221,7 @@ export const player_costumes = {
     unlocked: false,
     unlockable: false,
     name: "무지개",
-    description: "한 게임에서<br>350,000점 이상<br>획득 시 해금",
+    description: "한 게임에서<br>300,000점 이상<br>획득 시 해금",
     description_unlocked: "총알 발사 속도가<br>2배로 빨라집니다",
     color: "rgba(231, 52, 52, 1)",
     shadow_color: "rgba(231, 52, 52, 0.3)",
