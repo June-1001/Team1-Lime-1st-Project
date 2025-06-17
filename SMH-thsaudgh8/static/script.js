@@ -13,7 +13,7 @@ function startGameWithDelay() {
     function updateCountdown() {
         myGameArea.clear();     // 게임 화면 초기화 
 
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#fff";
         ctx.font = "48px Arial";
         ctx.textAlign = "center";
         ctx.fillText(count, myGameArea.canvas.width / 2, myGameArea.canvas.height / 2);     // 함수가 표시될 폰트,위치,사이즈등을 정해줌
@@ -46,6 +46,7 @@ function startGame() {      // 게임을 시작함
     drawGamePieces();       // drawGamePieces() 함수를 호출해서 캔버스에 그려줌
 }
 
+let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
 function gameTimer(switchState) {
     const timerEl = document.getElementById("timer");
 
@@ -109,7 +110,6 @@ function drawGamePieces() {
 
     myGamePieces.forEach(piece => piece.draw(ctx)); //게임 공간 안에있는 요소(배열)들을 그려줌
 }
- let intervalId = "";    // interval을 사용하려면 전역 설정을 해줘야 가능, interval 전용 변수 생성
 
 // 시작
 myGameArea.start(handleClick);
