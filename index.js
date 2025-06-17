@@ -69,9 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const container_center = document.getElementById("container_center");
+
   if (grid_repeat >= 4) {
-    container.style.marginTop = "0px";
+    container_center.style.display = "flex-start";
   } else {
+    container_center.style.display = "flex";
     container.style.gridTemplateColumns = `repeat(${grid_repeat}, 1fr)`;
   }
 
