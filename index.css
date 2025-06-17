@@ -15,7 +15,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh;
 }
 
 .header {
@@ -28,7 +27,7 @@ body {
   background: linear-gradient(to bottom, #000, #333);
   white-space: nowrap;
   font-family: "Alumni Sans SC", sans-serif;
-  margin-bottom: -50px;
+  padding: 50px;
   font-size: 48px;
   color: #fff;
   text-shadow: 0 0 12px #0f0;
